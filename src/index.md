@@ -13,8 +13,8 @@
 - Halting Problem
 - PCP
 
-2. Chapter 2: Basic math stuff (empezar aca)
-- Integers (los enteros son una abstraccion)
+2. Chapter 2: Basic math stuff
+- Integers
 - Modular arithmetic
 - Groups
 - Rings
