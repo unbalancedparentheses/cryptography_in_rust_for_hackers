@@ -4,3 +4,5 @@ language = "en"
 multilingual = false
 src = "src"
 title = "Cryptography in Rust for Hackers"
+[output.html]
+mathjax-support = true
