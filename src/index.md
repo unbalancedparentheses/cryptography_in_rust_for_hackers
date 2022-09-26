@@ -1,5 +1,13 @@
 # Cryptography in Rust for Hackers
 
+Objectives:
+Explain XChaCha20 and Poly1305, BLAKE2b, Argon2i.
+    Public Key Cryptography with X25519 (key exchange).
+    Public Key Signatures with EdDSA (RFC 8032) and Ed25519.
+    Steganography support with Elligator 2.
+    OPRF and PAKE support with Elligator 2 and scalar inversion.
+
+
 ## Table of Contents
 
 1. Chapter 1: 
@@ -98,3 +106,4 @@ Possible: PRNG
 ### Examples of attacks
 - [How 3 hours of inaction from Amazon cost cryptocurrency holders $235,000](https://arstechnica.com/information-technology/2022/09/how-3-hours-of-inaction-from-amazon-cost-cryptocurrency-holders-235000/)
 - [RSA CTF Tool](https://github.com/RsaCtfTool/RsaCtfTool)
+- [NSA, NIST, and post-quantum cryptography](https://blog.cr.yp.to/20220805-nsa.html)
