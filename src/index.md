@@ -8,18 +8,17 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 
 ## Table of Contents
 
-1. Chapter 1: 
-- Mathematics and Computation 
-    - Kolmogorov
+1. Mathematics and Computation 
 - Models of Computation (INTRODUCTION TO THEORETICAL COMPUTER SCIENCE BOAZ BARAK)
     - Von Neumann
     - Turing Machines
     - Lambda Calculus
+- Computation
 - P vs NP
 - Halting Problem
 - PCP
 
-2. Chapter 2: Basic math stuff
+2. Number theory and Abstract Algebra
 - Integers
 - Modular arithmetic
 - Groups
@@ -32,40 +31,30 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
     - Toom
     - FFT
     - Parallelization
-    - The discrete log problem.
+    - The discrete log problem
 - Primality testing
     - Euler's theorem
  
-3. Chapter 3: Symmetric encryption ChaCha20
+3. Symmetric encryption
 
-4. Chapter 3: Hash functions and commitments Blake2
+4. Asymmetric encryption 
 
-5. Chapter 4: Asymmetric encryption 
+5. Hash functions
 
-6. Chapter 5: MAC & HMAC
+6. Pseudorandom Number Generator (PRNG)
 
-7. Chapter 6: Diffie-Hellman
+7. Signatures
 
-8. Chapter 7: SNARKs
+8. Key Exchange
 
-9. Polynomial commitments
+9. Polynomial commitments and Elliptic curve pairings
 
-10. Elliptic curve pairings
+10. SNARKs
 
-11. R1CS
+11. Arithmetization
+- R1CS
 
-12. AIR
-
-R1CS
-Groth16
-Marlin
-Arkworks
-Spartan
-
-OTHER CHAPTERS OF SNARK
-12. Chapter 8: Protocols & Applications.
-
-Possible: PRNG
+12. STARKs
 
 ## References
 - [ingopedia](https://github.com/ingonyama-zk/ingopedia)
