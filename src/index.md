@@ -1,12 +1,10 @@
 # Cryptography in Rust for Hackers
 
 Objectives:
-Explain XChaCha20 and Poly1305, BLAKE2b, Argon2i.
-    Public Key Cryptography with X25519 (key exchange).
-    Public Key Signatures with EdDSA (RFC 8032) and Ed25519.
-    Steganography support with Elligator 2.
-    OPRF and PAKE support with Elligator 2 and scalar inversion.
 
+Explain basic number theory and abstract algebra requirements, symmetric encryption (block and stream cipher), asymmetric encryption (RSA, Elliptic curve), hashes, signatures, key exchange, polynomial commitments, SNARKs and STARKs.
+
+XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed25519.
 
 ## Table of Contents
 
