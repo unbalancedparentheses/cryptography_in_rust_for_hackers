@@ -97,3 +97,4 @@ Possible: PRNG
 
 ### Examples of attacks
 - [How 3 hours of inaction from Amazon cost cryptocurrency holders $235,000](https://arstechnica.com/information-technology/2022/09/how-3-hours-of-inaction-from-amazon-cost-cryptocurrency-holders-235000/)
+- [RSA CTF Tool](https://github.com/RsaCtfTool/RsaCtfTool)
