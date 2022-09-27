@@ -1,6 +1,6 @@
 # Fast Multiplication Algorithms
 
-## Divide and conquer: Karatsuba
+## Karatsuba's multiplication
 
 We all learned at elementary school how to multiply two numbers: we write one below the other and proceed to multiply each of the numbers above by each digit of the number below and then we add all the numbers:
 <pre>          1234 

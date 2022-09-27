@@ -1,6 +1,8 @@
 # Elliptic Curves
 
-Elliptic curves are very useful objects because they allow us to obtain a group structure with interesting properties. Given a field \\( \mathcal{F} \\), an elliptic curve is the set of points \\( (x,y) \\) which satisfy the following equation: \\[ y^2+a_1xy+a_3y=x^3+a_2x^2+a_4x+a_6 \\]  This is known as the general Weierstrass equation. In many cases, this can be written in the simpler form \\[ y^2=x^3+ax+b \\]  which is the (Weierstrass) short-form. Depending on the choice of the parameters \\( a \\) and \\( b \\) and the field, the curve can have some desired properties or not. If \\( 4a^3+27b^2 \neq 0 \\), the curve is non-singular.
+Elliptic curves are very useful objects because they allow us to obtain a group structure with interesting properties. Given a field \\( \mathcal{F} \\), an elliptic curve is the set of points \\( (x,y) \\) which satisfy the following equation: \\[ y^2+a_1xy+a_3y=x^3+a_2x^2+a_4x+a_6 \\]  This is known as the general Weierstrass equation. In many cases, this can be written in the simpler form 
+\\[ y^2=x^3+ax+b \\]
+which is the (Weierstrass) short-form. Depending on the choice of the parameters \\( a \\) and \\( b \\) and the field, the curve can have some desired properties or not. If \\( 4a^3+27b^2 \neq 0 \\), the curve is non-singular.
 
 We can define an operation which allows us to sum elements belonging to the elliptic curve and obtain a group. This is done using a geometric construction, the chord-and-tangent rule. Given two points on the curve \\( P_1=(x_1,y_1) \\) and \\( P_2=(x_2,y_2) \\), we can draw a line connecting them. That line intersects the curve on a third point \\( P_3=(x_3,y_3) \\). We set the sum of \\( P_1 \\) and \\( P_2 \\) as \\( (x_3,-y_3) \\), that is, point \\( P_3 \\) flipped around the \\( x \\)-axis. The formulae are:
 \\( s=\frac{y_2-y_1}{x_2-x_1} \\)
