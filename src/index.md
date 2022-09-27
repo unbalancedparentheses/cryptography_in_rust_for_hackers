@@ -66,6 +66,7 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - <https://toc.cryptobook.us/> by Dan Boneh
 - [Could you give a couple examples of attacks that you thought was just theoretical but turned out to be very practical? Very curious about this topic](https://news.ycombinator.com/item?id=23384227)
 - Applied Cryptography Book by Bruce Schneier
+- Pairings for Beginners, Craig Costello <https://static1.squarespace.com/static/5fdbb09f31d71c1227082339/t/5ff394720493bd28278889c6/1609798774687/PairingsForBeginners.pdf>
 
 ### SNARKs
 - [A Cambrian Explosion of Crypto Proofs - Eli Ben-Sasson](https://nakamoto.com/cambrian-explosion-of-crypto-proofs/)
