@@ -1,8 +1,8 @@
 # Multiscalar Muforltiplication
 
-The *Multi-Scalar Multiplication* problem consists of, given an elliptic curve, calculating 
+The Multi-Scalar Multiplication (MSM) problem consists of, given an elliptic curve, calculating 
 \\[ \sum_{i=1}^{n} k_i P_i \\]
-for some scalars (a.k.a. integers modulo a certain prime) \\( k_i \\), some elliptic curve points \\( P_i = (x_i, y_i) \\) and some \\( n \\) (For example, in the order of \\( 2^{26} \\)).
+for some scalars \\( k_i \\), some elliptic curve points \\( P_i = (x_i, y_i) \\) and some \\( n \\) (For example, in the order of \\( 2^{26} \\)).
 
 It is estimated that around 80% of the time to produce a zk-SNARK proof is spent doing MSM, so optimizing it is very important for performance.
 
@@ -31,4 +31,4 @@ We can calculate this with a minimum number of point additions, using partial su
 Each of these operations involves doing just one elliptic point addition. The final result can be obtained by summing these partial sums:
 \\[ B_j=\sum T_{jk} \\]
 
-We can improve the calculations by changing the expansion of the coefficients \\( k_i \\). In binary representation, the Hamming weight is the number of non-zero bits; ideally, we would like this weight to be as small as possible to reduce the number of additions (For example, 65537, which is \\( 2^{16}+1 \\) is used as public key for the RSA cryptosystem in many implementations. The square and multiply algorithm requires only two multiplications). The average Hamming weight in a binary representation is \\( 1/2 \\); if we introduce a signed binary representation (\\( -1,0,1 \\)), the average weight is reduced to \\(1/3\\(, with the consequent decrease in the number of operations (on average).
+We can improve the calculations by changing the expansion of the coefficients \\( k_i \\). In binary representation, the Hamming weight is the number of non-zero bits; ideally, we would like this weight to be as small as possible to reduce the number of additions (For example, 65537, which is \\( 2^{16}+1 \\) is used as public key for the RSA cryptosystem in many implementations. The square and multiply algorithm requires only two multiplications). The average Hamming weight in a binary representation is \\( 1/2 \\); if we introduce a signed binary representation (\\( -1,0,1 \\)), the average weight is reduced to \\( 1/3 \\), with the consequent decrease in the number of operations (on average).
