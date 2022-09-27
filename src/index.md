@@ -2,7 +2,7 @@
 
 Objectives:
 
-Explain basic number theory and abstract algebra requirements, symmetric encryption (block and stream cipher), asymmetric encryption (RSA, Elliptic curve), hashes, signatures, key exchange, polynomial commitments, SNARKs and STARKs.
+Explain introductory number theory and abstract algebra, symmetric encryption (block and stream cipher), asymmetric encryption (RSA, Elliptic curve), hashes, signatures, key exchange, polynomial commitments, SNARKs and STARKs.
 
 XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed25519.
 
@@ -68,6 +68,7 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - Applied Cryptography Book by Bruce Schneier
 
 ### SNARKs
+- [A Cambrian Explosion of Crypto Proofs - Eli Ben-Sasson](https://nakamoto.com/cambrian-explosion-of-crypto-proofs/)
 - [ZK whiteboard sessions — introductory modules with Dan Boneh et al](https://zkhack.dev/whiteboard/)
 - [Why and how zk-SNARK Works: a definitive explanation by Maksym Petkus](https://arxiv.org/pdf/1906.07221.pdf)
 - [Zk-SNARKs: under the hood by Vitalik Buterin](https://medium.com/@VitalikButerin/zk-snarks-under-the-hood-b33151a013f6) part 1, part 2, part 3
