@@ -133,6 +133,7 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - [curdle_proofs] (https://github.com/asn-d6/curdleproofs/tree/main/src)
 - [aes] (https://github.com/secworks/aes)
 - [chacha] (https://github.com/secworks/chacha/blob/master/src/rtl/chacha_core.v)
+- [chachaRust] (https://github.com/RustCrypto/stream-ciphers)
 
 ### Examples of attacks
 - [How 3 hours of inaction from Amazon cost cryptocurrency holders $235,000](https://arstechnica.com/information-technology/2022/09/how-3-hours-of-inaction-from-amazon-cost-cryptocurrency-holders-235000/)
