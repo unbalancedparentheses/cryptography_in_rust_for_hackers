@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Chapter 2 - Cryptography in Rust for Hackers</title>
+        <title>Primality Testing - Cryptography in Rust for Hackers</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -77,7 +77,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Index</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li class="chapter-item expanded "><a href="chapter_2.html" class="active"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Natural_Numbers.html"><strong aria-hidden="true">3.1.</strong> Natural Numbers</a></li><li class="chapter-item expanded "><a href="Integers.html"><strong aria-hidden="true">3.2.</strong> Integers</a></li><li class="chapter-item expanded "><a href="Modular_Arithmetic.html"><strong aria-hidden="true">3.3.</strong> Modular Arithmetic</a></li><li class="chapter-item expanded "><a href="Groups.html"><strong aria-hidden="true">3.4.</strong> Groups</a></li><li class="chapter-item expanded "><a href="Rings.html"><strong aria-hidden="true">3.5.</strong> Rings</a></li><li class="chapter-item expanded "><a href="Polynomials.html"><strong aria-hidden="true">3.6.</strong> Polynomials</a></li><li class="chapter-item expanded "><a href="Fields.html"><strong aria-hidden="true">3.7.</strong> Fields</a></li><li class="chapter-item expanded "><a href="Elliptic_Curves.html"><strong aria-hidden="true">3.8.</strong> Elliptic Curves</a></li><li class="chapter-item expanded "><a href="Fast_Multiplication_Algorithms.html"><strong aria-hidden="true">3.9.</strong> Fast Multiplication Algorithms</a></li><li class="chapter-item expanded "><a href="Multiscalar_Multiplication.html"><strong aria-hidden="true">3.10.</strong> Multiscalar Multiplication</a></li><li class="chapter-item expanded "><a href="Primality_Testing.html"><strong aria-hidden="true">3.11.</strong> Primality Testing</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Index</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Natural_Numbers.html"><strong aria-hidden="true">3.1.</strong> Natural Numbers</a></li><li class="chapter-item expanded "><a href="Integers.html"><strong aria-hidden="true">3.2.</strong> Integers</a></li><li class="chapter-item expanded "><a href="Modular_Arithmetic.html"><strong aria-hidden="true">3.3.</strong> Modular Arithmetic</a></li><li class="chapter-item expanded "><a href="Groups.html"><strong aria-hidden="true">3.4.</strong> Groups</a></li><li class="chapter-item expanded "><a href="Rings.html"><strong aria-hidden="true">3.5.</strong> Rings</a></li><li class="chapter-item expanded "><a href="Polynomials.html"><strong aria-hidden="true">3.6.</strong> Polynomials</a></li><li class="chapter-item expanded "><a href="Fields.html"><strong aria-hidden="true">3.7.</strong> Fields</a></li><li class="chapter-item expanded "><a href="Elliptic_Curves.html"><strong aria-hidden="true">3.8.</strong> Elliptic Curves</a></li><li class="chapter-item expanded "><a href="Fast_Multiplication_Algorithms.html"><strong aria-hidden="true">3.9.</strong> Fast Multiplication Algorithms</a></li><li class="chapter-item expanded "><a href="Multiscalar_Multiplication.html"><strong aria-hidden="true">3.10.</strong> Multiscalar Multiplication</a></li><li class="chapter-item expanded "><a href="Primality_Testing.html" class="active"><strong aria-hidden="true">3.11.</strong> Primality Testing</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -136,19 +136,49 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="chapter-2-math-preliminaries"><a class="header" href="#chapter-2-math-preliminaries">Chapter 2: Math preliminaries</a></h1>
-<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
-<p>Math is at the core of cryptography. It gives us a framework to work with and prove that cryptographic primitives are safe or, at least, that some problems are really hard to solve. Public key cryptography is possible due to the fact that some calculations are fast to be done in one way, but it is difficult to do them the other way round and that has to do only with math. Even if a good understanding of math is important, some of the key concepts for cryptography are rather easy to grasp and related to elementary school math. Besides, you don't have to be really good at doing calculations, you just have to understand how to implement the different cryptographic primitives in a secure way. For example, the RSA cryptosystem relies on finding prime numbers and multiplicative inverses (in short, given \( a \) , find \( b \) such that \( a\times b=1 \) ) and efficiently computing powers of numbers. The method owes its strength to the difficulty of factoring a number into its prime factors. We will now explain in more detail each of these concepts (though it is likely that many of these ideas ring a bell) and, more importantly, how to implement them in practice. There are, of course, some underlying subtleties and we will need at some points to go down the rabbit hole, but this will be much easier if we know the reasons why we need it.</p>
+                        <h1 id="primality-testing"><a class="header" href="#primality-testing">Primality Testing</a></h1>
+<p>We can test primality using the <a href="https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test">Miller-Rabin test</a>. Given an odd number \( n \), we can write it as \( n=2^r\times d +1 \), for some \( r&gt; 0 \) and \( d \) an odd number. If \( d \) is prime, then:
+\( a^d \equiv 1 \pmod{n} \)
+\( a^{2^r \times d}\equiv -1 \pmod{n} \)
+If \( n \) is prime, then it satisfies Fermat's little theorem and the only square roots of \( 1 \) are \( -1 \) and \( 1 \). If any of these conditions is not fulfilled, \( n \) is not prime (if it passes, it could be composite, depending on the choice of \( a \), known as the witness). Checking several \( a \) allows us to make sure that the test passed for a composite number. The decomposition is easy to do:</p>
+<pre><code>pub fn decompose(n: u128) -&gt; (u128,u128) {
+        let mut d: u128=n-1;
+        let mut r: u128=0;
+        while d%2 == 0 {
+            d /= 2;
+            r += 1;
+        }
+        (d,r)
+    }
+</code></pre>
+<p>Since \( n-1 \) is even, we can take factors of \( 2 \) repeatedly, until \( d \) is no longer divisible by \( 2 \). The condition can be checked faster by looking at the last bit of \( n-1 \).</p>
+<p>The core of the Miller-Rabin test is (it yields true if it is probably prime):</p>
+<pre><code>fn miller_rabin(a: u128, n: u128, d: u128, r: u128) -&gt; bool {
+        let n_minus_one: u128 = n - 1u128;
+        let field=FieldPoint::new(a,n);
+        let mut x = field.power(d);
+        let mut count: u128 =1;
+        if x.num == 1 || x.num == n_minus_one {
+            return true;
+        }
+        while count &lt; r {
+            x = x.power(2u128);
+            if x.num == n_minus_one {
+                return true;
+            }
+            count += 1u128;
+        }
+        false
+    }
+</code></pre>
+<p>If you have a composite number and try several witnesses, it is very likely it will fail at least one (and stop at the first one) and so we can discard the number.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="chapter_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="Multiscalar_Multiplication.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a rel="next" href="Natural_Numbers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
                     </nav>
@@ -156,11 +186,8 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="chapter_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="Multiscalar_Multiplication.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a rel="next" href="Natural_Numbers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 
