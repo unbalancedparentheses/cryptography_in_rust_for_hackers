@@ -14,4 +14,10 @@
     - [Fast Multiplication Algorithms](./Fast_Multiplication_Algorithms.md)
     - [Multiscalar Multiplication](./Multiscalar_Multiplication.md)
     - [Primality Testing](./Primality_Testing.md)
+- [Chapter 3](./chapter_3.md)
+    - [Information vs Computational Security](./information.md)
+    - [Bit Operations](./bit_operations.md)
+    - [Stream and block ciphers](./stream_and_block.md)
+    - [AES](./AES.md)
+    - [ChaCha20](./ChaCha20.md)
 
