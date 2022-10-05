@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Chapter 2 - Cryptography in Rust for Hackers</title>
+        <title>AES - Cryptography in Rust for Hackers</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -77,7 +77,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Index</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li class="chapter-item expanded "><a href="chapter_2.html" class="active"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Natural_Numbers.html"><strong aria-hidden="true">3.1.</strong> Natural Numbers</a></li><li class="chapter-item expanded "><a href="Integers.html"><strong aria-hidden="true">3.2.</strong> Integers</a></li><li class="chapter-item expanded "><a href="Modular_Arithmetic.html"><strong aria-hidden="true">3.3.</strong> Modular Arithmetic</a></li><li class="chapter-item expanded "><a href="Groups.html"><strong aria-hidden="true">3.4.</strong> Groups</a></li><li class="chapter-item expanded "><a href="Rings.html"><strong aria-hidden="true">3.5.</strong> Rings</a></li><li class="chapter-item expanded "><a href="Polynomials.html"><strong aria-hidden="true">3.6.</strong> Polynomials</a></li><li class="chapter-item expanded "><a href="Fields.html"><strong aria-hidden="true">3.7.</strong> Fields</a></li><li class="chapter-item expanded "><a href="Elliptic_Curves.html"><strong aria-hidden="true">3.8.</strong> Elliptic Curves</a></li><li class="chapter-item expanded "><a href="Fast_Multiplication_Algorithms.html"><strong aria-hidden="true">3.9.</strong> Fast Multiplication Algorithms</a></li><li class="chapter-item expanded "><a href="Multiscalar_Multiplication.html"><strong aria-hidden="true">3.10.</strong> Multiscalar Multiplication</a></li><li class="chapter-item expanded "><a href="Primality_Testing.html"><strong aria-hidden="true">3.11.</strong> Primality Testing</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Chapter 3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="information.html"><strong aria-hidden="true">4.1.</strong> Information vs Computational Security</a></li><li class="chapter-item expanded "><a href="bit_operations.html"><strong aria-hidden="true">4.2.</strong> Bit Operations</a></li><li class="chapter-item expanded "><a href="stream_and_block.html"><strong aria-hidden="true">4.3.</strong> Stream and block ciphers</a></li><li class="chapter-item expanded "><a href="AES.html"><strong aria-hidden="true">4.4.</strong> AES</a></li><li class="chapter-item expanded "><a href="ChaCha20.html"><strong aria-hidden="true">4.5.</strong> ChaCha20</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Index</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Natural_Numbers.html"><strong aria-hidden="true">3.1.</strong> Natural Numbers</a></li><li class="chapter-item expanded "><a href="Integers.html"><strong aria-hidden="true">3.2.</strong> Integers</a></li><li class="chapter-item expanded "><a href="Modular_Arithmetic.html"><strong aria-hidden="true">3.3.</strong> Modular Arithmetic</a></li><li class="chapter-item expanded "><a href="Groups.html"><strong aria-hidden="true">3.4.</strong> Groups</a></li><li class="chapter-item expanded "><a href="Rings.html"><strong aria-hidden="true">3.5.</strong> Rings</a></li><li class="chapter-item expanded "><a href="Polynomials.html"><strong aria-hidden="true">3.6.</strong> Polynomials</a></li><li class="chapter-item expanded "><a href="Fields.html"><strong aria-hidden="true">3.7.</strong> Fields</a></li><li class="chapter-item expanded "><a href="Elliptic_Curves.html"><strong aria-hidden="true">3.8.</strong> Elliptic Curves</a></li><li class="chapter-item expanded "><a href="Fast_Multiplication_Algorithms.html"><strong aria-hidden="true">3.9.</strong> Fast Multiplication Algorithms</a></li><li class="chapter-item expanded "><a href="Multiscalar_Multiplication.html"><strong aria-hidden="true">3.10.</strong> Multiscalar Multiplication</a></li><li class="chapter-item expanded "><a href="Primality_Testing.html"><strong aria-hidden="true">3.11.</strong> Primality Testing</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Chapter 3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="information.html"><strong aria-hidden="true">4.1.</strong> Information vs Computational Security</a></li><li class="chapter-item expanded "><a href="bit_operations.html"><strong aria-hidden="true">4.2.</strong> Bit Operations</a></li><li class="chapter-item expanded "><a href="stream_and_block.html"><strong aria-hidden="true">4.3.</strong> Stream and block ciphers</a></li><li class="chapter-item expanded "><a href="AES.html" class="active"><strong aria-hidden="true">4.4.</strong> AES</a></li><li class="chapter-item expanded "><a href="ChaCha20.html"><strong aria-hidden="true">4.5.</strong> ChaCha20</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -136,18 +136,58 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="chapter-2-math-preliminaries"><a class="header" href="#chapter-2-math-preliminaries">Chapter 2: Math preliminaries</a></h1>
-<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
-<p>Math is at the core of cryptography. It gives us a framework to work with and prove that cryptographic primitives are safe or, at least, that some problems are really hard to solve. Public key cryptography is possible due to the fact that some calculations are fast to be done in one way, but it is difficult to do them the other way round and that has to do only with math. Even if a good understanding of math is important, some of the key concepts for cryptography are rather easy to grasp and related to elementary school math. Besides, you don't have to be really good at doing calculations, you just have to understand how to implement the different cryptographic primitives in a secure way. For example, the RSA cryptosystem relies on finding prime numbers and multiplicative inverses (in short, given \( a \) , find \( b \) such that \( a\times b=1 \) ) and efficiently computing powers of numbers. The method owes its strength to the difficulty of factoring a number into its prime factors. We will now explain in more detail each of these concepts (though it is likely that many of these ideas ring a bell) and, more importantly, how to implement them in practice. There are, of course, some underlying subtleties and we will need at some points to go down the rabbit hole, but this will be much easier if we know the reasons why we need it.</p>
+                        <h1 id="aes"><a class="header" href="#aes">AES</a></h1>
+<p>The Advanced Encryption Standard (AES) was the result of an open competition, organized by NIST in 1997 and which lasted for three years. The proposal by Rijmen and Daemen was nominated as the winner and was standardized in 2001 by NIST.</p>
+<p>AES offers 3 levels of security: AES-128, AES-192, and AES-256, with key sizes of 16, 24, and 32 bytes, respectively. As the key's size increases, so does security. However, for most applications, AES-128 provides sufficient security levels (the best-known attacks against AES are only slightly better than brute-force attacks, which would require \( 2^{128} \) operations).</p>
+<p>AES is a block cipher: it takes a 16-byte block (128 bits) and the variable length key and outputs a 16-byte ciphertext. If the text has less than 16 bytes, then it is conveniently padded. After performing decryption, it should be possible to eliminate the padding to recover the message; therefore, random padding cannot be used, because we could not distinguish the original message from the random bits.</p>
+<p>Remember that block ciphers are permutations: they map all the possible plaintexts into all possible ciphertexts.</p>
+<p>The cipher sees the plaintext as a \( 4\times 4 \) matrix of bytes. AES has a round function, which is applied several times to the plaintext, scrambling and mixing everything well, until we obtain the ciphertext. Each round uses a different key (which is generated in a deterministic way from the secret key), making the smallest changes in the bits of the secret key result in entirely different encryption. The steps in each round function (except in the last one) are:</p>
+<ul>
+<li>SubBytes</li>
+<li>ShiftRows</li>
+<li>MixColumns</li>
+<li>AddRoundKey</li>
+</ul>
+<p>The first three are easily reversible, but the last one is not: it performs an XOR operation between the text and the round key. However, all the steps are necessary to achieve the desired security levels.</p>
+<p>AES uses 10 rounds to perform encryption. All steps contain the four operations, except for the first one (where only the round key is added) and the 10th (where MixColumns is omitted).</p>
+<p>SubBytes (also called substitution boxes) provide the substitution step and is a nonlinear function. Given that we encrypt blocks of 16 bytes, the substitution can be done with the aid of lookup tables.</p>
+<p>In ShiftRows and MixColumns, the bytes of the columns/rows are moved. </p>
+<p>To generate the keys for each round, the key schedule function is called: all the keys are derived from the secret key, using the substitution boxes and XOR operations. One drawback of this key scheduling is that, if an attacker learns one of the keys, he can reverse the algorithm and learn all other keys, including the secret key.</p>
+<p>Why do we need all these operations to have a secure cipher?</p>
+<ul>
+<li>The MixColumns and ShiftRows guarantee that all the elements are &quot;well mixed&quot;. If one of them is missing, then we could break the cipher into smaller blocks and perform a codebook search over \( 2^{32} \) possibilities, which is far better than \( 2^{128} \).</li>
+<li>SubBytes gives the nonlinear part to the cipher. Without it, all the operations are linear and easier to reverse.</li>
+<li>AddRoundKey makes the ciphertext depend on the key. If we skipped this step, then we don't need any key to decipher.</li>
+<li>The key schedule prevents us from reusing the same key all the time, making the cipher vulnerable to slide attacks.</li>
+</ul>
+<p>When we want to encrypt a large message, we could divide it into blocks of 16 bytes and pad the last one, if necessary. This very simple approach is known as the electronic codebook mode (ECB) and should not be used. As encryption is deterministic, every time we encrypt a given plaintext, we will get the same ciphertext. This is problematic when we have, for example, an image with repetitive patterns or large areas of one color, since the ciphertext will exhibit those patterns too. To avoid this problem, there are several modes that we can use:</p>
+<ul>
+<li>Cipher block chaining (CBC)</li>
+<li>Propagating cipher block chaining (PCBC)</li>
+<li>Cipher Feedback (CFB)</li>
+<li>Output feedback (OFB)</li>
+<li>Counter (CTR)</li>
+</ul>
+<p>For example, in the CBC mode:</p>
+<ol>
+<li>Initialize a 16-byte random vector (IV), </li>
+<li>Perform \( \tilde{B}_1=IV \oplus B_1 \), where \( B_1 \) is the first block and set \( k=1 \).</li>
+<li>Use AES to encrypt \( E_1= \tilde{B}_1 \).</li>
+<li>Perform \( \tilde{B}<em>{k+1}=E_k \oplus B</em>{k+1} \)</li>
+<li>Use AES to encrypt \( E_{k+1}= \tilde{B}_{k+1} \) and do \( k=k+1 \)</li>
+<li>If \( k \neq k_{max} \), go to step 4. Otherwise, it is the end of the encryption.</li>
+</ol>
+<p>The IV guarantees that, even if the same plaintext is encrypted, the resulting ciphertext will be different.</p>
+<p>Another problem that we face is that, even though the message has been encrypted, we have no way of knowing that it has been modified by an attacker. To prevent modification of the ciphertext, we can add message authentication codes (MAC), which we will cover in another chapter.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="chapter_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="stream_and_block.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="Natural_Numbers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="ChaCha20.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -156,10 +196,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="chapter_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="stream_and_block.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="Natural_Numbers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="ChaCha20.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

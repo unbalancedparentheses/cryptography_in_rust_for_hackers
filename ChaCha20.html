@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Chapter 2 - Cryptography in Rust for Hackers</title>
+        <title>ChaCha20 - Cryptography in Rust for Hackers</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -77,7 +77,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Index</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li class="chapter-item expanded "><a href="chapter_2.html" class="active"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Natural_Numbers.html"><strong aria-hidden="true">3.1.</strong> Natural Numbers</a></li><li class="chapter-item expanded "><a href="Integers.html"><strong aria-hidden="true">3.2.</strong> Integers</a></li><li class="chapter-item expanded "><a href="Modular_Arithmetic.html"><strong aria-hidden="true">3.3.</strong> Modular Arithmetic</a></li><li class="chapter-item expanded "><a href="Groups.html"><strong aria-hidden="true">3.4.</strong> Groups</a></li><li class="chapter-item expanded "><a href="Rings.html"><strong aria-hidden="true">3.5.</strong> Rings</a></li><li class="chapter-item expanded "><a href="Polynomials.html"><strong aria-hidden="true">3.6.</strong> Polynomials</a></li><li class="chapter-item expanded "><a href="Fields.html"><strong aria-hidden="true">3.7.</strong> Fields</a></li><li class="chapter-item expanded "><a href="Elliptic_Curves.html"><strong aria-hidden="true">3.8.</strong> Elliptic Curves</a></li><li class="chapter-item expanded "><a href="Fast_Multiplication_Algorithms.html"><strong aria-hidden="true">3.9.</strong> Fast Multiplication Algorithms</a></li><li class="chapter-item expanded "><a href="Multiscalar_Multiplication.html"><strong aria-hidden="true">3.10.</strong> Multiscalar Multiplication</a></li><li class="chapter-item expanded "><a href="Primality_Testing.html"><strong aria-hidden="true">3.11.</strong> Primality Testing</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Chapter 3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="information.html"><strong aria-hidden="true">4.1.</strong> Information vs Computational Security</a></li><li class="chapter-item expanded "><a href="bit_operations.html"><strong aria-hidden="true">4.2.</strong> Bit Operations</a></li><li class="chapter-item expanded "><a href="stream_and_block.html"><strong aria-hidden="true">4.3.</strong> Stream and block ciphers</a></li><li class="chapter-item expanded "><a href="AES.html"><strong aria-hidden="true">4.4.</strong> AES</a></li><li class="chapter-item expanded "><a href="ChaCha20.html"><strong aria-hidden="true">4.5.</strong> ChaCha20</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Index</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Natural_Numbers.html"><strong aria-hidden="true">3.1.</strong> Natural Numbers</a></li><li class="chapter-item expanded "><a href="Integers.html"><strong aria-hidden="true">3.2.</strong> Integers</a></li><li class="chapter-item expanded "><a href="Modular_Arithmetic.html"><strong aria-hidden="true">3.3.</strong> Modular Arithmetic</a></li><li class="chapter-item expanded "><a href="Groups.html"><strong aria-hidden="true">3.4.</strong> Groups</a></li><li class="chapter-item expanded "><a href="Rings.html"><strong aria-hidden="true">3.5.</strong> Rings</a></li><li class="chapter-item expanded "><a href="Polynomials.html"><strong aria-hidden="true">3.6.</strong> Polynomials</a></li><li class="chapter-item expanded "><a href="Fields.html"><strong aria-hidden="true">3.7.</strong> Fields</a></li><li class="chapter-item expanded "><a href="Elliptic_Curves.html"><strong aria-hidden="true">3.8.</strong> Elliptic Curves</a></li><li class="chapter-item expanded "><a href="Fast_Multiplication_Algorithms.html"><strong aria-hidden="true">3.9.</strong> Fast Multiplication Algorithms</a></li><li class="chapter-item expanded "><a href="Multiscalar_Multiplication.html"><strong aria-hidden="true">3.10.</strong> Multiscalar Multiplication</a></li><li class="chapter-item expanded "><a href="Primality_Testing.html"><strong aria-hidden="true">3.11.</strong> Primality Testing</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Chapter 3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="information.html"><strong aria-hidden="true">4.1.</strong> Information vs Computational Security</a></li><li class="chapter-item expanded "><a href="bit_operations.html"><strong aria-hidden="true">4.2.</strong> Bit Operations</a></li><li class="chapter-item expanded "><a href="stream_and_block.html"><strong aria-hidden="true">4.3.</strong> Stream and block ciphers</a></li><li class="chapter-item expanded "><a href="AES.html"><strong aria-hidden="true">4.4.</strong> AES</a></li><li class="chapter-item expanded "><a href="ChaCha20.html" class="active"><strong aria-hidden="true">4.5.</strong> ChaCha20</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -136,19 +136,29 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="chapter-2-math-preliminaries"><a class="header" href="#chapter-2-math-preliminaries">Chapter 2: Math preliminaries</a></h1>
-<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
-<p>Math is at the core of cryptography. It gives us a framework to work with and prove that cryptographic primitives are safe or, at least, that some problems are really hard to solve. Public key cryptography is possible due to the fact that some calculations are fast to be done in one way, but it is difficult to do them the other way round and that has to do only with math. Even if a good understanding of math is important, some of the key concepts for cryptography are rather easy to grasp and related to elementary school math. Besides, you don't have to be really good at doing calculations, you just have to understand how to implement the different cryptographic primitives in a secure way. For example, the RSA cryptosystem relies on finding prime numbers and multiplicative inverses (in short, given \( a \) , find \( b \) such that \( a\times b=1 \) ) and efficiently computing powers of numbers. The method owes its strength to the difficulty of factoring a number into its prime factors. We will now explain in more detail each of these concepts (though it is likely that many of these ideas ring a bell) and, more importantly, how to implement them in practice. There are, of course, some underlying subtleties and we will need at some points to go down the rabbit hole, but this will be much easier if we know the reasons why we need it.</p>
+                        <h1 id="chacha20"><a class="header" href="#chacha20">ChaCha20</a></h1>
+<p>ChaCha20 is a modification of the Salsa20 cipher, invented by Daniel J. Bernstein in 2005. Its working principle is the same as all stream ciphers: it generates a keystream from the secret key and encrypts by performing an XOR operation between the plaintext and the keystream.</p>
+<p>ChaCha20 generates the keystream by repeatedly calling a block function that outputs 64 bytes of keystream. It takes as input:</p>
+<ul>
+<li>256-bit key.</li>
+<li>96-bit nonce.</li>
+<li>32-bit counter.</li>
+</ul>
+<p>Every time the function outputs 64 bytes of keystream, the counter is increased by one and the process continues, until the keystream is larger than the plaintext; then it is truncated to the length of the plaintext and the XOR operation is performed. The maximum size we can encrypt is given by the maximum value of the counter, \( 2^{32} \), and the output of each round, 64 bytes, yielding a maximum of \( 2^{32}\times 64=256 \) GB.</p>
+<p>The core operation is the Quarter Round. It takes 4 32-bit unsigned integers, denoted \( a,b,c \) and \(d \) and performs the following operations:
+\( a=a+b;\space d=d\oplus a;\space d&lt;&lt;&lt;16\)
+\( c=c+d;\space b=b\oplus c;\space b&lt;&lt;&lt;12\)
+\( a=a+b;\space d=d\oplus a;\space d&lt;&lt;&lt;8\)
+\( c=c+b;\space b=b\oplus c;\space b&lt;&lt;&lt;7\)
+where \( &lt;&lt;&lt;n \) denotes an \( n \)-bit rotation towards the left.</p>
+<p>The ChaCha state is composed of 16 32-bit words: the first four are constants; the next 8 correspond to the key, followed by the counter and the nonce.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="chapter_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="AES.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a rel="next" href="Natural_Numbers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
                     </nav>
@@ -156,11 +166,8 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="chapter_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="AES.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a rel="next" href="Natural_Numbers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 

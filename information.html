@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Chapter 2 - Cryptography in Rust for Hackers</title>
+        <title>Information vs Computational Security - Cryptography in Rust for Hackers</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -77,7 +77,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Index</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li class="chapter-item expanded "><a href="chapter_2.html" class="active"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Natural_Numbers.html"><strong aria-hidden="true">3.1.</strong> Natural Numbers</a></li><li class="chapter-item expanded "><a href="Integers.html"><strong aria-hidden="true">3.2.</strong> Integers</a></li><li class="chapter-item expanded "><a href="Modular_Arithmetic.html"><strong aria-hidden="true">3.3.</strong> Modular Arithmetic</a></li><li class="chapter-item expanded "><a href="Groups.html"><strong aria-hidden="true">3.4.</strong> Groups</a></li><li class="chapter-item expanded "><a href="Rings.html"><strong aria-hidden="true">3.5.</strong> Rings</a></li><li class="chapter-item expanded "><a href="Polynomials.html"><strong aria-hidden="true">3.6.</strong> Polynomials</a></li><li class="chapter-item expanded "><a href="Fields.html"><strong aria-hidden="true">3.7.</strong> Fields</a></li><li class="chapter-item expanded "><a href="Elliptic_Curves.html"><strong aria-hidden="true">3.8.</strong> Elliptic Curves</a></li><li class="chapter-item expanded "><a href="Fast_Multiplication_Algorithms.html"><strong aria-hidden="true">3.9.</strong> Fast Multiplication Algorithms</a></li><li class="chapter-item expanded "><a href="Multiscalar_Multiplication.html"><strong aria-hidden="true">3.10.</strong> Multiscalar Multiplication</a></li><li class="chapter-item expanded "><a href="Primality_Testing.html"><strong aria-hidden="true">3.11.</strong> Primality Testing</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Chapter 3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="information.html"><strong aria-hidden="true">4.1.</strong> Information vs Computational Security</a></li><li class="chapter-item expanded "><a href="bit_operations.html"><strong aria-hidden="true">4.2.</strong> Bit Operations</a></li><li class="chapter-item expanded "><a href="stream_and_block.html"><strong aria-hidden="true">4.3.</strong> Stream and block ciphers</a></li><li class="chapter-item expanded "><a href="AES.html"><strong aria-hidden="true">4.4.</strong> AES</a></li><li class="chapter-item expanded "><a href="ChaCha20.html"><strong aria-hidden="true">4.5.</strong> ChaCha20</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Index</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Natural_Numbers.html"><strong aria-hidden="true">3.1.</strong> Natural Numbers</a></li><li class="chapter-item expanded "><a href="Integers.html"><strong aria-hidden="true">3.2.</strong> Integers</a></li><li class="chapter-item expanded "><a href="Modular_Arithmetic.html"><strong aria-hidden="true">3.3.</strong> Modular Arithmetic</a></li><li class="chapter-item expanded "><a href="Groups.html"><strong aria-hidden="true">3.4.</strong> Groups</a></li><li class="chapter-item expanded "><a href="Rings.html"><strong aria-hidden="true">3.5.</strong> Rings</a></li><li class="chapter-item expanded "><a href="Polynomials.html"><strong aria-hidden="true">3.6.</strong> Polynomials</a></li><li class="chapter-item expanded "><a href="Fields.html"><strong aria-hidden="true">3.7.</strong> Fields</a></li><li class="chapter-item expanded "><a href="Elliptic_Curves.html"><strong aria-hidden="true">3.8.</strong> Elliptic Curves</a></li><li class="chapter-item expanded "><a href="Fast_Multiplication_Algorithms.html"><strong aria-hidden="true">3.9.</strong> Fast Multiplication Algorithms</a></li><li class="chapter-item expanded "><a href="Multiscalar_Multiplication.html"><strong aria-hidden="true">3.10.</strong> Multiscalar Multiplication</a></li><li class="chapter-item expanded "><a href="Primality_Testing.html"><strong aria-hidden="true">3.11.</strong> Primality Testing</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Chapter 3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="information.html" class="active"><strong aria-hidden="true">4.1.</strong> Information vs Computational Security</a></li><li class="chapter-item expanded "><a href="bit_operations.html"><strong aria-hidden="true">4.2.</strong> Bit Operations</a></li><li class="chapter-item expanded "><a href="stream_and_block.html"><strong aria-hidden="true">4.3.</strong> Stream and block ciphers</a></li><li class="chapter-item expanded "><a href="AES.html"><strong aria-hidden="true">4.4.</strong> AES</a></li><li class="chapter-item expanded "><a href="ChaCha20.html"><strong aria-hidden="true">4.5.</strong> ChaCha20</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -136,18 +136,33 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="chapter-2-math-preliminaries"><a class="header" href="#chapter-2-math-preliminaries">Chapter 2: Math preliminaries</a></h1>
-<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
-<p>Math is at the core of cryptography. It gives us a framework to work with and prove that cryptographic primitives are safe or, at least, that some problems are really hard to solve. Public key cryptography is possible due to the fact that some calculations are fast to be done in one way, but it is difficult to do them the other way round and that has to do only with math. Even if a good understanding of math is important, some of the key concepts for cryptography are rather easy to grasp and related to elementary school math. Besides, you don't have to be really good at doing calculations, you just have to understand how to implement the different cryptographic primitives in a secure way. For example, the RSA cryptosystem relies on finding prime numbers and multiplicative inverses (in short, given \( a \) , find \( b \) such that \( a\times b=1 \) ) and efficiently computing powers of numbers. The method owes its strength to the difficulty of factoring a number into its prime factors. We will now explain in more detail each of these concepts (though it is likely that many of these ideas ring a bell) and, more importantly, how to implement them in practice. There are, of course, some underlying subtleties and we will need at some points to go down the rabbit hole, but this will be much easier if we know the reasons why we need it.</p>
+                        <h1 id="information-vs-computational-security"><a class="header" href="#information-vs-computational-security">Information vs Computational Security</a></h1>
+<p>One important key is related to the security proofs of our cryptographic schemes. In some cases, one can prove that certain schemes are mathematically secure, even if the attacker has unbounded computational power. This is called an information-theoretic secure scheme. However, to be able to build practical cryptographical schemes, we need to introduce some assumptions. Modern cryptographic algorithms can be proven computationally secure, where the adversary has bounded computing power and will be able to break the system only after spending a very large time and/or resources, even with the fastest and most powerful devices available nowadays.</p>
+<p>Instead of perfect security, computational security relies on the following:</p>
+<ul>
+<li>Security is preserver only against efficient adversaries.</li>
+<li>Adversaries can succeed, but only with a very small probability.</li>
+</ul>
+<p>If we have sufficiently good bounds for computational power and the probability of success is small enough, we can consider our schemes secure for practical purposes.</p>
+<p>There are two common approaches to analyzing the security of our cryptographic protocols:</p>
+<ol>
+<li>Concrete.</li>
+<li>Asymptotic.</li>
+</ol>
+<p>In the concrete case, we bound the probability of success, \( \epsilon \), after the attacker has spent time \(t \). We say that the scheme is \( (t,\epsilon) \)-secure if an adversary spending time \(t \) has a probability of success of at most \( \epsilon \). </p>
+<p>The asymptotic approach is related to complexity theory and views the running time of the attacker and his success probability as functions of a security parameter, \( \lambda \) (for example, the size of the secret key). It only guarantees security provided \( \lambda \) is sufficiently large.</p>
+<p>We say an algorithm is efficient if their running time is polynomial in \( \lambda \), that is \( c_1 \lambda^{c_2} \) for some numbers \( c_1 \) and \( c_2\). We can also write this in big O notation, \( \lambda^{c_2}\).</p>
+<p>As for the probability of success, we consider them to be small if it is smaller than any inverse polynomial in \( \lambda \). More precisely, for every constant \( c \), the attacker's success probability is smaller than the inverse polynomial in \( \lambda \), \( \lambda^{-c}\). A function growing slower than any inverse polynomial is called negligible.</p>
+<p>A scheme is called secure if every probabilistic, polynomial time attacker succeeds in breaking it with only negligible probability.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="chapter_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="chapter_3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="Natural_Numbers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="bit_operations.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -156,10 +171,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="chapter_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="chapter_3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="Natural_Numbers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="bit_operations.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
