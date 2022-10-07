@@ -137,6 +137,156 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="modular-arithmetic"><a class="header" href="#modular-arithmetic">Modular Arithmetic</a></h1>
+<p>One inconvenient we face with computers is that the numbers we can work with are limited. Besides, in some cases, we are not interested in a number itself, but rather in its belonging to a certain class or group. For example, when we bet on a roulette, we can choose whether the result will be even or odd. If it is even, then \( r=2\times k \), for some \( k \in {0,1,2,3...18} \). If it is odd, then \( r=2\times k+1 \). We notice that if we want to check parity, we only need to look at the remainder, which can take two values in this case: \( 0 \) or \( 1 \). In fact, when we want to check whether a number is even in the computer, we look at the last bit and check whether it is zero or not. For the case of \( 2 \), we see that any number \( a \) satisfies either:
+\( a\equiv 0 \pmod{2} \)
+\( a\equiv 1 \pmod{2} \)
+We say that \( a \) is congruent to \( 0 \) (or \( 1 \)) modulo \( 2 \). This way, we split all the numbers into two categories: even and odd. We can do the same for any number \( p&gt;1 \), remembering that the remainder is \( 0 \leq r \leq p-1 \). This can also be seen as \( a\equiv r \pmod{p} \) as \( p\mid a-r \) or \( a=k\times p+r \). This notation was invented by Gauss and is really powerful to study a lot of complex problems. We can perform usual operations such as addition and multiplication, but we have to be careful of how things work, given that results will always have to be in the range \( 0 \leq r \leq p-1 \) (As a side note, we could choose a different range, such as \( {-2,-1,0,1,2,p-3} \), but it can be confusing and we should better stick to our first choice). </p>
+<p>In the case of the sum, we can add them just as regular numbers and, if the result exceeds \( p \), take the remainder. For example, let's take \( p=7 \), so the elements we have are \( {0,1,2,3,4,5,6} \). First, we see that \( 0 \) is an element of the set and that adding it to any number does not change the result. If we add \( 2 \) and \( 3 \) the result is \( 5 \). If we add \( 5 \) and \( 4 \), we get \( 9 \), but \( 4+5=9\equiv 2 \pmod{7} \). \( 2 \) is just the remainder of the division of \( 9 \) by \( 7 \). </p>
+<p>We see that the result stays in the original set. What happens when we add \( 4 \) and \( 3 \)?
+\( 4+3=7\equiv 0 \pmod{7} \)
+We get \( 0 \)! That is because \( 7 \) is divisible by itself and the remainder is \( 0 \). We see that \( 4 \) is the additive inverse of \( 3 \) under this arithmetic. Similarly, \( 1 \) and \( 6 \) are each other's inverse, as are \( 2 \) and \( 5 \). We can recognize that the set \( {0,1,2,3,4,5,6} \) with the sum done modulo \( 7 \) has the same properties as the ordinary addition in the integers. This means that the set with this addition modulo \( p \) forms a group. Subtraction can be easily defined as adding the inverse of the number or just performing ordinary subtraction and then taking the result modulo \( p \).</p>
+<p>With multiplication we get something similar. For example,
+\( 4\times 5=20\equiv 6 \pmod{7} \).
+Taking the modulo operation ensures that we always stay inside the set. We also see that \( 1 \) works as the multiplicative identity since any number multiplied by \( 1 \) stays the same. Let's look at what happens with \( 6\times 6 \):
+\( 6\times 6=36\equiv 1 \pmod{7} \).
+We multiplied \( 6 \) by itself and got \( 1 \)! Division \( a/b \) can be restated as \( a\times b^{-1} \), where \( b\times b^{-1}=1=b^{-1}\times b \). We see that \( 6 \) is its own multiplicative inverse with the multiplication modulo \( p \). We can also see that:
+\( 3\times 5=15\equiv 1 \pmod{7} \) 
+\( 2\times 4=8\equiv 1 \pmod{7} \) 
+So, \( 3=5^{-1} \)  and \( 2=4^{-1} \)! This can sound weird, but we have to remember that we are working with congruences. We can understand the precise meaning of this by rephrasing. Let's take the case of \( 6 \) and  \( 6\) . There are two numbers \( a=q_1\times 7+6 \) and \( b=q_2\times 7+6 \) (because that is what the congruence means). Let's take the product \( a\times b \) :
+\( a\times b=(q_1\times 7+6)\times (q_2\times 7+6) \) 
+Let's apply the distributive law:
+\( a\times b=q_1\times q_2 \times 7^2+6\times 7\times (q_1+q_2)+36 \) 
+Let's split this further \( 36=1+35=1+7\times 5 \) and regroup, taking as a common factor \( 7 \) :
+\( a\times b=7\times (q_1\times q_2\times 7+6\times(q_1+q_2)+5)+1 \) 
+The first term is divisible by \( 7 \), so it is congruent to \( 0 \). Or, if we subtract \( 1 \) to \( a\times b \), we see that it is divisible by \( 7 \) (since it is the product of \( 7 \) and an integer).</p>
+<h2 id="defining-operations"><a class="header" href="#defining-operations">Defining operations</a></h2>
+<p>We need to implement first some of the arithmetic operations and define field elements. We will show how to do it in Rust.</p>
+<pre><code>use::std::ops::{Add, Sub, Mul, Div};
+pub struct FieldPoint {
+    num: u128,
+    prime: u128,
+}
+</code></pre>
+<p>The first line imports the standard library (in particular, the operations of addition, subtraction, multiplication, and division), which will allow us to override these operators with the expressions we need to use in modular arithmetic.</p>
+<p>In the second line, we define a public structure named <code>FieldPoint</code>, which has two fields: <code>num</code> (a number in the range 0 to prime) and <code>prime</code> (this will give us the size and we will perform all operations modulo prime). For practical applications, we need to replace the unsigned integers <code>u128</code> with appropriate variables that allow us to store large integers.</p>
+<p>We can now instantiate some methods over <code>FieldPoint</code>, such as how to create one or how to multiply or divide field elements.</p>
+<pre><code>impl FieldPoint {
+    pub fn new(num: u128, prime: u128) -&gt; FieldPoint {
+        if num &gt; prime {
+            panic!(&quot;Not a valid input for a field point, num should be nonnegative and less than prime, obtained {}&quot;, num);
+        } else {
+            FieldPoint {num:num, prime:prime}
+        }
+    }
+}
+</code></pre>
+<p>Methods are defined following the keyword <code>impl</code> and the name of the <code>struct</code>. We have a constructor for the <code>FieldPoint</code>, which takes two unsigned <code>u128</code> integers.</p>
+<p>To define addition, we can implement the trait <code>Add</code> for <code>FieldPoint</code> in this way:</p>
+<pre><code>impl Add for FieldPoint {
+    type Output = Self;
+    fn add(self, other: Self) -&gt; Self {
+        if self.prime == other.prime {
+            FieldPoint {num: (self.num + other.num).rem_euclid(self.prime), prime: self.prime}
+        } else {
+            panic!(&quot;Cannot add these field points, different prime values {},{}&quot;,self.prime,other.prime);
+        }
+    }
+}
+</code></pre>
+<p>The addition is simply adding the <code>num</code> fields and if the result exceeds the modulus <code>prime</code>, we take the remainder of the Euclidean division between the sum and the modulus.</p>
+<p>Multiplication works in a similar way:</p>
+<pre><code>impl Mul for FieldPoint {
+    type Output = Self;
+    fn mul(self, other: Self) -&gt; Self {
+        if self.prime == other.prime {
+            FieldPoint {num: (self.num*other.num).rem_euclid(self.prime), prime: self.prime}
+        } else {
+            panic!(&quot;Cannot multiply these field points, different prime values, {},{}&quot;,self.prime,other.prime);
+        }
+    }
+}
+</code></pre>
+<p>We need to define integer powers of <code>FieldElement</code>. We can do it in a rather efficient way by squaring and taking the remainder:</p>
+<pre><code>pub fn power(&amp;self,index: u128) -&gt; Self {
+        if index == 0 {
+            FieldPoint {num: 1u128, prime: self.prime}
+        } else {
+            let mut aux=index.rem_euclid(self.prime-1u128);
+            let mut acc: u128 = 1;
+            let mut base: u128 =self.num;
+            while aux &gt;0{
+                if aux%2 == 0 {
+                    base = (base*base).rem_euclid(self.prime);
+                    aux=aux/2u128;
+                } else {
+                    acc = (acc*base).rem_euclid(self.prime);
+                    aux=aux-1u128; 
+                }
+            }
+            FieldPoint {num: acc, prime: self.prime}
+        }
+
+    }
+</code></pre>
+<p>The power function takes a <code>FieldElement</code> and <code>index</code>, a <code>u128</code>. If the index is \( 0 \), the result is trivial and we output a <code>FieldElement</code> with <code>num</code> equal to \( 1 \). In any other case, we first reduce <code>index</code> (if <code>index</code> exceeds <code>prime</code>, we can take the remainder of <code>index</code> by <code>prime-1</code> -this works when the modulus is prime, since Euler's theorem (to be presented soon) says that \( a^{p-1}\equiv 1 \pmod{p} \)-. A better version would reduce <code>index</code> by \( \phi(n) \)) (the function \( \phi\) is known as Euler's totient function) and store it in <code>aux</code>. We also define a variable to calculate the result <code>acc</code> and <code>base</code>, where we will repeatedly square and take the remainder of the <code>num</code>.</p>
+<p>We now focus on the squaring and the updating of the result:</p>
+<pre><code>while aux &gt;0{
+    if aux%2 == 0 {
+        base = (base*base).rem_euclid(self.prime);
+        aux=aux/2u128;
+    } else {
+        acc = (acc*base).rem_euclid(self.prime);
+        aux=aux-1u128; 
+    }
+}
+</code></pre>
+<p>We will go decreasing the index stored in <code>aux</code>: if it is even (the first condition -this could be checked much faster, by inspecting the last bit of <code>aux</code>-), we divide <code>aux</code> by two and update <code>base</code> to the remainder of its square. If it is odd, then we proceed to update the result in <code>acc</code> and decrease <code>aux</code> by one (which means that in the next step it will be even).</p>
+<p>To convince ourselves, let's take a short numerical example, while we follow the instructions. Let's take <code>prime</code> as 11, <code>num</code> as 4, and <code>index</code> as 39.</p>
+<ol>
+<li>We set <code>aux</code> equal to the remainder of 39 and 10 (which is also \( \phi(11) \)). We get <code>aux=9</code>.</li>
+<li>Since \( 9&gt;0 \), we go inside the while loop. \( 9 \) is odd, so <code>acc=9</code> and <code>aux=8</code>.</li>
+<li><code>aux</code> is even, so <code>base=4*4=16</code>; we have to reduce the number by taking the remainder by \( 11 \), so <code>base=5</code> and <code>aux=4</code>.</li>
+<li><code>aux</code> is even, so <code>base=5*5=25</code> and we get <code>base=3</code> and <code>aux=2</code>.</li>
+<li><code>aux</code> is once again even, <code>base=9</code> and <code>aux=1</code>.</li>
+<li><code>aux</code> is odd, we get <code>acc=9*4=36-&gt;3</code> and <code>aux=0</code>.</li>
+<li>Since <code>aux=0</code>, we jump outside the while loop and the function returns the <code>FieldPoint</code> (<code>num</code>=3,<code>prime</code>=11).</li>
+</ol>
+<h2 id="computing-inverses-exponentiation-or-extended-euclidean-algorithm"><a class="header" href="#computing-inverses-exponentiation-or-extended-euclidean-algorithm">Computing inverses: Exponentiation or extended Euclidean algorithm?</a></h2>
+<p>Fermat's little theorem states that if \( p \) is a prime number, then \( a^p\equiv a \pmod{p} \). We can also write this as \( a^{p-1}\equiv 1 \pmod{p} \) and see that \( a^{-1}=a^{p-2} \). This gives us a way to compute the multiplicative inverse of \( a \) by taking powers of it. It is clear that this will involve many multiplications and that performing modular division (or inversion) will be a costly operation, especially when the modulus is very large. As a matter of fact, we will see that using \( p-2 \) as exponent will overestimate the power we need to use for some numbers. One advantage of this method is that, for a given prime, we will perform exactly the same number of operations and it will be possible to implement it in constant time (which will make it resistant to timing attacks). </p>
+<p>Inverses can be calculated alternatively with help from the extended Euclidean algorithm:</p>
+<pre><code>pub fn inversion(a:i128,b:i128) -&gt; i128 {
+
+    let mut t=0i128;
+    let mut r=b;
+    let mut t1=1i128;
+    let mut r1=a;
+
+    while r1 != 0i128 {
+        let q=r.div_euclid(r1);
+        (t,t1)=(t1,t-q*t1);
+        (r,r1)=(r1,r-q*r1);
+    }
+
+    if r != 1i128 {
+        return 0i128;
+    }
+    if t&lt;0{
+        t=t+b;
+    }
+
+    t
+}
+</code></pre>
+<p>Let's see how it works for a simple case: \( a=3 \), \( b=5 \); the inverse of \( 3 \) (modulo 5) is \( 2 \). The algorithm begins:</p>
+<ol>
+<li>\( t=0 \), \( t_1=1 \), \( r=5 \), \( r_1=3 \).</li>
+<li>Since \( r_1=3 \neq 0 \) we loop: \( q=1 \), \( t=1 \), \( t_1=0-1\times 1=-1 \), \( r=3 \), \( r_1=2 \).</li>
+<li>\( r_1 \neq 0 \), \( q=1 \), \( t=-1 \), \( t_1=1-1\times (-1)=2 \), \( r=2 \), \( r_1=1 \).</li>
+<li>\( r_1 \neq 0 \), \( q=2 \), \( t=2 \), \( t_1=-1-2\times 2=-5 \), \( r=1 \) and \( r_1=0 \).</li>
+<li>\( r_1 = 0 \), so the function outputs \( t=2 \), which is the correct answer.</li>
+</ol>
+<p>In many cases, the Euclidean algorithm will find the inverse in a faster way; the drawback is that the amount of time needed to find the answer will depend on the number we are trying to invert.</p>
+<p>We see that both multiplication and addition modulo \( p \) are closed operations in the set \( {0,1,2,...,p-1} \). We will soon see that this set with these operations forms a finite field.</p>
 
                     </main>
 

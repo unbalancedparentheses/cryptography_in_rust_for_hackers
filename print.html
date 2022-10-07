@@ -363,14 +363,479 @@
 <div style="break-before: page; page-break-before: always;"></div><h1 id="chapter-1"><a class="header" href="#chapter-1">Chapter 1</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="chapter-2"><a class="header" href="#chapter-2">Chapter 2</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="natural-numbers"><a class="header" href="#natural-numbers">Natural Numbers</a></h1>
+<p>These are the numbers we use to count objects, such as \( 0,1,2,3,4,5 \) , etc. We represent them by \( \mathbb{N} \). In elementary school, we were taught how to add, subtract, multiply and divide two numbers from this set and the properties of these operations. We can think of any of them as functions \( f \)  taking two inputs from the set, \( x \)  and \( y \) , and returning some output. For example, the addition is simply \( f(x,y)=z=x+y \) . This way of thinking will become handy when we deal with more complex data types. Rust supports the natural numbers among its primitive data types, the unsigned integers <code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>u128</code> and <code>usize</code>. </p>
+<p>Given any numbers \( a \)  and \( b \)  (with \( b \neq 0 \) ) we can write \( a \)  in the following way \( a=q\times b+r \) , where \( q \)  and \( r \)  are two numbers (called quotient and remainder), where \( r &lt; b \). This is what we did at school when learning division with remainder. The decomposition is unique and it is known as the division algorithm. It will give us the basis for modular arithmetic, which has many applications in cryptography. If \( b=5 \), the remainder of the division of any number can only take the values \( 0,1,2,3,4 \), which will help us separate the natural numbers into different &quot;boxes&quot;, according to their remainder. A useful application is the case where \( b=2 \) , so the remainder is only \( 0 \)  or \( 1 \). When the remainder is \( 0 \)  the number is even, otherwise it is odd: we can check whether any large number is odd or even just by checking the last bit!</p>
+<p>We say that \( a \) is divisible by \( b \) if the remainder of the division of \( a \) by \( b \) is \( 0 \), that is, \( a=q\times b \) (in other words, \( a \) is a multiple of \( b \)). We will write this as \( b \mid a \); if \( b \) does not divide \( a \), we write \( b \not\mid a \). For example, \( 25 \) is divisible by \( 5 \)  since \( 5\times 5=25 \), but not by \( 2 \), since \( 25=12\times 2+1 \) and \( r\neq 0 \). </p>
+<h2 id="prime-numbers"><a class="header" href="#prime-numbers">Prime Numbers</a></h2>
+<p>An important subset of \( \mathbb{N} \) is that of prime numbers. We say that \( p&gt;1 \) is a prime number if the only numbers that divide \( p \) are \( 1 \) and \( p \). For example, \( 2,3,5,7,11,13,17,19,23 \) are all prime numbers. On the other hand \( 4,6,8,10 \) have \( 2 \) as a divisor (besides \( 1 \) and themselves), so they are not prime (they are called composite numbers). </p>
+<p>The fundamental theorem of arithmetic states that any number can be expressed in a unique way (except for the order) as the product of prime powers. Let's look at some examples:
+\( 5=5^1 \) 
+\( 20=2^2\times 5 \) 
+\( 60=2^2\times 3 \times 5 \) 
+\( 35=5\times 7 \) 
+\( 1000000=2^6\times 5^6 \) </p>
+<p>When we get this decomposition, we have found the prime factors of the number and we say it is factorized. For small numbers, factorization is quite straightforward (we can try different primes, divide and check remainders); for very large numbers, however, it can be really challenging, as there are no general efficient algorithms.</p>
+<p>Euclid's lemma states that if a prime number \( p \) divides the product of two numbers \( a \times b \), then \( p \mid a \) or \( p \mid b \).</p>
+<h2 id="greatest-common-divisor-the-euclidean-algorithm"><a class="header" href="#greatest-common-divisor-the-euclidean-algorithm">Greatest Common Divisor: The Euclidean algorithm</a></h2>
+<p>Another important concept is that of the greatest common divisor: given two numbers \( a \) and \( b \), we want to find the largest number \( c \) such that \( c\mid a \) and \( c\mid b \). We denote this by \( c=gcd(a,b) \) or simply \( c=(a,b) \). For example, \( 20=2^2\times 5 \) and \( 50=2\times 5^2 \). Both numbers are divisible by \( 1,2,5,10 \). \( 10 \) is the greatest number dividing both and so \( gcd(20,50)=10 \). Two numbers \( a,b \)  are called relatively prime (or coprime) if \( gcd(a,b)=1 \) . If \( a \) and \( b \) are both prime (and different), \( 1 \) is the only common divisor. However, \( 8 \) and \( 9 \) are not prime themselves (\( 8=2^3 \) and \( 9=3^2 \)), but their only common divisor is \( 1 \) and are coprime.</p>
+<p>The greatest common divisor satisfies the following equation, for some \( x \) and \( y \):
+\( x\times a+y\times b=gcd(a,b) \) 
+The greatest common divisor can be found very efficiently using the Euclidean algorithm. A simple rust implementation is given below:</p>
+<pre><code>pub fn gcd(a: u128,b: u128) -&gt; u128 {
+
+    let mut r0: u128=b;
+    let mut r1: u128=a;
+
+    if a&gt;b {
+        r0 = b;
+        r1 = a;
+    } 
+
+    let mut r2: u128 = 1;
+
+    while r2 &gt;0 {
+        r2=r1.rem_euclid(r0);
+        r1=r0;
+        r0=r2;
+    }
+
+    r1
+}
+</code></pre>
+<p>We take two numbers \( a \) and \( b \) and we output their greatest common divisor. If \( a \) is smaller than \( b \) we initialize the dividend as \( b \) and the divisor as \( a \) (this makes us chop the larger number by the smaller one); otherwise we invert the selection. Next, we begin by reducing \( r_1 \) by \( r_0 \) and we change the roles (since \( r_2 \) is smaller then \( r_0 \) ). A numerical example helps illustrate the points:</p>
+<ol>
+<li>Take a=12, b=8 (we can immediately see that the right answer is 4, but this helps us see how the algorithm finds it).</li>
+<li>\( r_0=8 \), \( r_1=12 \), \( r_2=1 \) so we immediately enter the while loop.</li>
+<li>\( r_2=4 \) since the remainder of \( 12 \) divided by \( 8 \) is 4.</li>
+<li>\( r_1=8 \) and \( r_0=4 \).</li>
+<li>Since \( r_2 \) is not zero, we keep it inside the loop. </li>
+<li>\( r_2=0 \) (since \( 8 \) is divisible by \( 4 \)), \( r_1=4 \) and \( r_0=0 \).</li>
+<li>Now \( r_2=0 \) so we exit the loop and the function outputs \( gcd=4 \).</li>
+</ol>
+<p>We can change the division at each step in the algorithm by doing a subtraction instead. This saves us from performing an expensive operation such as division; since in many steps of the algorithm the quotient of the division is \( 1 \), doing this change will increase performance. Of course, if the numbers are quite different, doing the division will be faster, at least for the first few steps.</p>
+<h2 id="application-breaking-rsa"><a class="header" href="#application-breaking-rsa">Application: Breaking RSA</a></h2>
+<p>The RSA cryptosystem contains a public parameter for each user \( n \), which is the product of two large primes, \( p \) and \( q \). If we can factor \( n \), we can find the private key and decrypt messages or forge signatures. Suppose we have the public parameters \( n_k \) for many users. If two \( n_i \) share one prime factor (this is possible if the RSA algorithm does not sample primes at random), we can use the greatest common divisor algorithm (which is very efficient) to find it. We take one \( n_j \) and take the product of all other \( n_k \) (this is much faster than trying each \( n_i \) against \( n_j \)): the gcd will find either output \( 1 \) or one of the prime factors \( p \). If it were the latter case, we can compute \( q \) just by dividing \( n_i \) by \( p \).</p>
+<h2 id="chinese-remainder-theorem"><a class="header" href="#chinese-remainder-theorem">Chinese Remainder Theorem</a></h2>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="integers"><a class="header" href="#integers">Integers</a></h1>
+<p>One problem we have with the natural numbers is that we cannot subtract any two to yield a third one: for example, if we try \( 3-10 \) we get something that is not in the set. If we try doing that calculation using unsigned integers, Rust will output an error. The subtraction operation is not closed in the natural numbers. The set of integers, \( \mathbb{Z} \), is obtained by adding negative numbers: \( -1,-2,-3 \), etc. If we add a number and its negative, we get \( 0 \): \( 5+(-5)=0 \), \( 10+(-10)=0 \). We say that \( -a \) is the additive inverse (or opposite) of \( a \). We can view subtraction \( a-b \) as the addition of \( a \) and \( -b \), thanks to the incorporation of inverses. The addition operation has three basic properties:</p>
+<ol>
+<li>We have an identity element, \( 0 \). For any \( a \) in \( \mathbb{Z} \), \( a+0=a \)  .</li>
+<li>If \( a \) is in \( \mathbb{Z} \), so is \( b \) such that \( a+b=0 \); we commonly refer to \( b \) as \( -a \).</li>
+<li>For any \( a \), \( b \) in \( \mathbb{Z} \), then \( a+b \) is also in \( \mathbb{Z} \). This means that the operation is closed.</li>
+</ol>
+<p>The set of integers \( \mathbb{Z} \) with the addition operation forms an important algebraic structure, which is called a group. Many different mathematical objects share the same structure, even if the operations and elements are totally different, and we have general results and tools to deal with them.</p>
+<p>When we turn to division, we see that the operation is not closed. If we try doing \( 5/3 \), we do not get an integer. If we want the operation to be closed, we need to add need elements and arrive at the set of rational numbers, \( \mathbb{Q} \), which is the set of numbers that can be expressed as the ratio of two integers. </p>
+<p>For cryptography, the integers (with the addition and multiplication of elementary school) have several drawbacks that limit their application. We can define both operations in a slightly different way, which will have interesting properties and provide us with operations that are easy to compute, but hard to reverse.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="modular-arithmetic"><a class="header" href="#modular-arithmetic">Modular Arithmetic</a></h1>
+<p>One inconvenient we face with computers is that the numbers we can work with are limited. Besides, in some cases, we are not interested in a number itself, but rather in its belonging to a certain class or group. For example, when we bet on a roulette, we can choose whether the result will be even or odd. If it is even, then \( r=2\times k \), for some \( k \in {0,1,2,3...18} \). If it is odd, then \( r=2\times k+1 \). We notice that if we want to check parity, we only need to look at the remainder, which can take two values in this case: \( 0 \) or \( 1 \). In fact, when we want to check whether a number is even in the computer, we look at the last bit and check whether it is zero or not. For the case of \( 2 \), we see that any number \( a \) satisfies either:
+\( a\equiv 0 \pmod{2} \)
+\( a\equiv 1 \pmod{2} \)
+We say that \( a \) is congruent to \( 0 \) (or \( 1 \)) modulo \( 2 \). This way, we split all the numbers into two categories: even and odd. We can do the same for any number \( p&gt;1 \), remembering that the remainder is \( 0 \leq r \leq p-1 \). This can also be seen as \( a\equiv r \pmod{p} \) as \( p\mid a-r \) or \( a=k\times p+r \). This notation was invented by Gauss and is really powerful to study a lot of complex problems. We can perform usual operations such as addition and multiplication, but we have to be careful of how things work, given that results will always have to be in the range \( 0 \leq r \leq p-1 \) (As a side note, we could choose a different range, such as \( {-2,-1,0,1,2,p-3} \), but it can be confusing and we should better stick to our first choice). </p>
+<p>In the case of the sum, we can add them just as regular numbers and, if the result exceeds \( p \), take the remainder. For example, let's take \( p=7 \), so the elements we have are \( {0,1,2,3,4,5,6} \). First, we see that \( 0 \) is an element of the set and that adding it to any number does not change the result. If we add \( 2 \) and \( 3 \) the result is \( 5 \). If we add \( 5 \) and \( 4 \), we get \( 9 \), but \( 4+5=9\equiv 2 \pmod{7} \). \( 2 \) is just the remainder of the division of \( 9 \) by \( 7 \). </p>
+<p>We see that the result stays in the original set. What happens when we add \( 4 \) and \( 3 \)?
+\( 4+3=7\equiv 0 \pmod{7} \)
+We get \( 0 \)! That is because \( 7 \) is divisible by itself and the remainder is \( 0 \). We see that \( 4 \) is the additive inverse of \( 3 \) under this arithmetic. Similarly, \( 1 \) and \( 6 \) are each other's inverse, as are \( 2 \) and \( 5 \). We can recognize that the set \( {0,1,2,3,4,5,6} \) with the sum done modulo \( 7 \) has the same properties as the ordinary addition in the integers. This means that the set with this addition modulo \( p \) forms a group. Subtraction can be easily defined as adding the inverse of the number or just performing ordinary subtraction and then taking the result modulo \( p \).</p>
+<p>With multiplication we get something similar. For example,
+\( 4\times 5=20\equiv 6 \pmod{7} \).
+Taking the modulo operation ensures that we always stay inside the set. We also see that \( 1 \) works as the multiplicative identity since any number multiplied by \( 1 \) stays the same. Let's look at what happens with \( 6\times 6 \):
+\( 6\times 6=36\equiv 1 \pmod{7} \).
+We multiplied \( 6 \) by itself and got \( 1 \)! Division \( a/b \) can be restated as \( a\times b^{-1} \), where \( b\times b^{-1}=1=b^{-1}\times b \). We see that \( 6 \) is its own multiplicative inverse with the multiplication modulo \( p \). We can also see that:
+\( 3\times 5=15\equiv 1 \pmod{7} \) 
+\( 2\times 4=8\equiv 1 \pmod{7} \) 
+So, \( 3=5^{-1} \)  and \( 2=4^{-1} \)! This can sound weird, but we have to remember that we are working with congruences. We can understand the precise meaning of this by rephrasing. Let's take the case of \( 6 \) and  \( 6\) . There are two numbers \( a=q_1\times 7+6 \) and \( b=q_2\times 7+6 \) (because that is what the congruence means). Let's take the product \( a\times b \) :
+\( a\times b=(q_1\times 7+6)\times (q_2\times 7+6) \) 
+Let's apply the distributive law:
+\( a\times b=q_1\times q_2 \times 7^2+6\times 7\times (q_1+q_2)+36 \) 
+Let's split this further \( 36=1+35=1+7\times 5 \) and regroup, taking as a common factor \( 7 \) :
+\( a\times b=7\times (q_1\times q_2\times 7+6\times(q_1+q_2)+5)+1 \) 
+The first term is divisible by \( 7 \), so it is congruent to \( 0 \). Or, if we subtract \( 1 \) to \( a\times b \), we see that it is divisible by \( 7 \) (since it is the product of \( 7 \) and an integer).</p>
+<h2 id="defining-operations"><a class="header" href="#defining-operations">Defining operations</a></h2>
+<p>We need to implement first some of the arithmetic operations and define field elements. We will show how to do it in Rust.</p>
+<pre><code>use::std::ops::{Add, Sub, Mul, Div};
+pub struct FieldPoint {
+    num: u128,
+    prime: u128,
+}
+</code></pre>
+<p>The first line imports the standard library (in particular, the operations of addition, subtraction, multiplication, and division), which will allow us to override these operators with the expressions we need to use in modular arithmetic.</p>
+<p>In the second line, we define a public structure named <code>FieldPoint</code>, which has two fields: <code>num</code> (a number in the range 0 to prime) and <code>prime</code> (this will give us the size and we will perform all operations modulo prime). For practical applications, we need to replace the unsigned integers <code>u128</code> with appropriate variables that allow us to store large integers.</p>
+<p>We can now instantiate some methods over <code>FieldPoint</code>, such as how to create one or how to multiply or divide field elements.</p>
+<pre><code>impl FieldPoint {
+    pub fn new(num: u128, prime: u128) -&gt; FieldPoint {
+        if num &gt; prime {
+            panic!(&quot;Not a valid input for a field point, num should be nonnegative and less than prime, obtained {}&quot;, num);
+        } else {
+            FieldPoint {num:num, prime:prime}
+        }
+    }
+}
+</code></pre>
+<p>Methods are defined following the keyword <code>impl</code> and the name of the <code>struct</code>. We have a constructor for the <code>FieldPoint</code>, which takes two unsigned <code>u128</code> integers.</p>
+<p>To define addition, we can implement the trait <code>Add</code> for <code>FieldPoint</code> in this way:</p>
+<pre><code>impl Add for FieldPoint {
+    type Output = Self;
+    fn add(self, other: Self) -&gt; Self {
+        if self.prime == other.prime {
+            FieldPoint {num: (self.num + other.num).rem_euclid(self.prime), prime: self.prime}
+        } else {
+            panic!(&quot;Cannot add these field points, different prime values {},{}&quot;,self.prime,other.prime);
+        }
+    }
+}
+</code></pre>
+<p>The addition is simply adding the <code>num</code> fields and if the result exceeds the modulus <code>prime</code>, we take the remainder of the Euclidean division between the sum and the modulus.</p>
+<p>Multiplication works in a similar way:</p>
+<pre><code>impl Mul for FieldPoint {
+    type Output = Self;
+    fn mul(self, other: Self) -&gt; Self {
+        if self.prime == other.prime {
+            FieldPoint {num: (self.num*other.num).rem_euclid(self.prime), prime: self.prime}
+        } else {
+            panic!(&quot;Cannot multiply these field points, different prime values, {},{}&quot;,self.prime,other.prime);
+        }
+    }
+}
+</code></pre>
+<p>We need to define integer powers of <code>FieldElement</code>. We can do it in a rather efficient way by squaring and taking the remainder:</p>
+<pre><code>pub fn power(&amp;self,index: u128) -&gt; Self {
+        if index == 0 {
+            FieldPoint {num: 1u128, prime: self.prime}
+        } else {
+            let mut aux=index.rem_euclid(self.prime-1u128);
+            let mut acc: u128 = 1;
+            let mut base: u128 =self.num;
+            while aux &gt;0{
+                if aux%2 == 0 {
+                    base = (base*base).rem_euclid(self.prime);
+                    aux=aux/2u128;
+                } else {
+                    acc = (acc*base).rem_euclid(self.prime);
+                    aux=aux-1u128; 
+                }
+            }
+            FieldPoint {num: acc, prime: self.prime}
+        }
+
+    }
+</code></pre>
+<p>The power function takes a <code>FieldElement</code> and <code>index</code>, a <code>u128</code>. If the index is \( 0 \), the result is trivial and we output a <code>FieldElement</code> with <code>num</code> equal to \( 1 \). In any other case, we first reduce <code>index</code> (if <code>index</code> exceeds <code>prime</code>, we can take the remainder of <code>index</code> by <code>prime-1</code> -this works when the modulus is prime, since Euler's theorem (to be presented soon) says that \( a^{p-1}\equiv 1 \pmod{p} \)-. A better version would reduce <code>index</code> by \( \phi(n) \)) (the function \( \phi\) is known as Euler's totient function) and store it in <code>aux</code>. We also define a variable to calculate the result <code>acc</code> and <code>base</code>, where we will repeatedly square and take the remainder of the <code>num</code>.</p>
+<p>We now focus on the squaring and the updating of the result:</p>
+<pre><code>while aux &gt;0{
+    if aux%2 == 0 {
+        base = (base*base).rem_euclid(self.prime);
+        aux=aux/2u128;
+    } else {
+        acc = (acc*base).rem_euclid(self.prime);
+        aux=aux-1u128; 
+    }
+}
+</code></pre>
+<p>We will go decreasing the index stored in <code>aux</code>: if it is even (the first condition -this could be checked much faster, by inspecting the last bit of <code>aux</code>-), we divide <code>aux</code> by two and update <code>base</code> to the remainder of its square. If it is odd, then we proceed to update the result in <code>acc</code> and decrease <code>aux</code> by one (which means that in the next step it will be even).</p>
+<p>To convince ourselves, let's take a short numerical example, while we follow the instructions. Let's take <code>prime</code> as 11, <code>num</code> as 4, and <code>index</code> as 39.</p>
+<ol>
+<li>We set <code>aux</code> equal to the remainder of 39 and 10 (which is also \( \phi(11) \)). We get <code>aux=9</code>.</li>
+<li>Since \( 9&gt;0 \), we go inside the while loop. \( 9 \) is odd, so <code>acc=9</code> and <code>aux=8</code>.</li>
+<li><code>aux</code> is even, so <code>base=4*4=16</code>; we have to reduce the number by taking the remainder by \( 11 \), so <code>base=5</code> and <code>aux=4</code>.</li>
+<li><code>aux</code> is even, so <code>base=5*5=25</code> and we get <code>base=3</code> and <code>aux=2</code>.</li>
+<li><code>aux</code> is once again even, <code>base=9</code> and <code>aux=1</code>.</li>
+<li><code>aux</code> is odd, we get <code>acc=9*4=36-&gt;3</code> and <code>aux=0</code>.</li>
+<li>Since <code>aux=0</code>, we jump outside the while loop and the function returns the <code>FieldPoint</code> (<code>num</code>=3,<code>prime</code>=11).</li>
+</ol>
+<h2 id="computing-inverses-exponentiation-or-extended-euclidean-algorithm"><a class="header" href="#computing-inverses-exponentiation-or-extended-euclidean-algorithm">Computing inverses: Exponentiation or extended Euclidean algorithm?</a></h2>
+<p>Fermat's little theorem states that if \( p \) is a prime number, then \( a^p\equiv a \pmod{p} \). We can also write this as \( a^{p-1}\equiv 1 \pmod{p} \) and see that \( a^{-1}=a^{p-2} \). This gives us a way to compute the multiplicative inverse of \( a \) by taking powers of it. It is clear that this will involve many multiplications and that performing modular division (or inversion) will be a costly operation, especially when the modulus is very large. As a matter of fact, we will see that using \( p-2 \) as exponent will overestimate the power we need to use for some numbers. One advantage of this method is that, for a given prime, we will perform exactly the same number of operations and it will be possible to implement it in constant time (which will make it resistant to timing attacks). </p>
+<p>Inverses can be calculated alternatively with help from the extended Euclidean algorithm:</p>
+<pre><code>pub fn inversion(a:i128,b:i128) -&gt; i128 {
+
+    let mut t=0i128;
+    let mut r=b;
+    let mut t1=1i128;
+    let mut r1=a;
+
+    while r1 != 0i128 {
+        let q=r.div_euclid(r1);
+        (t,t1)=(t1,t-q*t1);
+        (r,r1)=(r1,r-q*r1);
+    }
+
+    if r != 1i128 {
+        return 0i128;
+    }
+    if t&lt;0{
+        t=t+b;
+    }
+
+    t
+}
+</code></pre>
+<p>Let's see how it works for a simple case: \( a=3 \), \( b=5 \); the inverse of \( 3 \) (modulo 5) is \( 2 \). The algorithm begins:</p>
+<ol>
+<li>\( t=0 \), \( t_1=1 \), \( r=5 \), \( r_1=3 \).</li>
+<li>Since \( r_1=3 \neq 0 \) we loop: \( q=1 \), \( t=1 \), \( t_1=0-1\times 1=-1 \), \( r=3 \), \( r_1=2 \).</li>
+<li>\( r_1 \neq 0 \), \( q=1 \), \( t=-1 \), \( t_1=1-1\times (-1)=2 \), \( r=2 \), \( r_1=1 \).</li>
+<li>\( r_1 \neq 0 \), \( q=2 \), \( t=2 \), \( t_1=-1-2\times 2=-5 \), \( r=1 \) and \( r_1=0 \).</li>
+<li>\( r_1 = 0 \), so the function outputs \( t=2 \), which is the correct answer.</li>
+</ol>
+<p>In many cases, the Euclidean algorithm will find the inverse in a faster way; the drawback is that the amount of time needed to find the answer will depend on the number we are trying to invert.</p>
+<p>We see that both multiplication and addition modulo \( p \) are closed operations in the set \( {0,1,2,...,p-1} \). We will soon see that this set with these operations forms a finite field.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="groups"><a class="header" href="#groups">Groups</a></h1>
+<p>We define a group as a (non-empty) set \( G \) together with a binary operation (that is, an operation that takes two input elements from the set \( G \)) \( \times \) satisfying:</p>
+<ul>
+<li>G1: If \( a \) and \( b \) are in the set, then \( a\times b=c \) is also in the set.</li>
+<li>G2: There is an identity element, \( e \), such that \( e\times a=a\times e=a \).</li>
+<li>G3: If \( a \) is in the set, there is some \( b \) in the set such that \( a\times b=e \). We say that \( b \) is the inverse of \( a \) and denote it \( b=a^{-1} \).</li>
+<li>G4: For \( a,b,c \), \( a\times (b\times c)=(a\times b)\times c \).</li>
+</ul>
+<p>The notation in groups is sometimes confusing and people can freely use additive (+) or multiplicative (\( \times \)) notation, and call their identities either \( 0 \) or \( 1 \). This doesn't matter much, since the binary operation can be quite weird (such as &quot;addition&quot; on elliptic curves). If you can start by looking at things a little bit more abstractly, it will pay off very quickly. </p>
+<h2 id="-mathbbznmathbbz--as-a-group-cyclic-groups"><a class="header" href="#-mathbbznmathbbz--as-a-group-cyclic-groups">\( \mathbb{Z}/n\mathbb{Z} \) as a group. Cyclic groups.</a></h2>
+<p>You will frequently see these sets are denoted as \( \mathbb{Z}/p\mathbb{Z} \). We have to be very careful if we want to work with \( n \) not prime in \( \mathbb{Z}/n\mathbb{Z} \) (in this case, it is not a finite field either). For example, let's try to solve this equation:
+\( (x+2)\times(x+1)\equiv 0 \pmod{12} \)
+We could use our knowledge of math and, when the product of two numbers is \( 0 \), at least one of them is \( 0 \) (spoiler's alert: this will go wrong):</p>
+<ol>
+<li>\( (x+2)\equiv 0 \pmod{12} \). If \( x=10 \), then \( x+2=12\equiv 0 \), since it is divisible by 12.</li>
+<li>\( (x+1)\equiv 0 \pmod{12} \). If \( x=11 \), then \( x+2=12\equiv 0 \), since it is divisible by 12.
+Let's pick now \( 2 \) and see what happens:
+\( (2+2)\times(2+1)=12\equiv 0 \pmod{12} \).
+So \( 2 \) is a solution to the equation, but \( 2+2\equiv 4\not\equiv 0 \) and \( 2+1\equiv 3\not\equiv 0 \). This happens because \( 12 \) is not a prime number. </li>
+</ol>
+<p>As a matter of fact, given \( a \) and \( n \), we have that \( a \) has an inverse (modulo \( n \)) if and only if \( gcd(a,n)=1 \), that is, \( a \) and \( n \) are coprime. In the previous example, \( 3 \) is not coprime to \( 12 \) (they have \( 3 \) as a common divisor). </p>
+<p>If the set is not too large, we can find inverses just by trial and error. However, it would be nice to have some results that help us compute inverses and how to calculate (integer) powers of numbers.</p>
+<p>Let's focus on a prime number \( p \) and take all the non-zero elements of the set, \( (\mathbb{Z}/p\mathbb{Z})^\star \). Let's fix \( p=7 \), so \( (\mathbb{Z}/p\mathbb{Z})^\star={1,2,3,4,5,6} \) and let's focus on multiplication over the set. We can define the power \( a^n=a\times a\times a\times ...\times a \). Obviously, \( 1 \) is not interesting, because \( 1^n=1 \), so let's take \( 5 \):
+\( 5^1\equiv 5  \pmod{7} \)
+\( 5^2\equiv 4  \pmod{7} \)
+\( 5^3\equiv 6  \pmod{7} \)
+\( 5^4\equiv 2  \pmod{7} \)
+\( 5^5\equiv 3  \pmod{7} \)
+\( 5^6\equiv 1  \pmod{7} \)
+\( 5^7\equiv 5  \pmod{7} \)
+\( 5^8\equiv 4  \pmod{7} \)
+\( 5^{13}\equiv 5  \pmod{7} \)
+We see that the powers of \( 5 \) span all the elements of the group. We also see that numbers repeat themselves at an interval of \( 6 \), that is \( 4=5^2=5^8=5^{14}... \). Let's look at \( 3 \):
+\( 3^1\equiv 3  \pmod{7} \)
+\( 3^2\equiv 2  \pmod{7} \)
+\( 3^3\equiv 6  \pmod{7} \)
+\( 3^4\equiv 4  \pmod{7} \)
+\( 3^5\equiv 5  \pmod{7} \)
+\( 3^6\equiv 1  \pmod{7} \)
+\( 3^7\equiv 3  \pmod{7} \)
+We got all the elements (albeit in a different order). Finally, let's look at \( 2 \):
+\( 2^1\equiv 2  \pmod{7} \)
+\( 2^2\equiv 4  \pmod{7} \)
+\( 2^3\equiv 1  \pmod{7} \)
+\( 2^4\equiv 2  \pmod{7} \)
+This time we didn't span all the elements of the group and we got to the same number after \( 3 \). We will show that these results are valid in general (provided we're working modulo a prime number).</p>
+<p>First, we can prove that the set \( (\mathbb{Z}/p\mathbb{Z})^\star \) together with multiplication forms an abelian group (the product can never give 0 since all the numbers are not divisible by \( p \)). Second, the group is finite, since the number of elements is finite (6 in our example); its order is \( 6 \). We also saw that by repeatedly multiplying \( 5 \) by itself (that is, taking powers of \( 5 \)), we can generate all the elements of the group (note that everything repeats after \( 6 \), which is the order of the group). Since the group can be generated by one of its elements, it is a (finite) cyclic group. </p>
+<p>For an element \( a \), the lowest positive integer \( n \) such that \( a^n\equiv 1 \pmod{p} \) is known as the order of \( a \). The elements of the group with their respective order in parentheses are: \( 1 (1) \), \( 2 (3) \), \( 3 (6) \), \( 4 (2) \), \( 5(6) \), \( 6(2) \). We can see that the orders of each element divide the order of the group, \( 6 \). We will present the following theorems, which show that this is not a coincidence.</p>
+<h2 id="subgroups-lagranges-theorem"><a class="header" href="#subgroups-lagranges-theorem">Subgroups. Lagrange's theorem</a></h2>
+<p>We saw that the order of \( (\mathbb{Z}/7\mathbb{Z})^\star \) was 6 and that if we take any element \( a \), doing \( a^6\equiv 1 \pmod{7} \). However, for \( 2 \) we can do \( 2^3\equiv 1 \pmod{7} \). A subgroup \( H \) is a subset of \( G \), that is itself a group, that is, satisfies G1-G4. For example, if we consider the subset \( H={1} \), this is a subgroup of order \( 1 \). Why? Because \( 1\times 1=1 \), so the operation is closed and all other properties follow from the operations of the group \( G \). \( G \) is also a subgroup of itself. These two are called the trivial subgroups of \( G \) (which are not very interesting). The set \( {1,2,4} \) is a subgroup of \( (\mathbb{Z}/7\mathbb{Z})^\star \). To check this, we need to see that if an element is in the set, so is its inverse, the identity belongs to the set and the operation is closed. Let's check this:</p>
+<ul>
+<li>\( 1 \) is in the set and \( 1 \) is its own inverse.</li>
+<li>The operation is closed, because \( 2\times 2\equiv 4 \pmod{7} \), because \( 4\times 4=16\equiv 2 \pmod{7} \) and because \( 2\times 4=8\equiv 1 \pmod{7} \) (we don't need to check the products with \( 1 \) since that is obvious). We also checked the inverses, since \( 4=2^{-1} \).</li>
+</ul>
+<p>The subset \( {1,2,4} \) forms a subgroup of order \( 3 \). Lagrange's theorem states that the order of a subgroup divides the order of the group. We have another subgroup \( {1,6} \), which is of order \( 2 \). These are non-trivial subgroups. If the order of a group is prime, then its only subgroups are the trivial subgroups (since \( p \) is prime, the subgroups can only be of order \( 1 \) and \( p \)). A group whose only subgroups are the trivial ones is known as a simple group. For example, \( \mathbb{Z}/7\mathbb{Z} \) with addition is the group \( {0,1,2,3,4,5,6} \) of order \( 7 \). There are no subgroups other than the whole group and \( {0} \). Note that the order of each element (other than zero, which has order \( 1 \)) is \( 7 \), since \( 7\times a=a+a+a+a+a+a+a \) is divisible by \( 7 \) and, therefore, congruent to \( 0 \) modulo \( 7 \). The fact that some groups can be broken down into smaller subgroups is of concern when working with elliptic curves: if the group is not of prime order, it can be broken down into smaller groups and an attacker may break the system by performing searches on these subgroups.</p>
+<h2 id="the-discrete-logarithm-problem"><a class="header" href="#the-discrete-logarithm-problem">The discrete logarithm problem</a></h2>
+<p>Given a group, we can apply the operation repeatedly on a point \( g \) to get to a point \( P \), that is \( g^k=g\times g\times g\times ... \times g=P \). For example, in \( (\mathbb{Z}/7\mathbb{Z})^\star \), \( 5 \) generates all the elements by successive multiplications with itself. We could then ask how many times \( x \) should we multiply \( 5 \) with itself to get to \( 3 \), that is, \( 5^x\equiv 3 \pmod{7} \). Since we know that the order of the group is \( 6 \), we should only concern ourselves with numbers \( 0-6 \). If we look above or try all combinations, \( 5^5\equiv 3 \pmod{7} \) so \( x=5 \). Similarly, if we look for \( y \) such that \( 5^y\equiv 4 \pmod{7} \), we get \( y=2 \). The problem of finding \( x \) so that \( g^k=P \) is known as the discrete logarithm problem (in number theory, \( x \) and \( y \) are known as indices). We quickly see that this logarithm works quite differently from the common logarithm on the real numbers (though the idea is the same, given \( y \), find \( x \) such that \( e^x=y \)). There is no obvious pattern, it is not increasing and if we had to search over a large set, it could be really daunting. Many cryptographic systems rely on the hardness of this problem over a finite cyclic group.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rings"><a class="header" href="#rings">Rings</a></h1>
+<p>The set \( \mathbb{Z} \) together with addition and multiplication forms a ring. The polynomials with ordinary addition and multiplication also form a ring. \( n\times n \) matrices also form a ring under addition and multiplication. Formally, a ring is a set \( R \) with two operations \( + \) and \( \times \) such that:</p>
+<ol>
+<li>R is an abelian group under \( + \) (that is, R fulfills all the conditions for a group G1 to G4, plus commutativity, G5).</li>
+<li>There is a multiplicative identity \( e \), such that \( a\times e=e\times a=a \). Frequently, we use \( e=1 \).</li>
+<li>Multiplication is associative.</li>
+<li>We have the distributive property of multiplication concerning addition.</li>
+</ol>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="polynomials"><a class="header" href="#polynomials">Polynomials</a></h1>
+<p>A polynomial is an expression made of an indeterminate/variable (we typically call it \( x \)) and coefficients (elements of a ring, such as \( \mathbb{Z} \),\( \mathbb{Q} \),\( \mathbb{R} \), etc) of the form:
+\( p(x)=a_nx^n+a_{n-1}x^{n-1}+...+a_2x^2+a_1x+a_0 \)
+The greatest power of \( x \) determines the degree of the polynomial.</p>
+<p>We can define polynomial addition between \( p_1 \) and \( p_2 \) by summing the coefficients corresponding to the same power of \( x \):
+\( p_1(x)+p_2(x)=(a_n+b_n)x^n+(a_{n-1}+b_{n-1})x^{n-1}+...(a_1+b_1)x+(a_0+b_0) \)
+Polynomial addition has an identity element (the polynomial whose coefficients are all zero), has inverses (which is simply taking the inverses of the coefficients, since the coefficients belong to a ring) and the operation is closed.</p>
+<p>We can also multiply polynomials, by applying distributive property. We can also define the division of two polynomials, though this operation is not closed.</p>
+<p>We can see that the set of polynomials with coefficients in a ring \( \mathcal{R} \) with addition and multiplication forms a ring structure.</p>
+<p>We can also think of polynomials as functions. If we specify the value of \( x \), we can evaluate the expression and obtain a result. We say that \( x_0 \) is a root of a polynomial if \( p(x_0)=0 \). The fundamental theorem </p>
+<p>Polynomials will play an important role in the development of zk-SNARKs. Elliptic curves can be seen as the set of zeros of some polynomial in two variables.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="fields"><a class="header" href="#fields">Fields</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="elliptic-curves"><a class="header" href="#elliptic-curves">Elliptic Curves</a></h1>
+<p>Elliptic curves are very useful objects because they allow us to obtain a group structure with interesting properties. Given a field \( \mathcal{F} \), an elliptic curve is the set of points \( (x,y) \) which satisfy the following equation: \[ y^2+a_1xy+a_3y=x^3+a_2x^2+a_4x+a_6 \]  This is known as the general Weierstrass equation. In many cases, this can be written in the simpler form 
+\[ y^2=x^3+ax+b \]
+which is the (Weierstrass) short-form. Depending on the choice of the parameters \( a \) and \( b \) and the field, the curve can have some desired properties or not. If \( 4a^3+27b^2 \neq 0 \), the curve is non-singular.</p>
+<p>We can define an operation which allows us to sum elements belonging to the elliptic curve and obtain a group. This is done using a geometric construction, the chord-and-tangent rule. Given two points on the curve \( P_1=(x_1,y_1) \) and \( P_2=(x_2,y_2) \), we can draw a line connecting them. That line intersects the curve on a third point \( P_3=(x_3,y_3) \). We set the sum of \( P_1 \) and \( P_2 \) as \( (x_3,-y_3) \), that is, point \( P_3 \) flipped around the \( x \)-axis. The formulae are:
+\( s=\frac{y_2-y_1}{x_2-x_1} \)
+\( x_3=s^2-x_1-x_2 \)
+\( y_3=s(x_1-x_3)-y_1 \)</p>
+<p><img src="https://i.imgur.com/6QGoX43.jpg" alt="The addition of different points on an elliptic curve over R" /></p>
+<p>We can easily see that we have a problem if we try to sum \( P_1=(x_1,y_1) \) and \( P_2=(x_1,-y_1) \). We need to add an additional point to the system, which we call the point at infinity \( \mathcal{O} \). This inclusion is necessary to be able to define the group structure and works as the identity element for the group operation. </p>
+<p>Another problem appears when we want to sum \( P_1 \) and \( P_1 \) to get to \( P_3=2P_1 \). But, if we draw the tangent line to the curve on \( P_1 \), we see that it intersects the curve at another point. If we want to perform this operation, we need to find the slope of the tangent line and find the intersection:
+\( s=\frac{3x_1^2+a}{2y_1} \)
+\( x_3=s^2-2x_1 \)
+\( y_3=s(x_1-x_3)-y_1 \)</p>
+<p><img src="https://i.imgur.com/HYyk6dP.jpg" alt="" /></p>
+<p>It takes a little bit of work, but we can prove that the elliptic curve with this operation has the properties of a group. We will use finite fields to work with these curves and the groups that we will obtain are finite cyclic groups, that is, groups which can be generated by repeteadly using the operation on a generator, \( g \): \( {g,2g,3g,4g,5g,...} \).</p>
+<p><img src="https://i.imgur.com/0lW4bw3.jpg" alt="" /></p>
+<p>If we plot the collection of points onto a graph, we see that the points are distributed in a rather &quot;random&quot; fashion. For example, \( 2g \) could be very far from \( 3g \) which in turn are very far from \( 4g \). If we wanted to know how many times \( k \) we have to add the generator to arrive at a certain point \( P \) (that is solving the equation \( kg=P \)) we see that we don't have an easy strategy and we are forced to perform a brute search over all possible \( k \). This problem is known as the (elliptic curve) discrete logarithm (log for friends) problem (other friends prefer ECDLP).</p>
+<p>On the other hand, if we know \( k \), we can compute in a very fast way \( P=kg \). This offers us a way to hide (in plain sight) things inside the group. Of course, if you could break the DLP, you could get \( k \), but it is rather infeasible. If we want to calculate \( 65536g \), we can do it by realizing that \( g+g=2g \), \( 2g+2g=4g \), \( 4g+4g=8g \)...until \( 32768g+32768g=65535g \), so we narrowed the operations 65536 to 16. There are many useful algorithms that allow us to speed up the operations over elliptic curves, allowing us to avoid expensive calculations such as inversions, which appear when we want to calculate the slope. </p>
+<h2 id="projective-coordinates"><a class="header" href="#projective-coordinates">Projective coordinates</a></h2>
+<p>We can save ourselves from costly inversions if we move from our nice 2 dimensional space to a 3 dimensional space. This was introduced by Moebius and helps us also to represent the point at infinity properly. We can map our points from our elliptic curve \( (x,y) \) to points in projective space \( (X,Y,Z) \)  as \( (x,y) \rightarrow (X=x,Y=y,Z=1) \) and \( \mathcal{O} \rightarrow (0,1,0) \). We can go back using the transformation \( (X,Y,Z) \rightarrow (x=X/Z,y=Y/Z) \), except for the point at infinity, where it is ill-defined. We can visualize this process with the following picture, where we take three points from an elliptic curve and transform them to 3-d.</p>
+<p><img src="https://i.imgur.com/zmlMAg9.jpg" alt="" /></p>
+<p>We can think of this as transforming our 2-d points to lines passing through the origin in 3-d space. For example, the point \( (x_1,y_1) \) in 2-d transforms to the line \( (\mu x_1,\mu y_1, \mu) \) with \( \mu \) an element in the field. Thus, two points \( P_1=(X_1,Y_1,Z_1) \) and \( P_2=(X_2,Y_2,Z_2) \) are the same in 2-d (more precisely, are congruent) if we can find \( \eta \) such that \( (\eta X_1,\eta Y_1,\eta Z_1)=(X_2,Y_2,Z_2) \). These lines do not contain the origin \( (0,0,0) \). It is usual to write points is projective space as \( (X:Y:Z) \), instead of \( (X,Y,Z) \). In our picture, the point A (yellow) gets mapped to the point D (red above it). All the points that lie on the same straight line passing through the origin and D (pink dashed) are considered equivalent to D. Similarly, point B (blue) is mapped to point F (light blue) and all the ponts over the light green dotted line (except the origin) are equivalent to F. When we add points in this space, the components \( (X,Y,Z) \) will change, but we can go back to the point belonging to the curve by just retracing our steps to \( Z=1 \) along the line that passes through the origin. Why go all this length? We will shortly see that we avoid inversions at each addition step and do just one at the time of finding the point in 2-d (for example, when we need to find \( r=x_1 \) in ECDSA). Of course, if we have to do \( P=2g \) we didn't gain anything, but if we have to perform \( P=kg \) with \( k \) in the order of 256 bits, we saved many costly inversions.</p>
+<p>Making the substitutions into the elliptic curve equation
+\[ \frac{Y^2}{Z^2} = \frac{X^3}{Z^3} + a \frac{X}{Z} + b \] 
+We can multiply by \( Z^3 \) and get the equation
+\[ ZY^2=X^3+aZ^2+bZ^3 \] 
+If we want to sum \( P \) and \( Q \) to yield \( R=P+Q \) in projective space, we can use the formulae:</p>
+<p>\( Z_R=Z_PZ_Q(X_PZ_Q-X_QZ_P)^3 \)
+\( X_R=(X_PZ_Q-X_QZ_P)(Z_QZ_P(Y_PZ_Q-Y_QZ_P)^2-(X_PZ_Q-X_QZ_P)^2(X_PZ_Q+X_QZP)) \)
+\( Y_R=Z_PZ_Q(X_QY_P-X_PY_Q)(X_PZ_Q-X_QZ_P)^2-(Y_PZ_Q-Y_QZ_P)A \)
+\( A=Z_PZ_Q(Y_PZ_Q-Y_QZ_P)^2-(X_PZ_Q+X_QZ_P)(X_PZ_Q-X_QZ_P)^2 \).</p>
+<p>This looks more complicated and difficult than the simple formulae for 2 dimensional (2-d) space. However, we do not have to calculate any inverses! To get the sum, we have to perform 12 multiplications and 2 squarings. In 2-d, we have 2 multiplications, one squaring and one inversion. Inversions can be 20 times or more expensive than multiplications, so we've saved at least 10 multiplications (some authors say inversions are about 80 times more expensive than multiplications).</p>
+<p>Some curves can go even faster. If \( x^3+ax+b \) has a solution in \( \mathcal{F}_p \), we can work with an equivalent Jacobi quartic \( v^2=a^\prime u^4+du^2+1 \), where \( a^\prime \) and \( d \) depend on the root. We can transform the curve \( (u,v) \) to 3-d space \( (U,V,W) \) using \( u=U/W \) and \( v=V/W^2 \) and get the equation</p>
+<p>\[ V^2=a^\prime U^4+dU^2W^2+W^4 \] </p>
+<p>If we want to sum \( P_3=P_1+P_2 \), in these coordinates we have:</p>
+<p>\( U_3=U_1W_1V_2+U_2W_2V_1 \)
+\( V_3=((W_1W_2)^2+a^\prime (U_1U_2)^2)(V_1V_2+dU_1U_2W_1W_2)+2a^\prime U_1U_2W_1W_2(U_1^2W_2^2+U_2^2W_1^2) \)
+\( W_3=(W_1W_2)^2-a^\prime (U_1U_2)^2 \)</p>
+<p>These allow us to further reduce the costs for adding to 6 multiplications and 4 squarings. Other models with fast implementations are Edwards curves and Montgomery curves, which have some of the fastest implementations.</p>
+<p>Montgomery curves satisfy the following equation
+\[ By^2=x^3+Ax^2+x \] 
+where \( B(A^2-4)\neq 0 \). This expression can be cast in the Weierstrass form by making some transformation. If we take \( (x,y) \) and map it to \( (x^\prime,y^\prime) \) given by \( (x,y)\rightarrow(x/B+A/3B,y/B) \), we get
+\[ y^2=x^3+\left(\frac{3-A^2}{3B^2}\right)x+\frac{2A^3-9A}{27B^3} \] 
+Transforming a Weierstrass curve into a Montgomery curve is not always possible, though. The order of the group must be divisible by \( 4 \) and \( x^3+ax+b=0 \) must have a solution.</p>
+<p>Montgomery curves can also be related to twisted Edwards curves, which obey the following equation
+\[ ax^2+y^2=1+dx^2y^2 \] 
+The parameters are related via \( A=2(a+d)/(a-d) \) and \( B=4/(a-d) \). We say these two curves are birrationally equivalent. For example, the well-known Edwards curve 25519, with \( p=2^{255}-19 \) is (birrationally) equivalent to the Montgomery curve \( t^2=u^3+486662u^2+u \). The mappings are
+\( (x,y)=(\sqrt{-486664}u/t,(u-1)/(u+1)) \)
+\( (u,t)=((1+y)/(1-y),\sqrt{-486664}(1+y)/(x(1-y))) \)</p>
+<p>Montgomery curves have some interesting properties that lend themselves to constant time implementation. We can work in projective coordinates just using the \( x \) component, with the transformation \( x=X/Z \). Doubling a point takes the simple form:
+\( 4R=(X_1+Z_1)^2-(X_1-Z_1)^2 \)
+\( X_2=(X_1+Z_1)^2(X_1-Z_1)^2 \)
+\( Z_2=R((X_1-Z_1)^2+((A+2)/4)R) \)</p>
+<p>Twisted Edwards curves have there advantages, too. The expressions for point addition and doubling are the same. Given \( P_1=(x_1,y_1) \), \( P_2=(x_2,y_2) \) we get
+\( x_3=\frac{x_1y_2+x_2y_1}{1+dx_1x_2y_1y_2} \)
+\( y_3=\frac{y_1y_2-ax_1x_2}{1-dx_1x_2y_1y_2} \)
+If we let \( x_1=x_2 \) and \( y_1=y_2 \) we get the expressions for point doubling. There are several alternatives to speeding up the calculations, such as projective, inverted or extended coordinates.</p>
+<p>There are some other tricks to add and multiply points over elliptic curves, such as the technique by Gallant, Lambert and Vanstone (GLV) and generalized by Galbraith, Lin and Scott (GLS). </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="fast-multiplication-algorithms"><a class="header" href="#fast-multiplication-algorithms">Fast Multiplication Algorithms</a></h1>
+<h2 id="karatsubas-multiplication"><a class="header" href="#karatsubas-multiplication">Karatsuba's multiplication</a></h2>
+<p>We all learned at elementary school how to multiply two numbers: we write one below the other and proceed to multiply each of the numbers above by each digit of the number below and then we add all the numbers:</p>
+<pre>          1234 
+×          152
+———————————————
+      2468 ( =  1234 ×     2)
+     6170  ( =  1234 ×    50)
+    1234   ( =  1234 ×   100)
+———————————————
+    187568 ( = 187568)
+</pre>
+<p>This algorithm has \( \mathcal{O}(n^2) \). In 1960, Kolmogorov speculated that this represented the asymptotic bound for multiplication (that is, multiplication of two numbers could not take less than \( \mathcal{O}(n^2) \) operations). He gave a lecture on the topic and one of the students, Karatsuba, then 23 years old, came up with a solution that runs with \( \mathcal{O}(n^{\log_2(3)}) \), thus disproving Kolmogorov's conjecture. The basic idea of Karatsuba's algorithm is the following: say we want to multiply \( x \) and \( y \); we can break them into smaller numbers:
+\( x=x_1\times 10^m +x_0 \)
+\( y=y_1\times 10^m +y_0 \)
+where both \( x_0 \) and \( y_0 \) are numbers less than \( 10^m \). The product \( x\times y \) is simply:
+\( x\times y=x_1\times y_1\times 10^{2m}+(x_1\times y_0+y_1\times x_0)\times 10^m+x_0y_0 \)
+Karatsuba found that \( x_1y_0+y_1x_0 \) can be calculated efficiently at the expense of some additions:
+\( x_1\times y_0+y_1\times x_0=(x_1+x_0)\times (y_1+y_0)-x_1\times y_1-x_0\times y_0 \).
+Even if there are some extra calculations, these operate over smaller numbers, resulting in an overall smaller cost for large numbers.</p>
+<h2 id="toom-cook-algorithm"><a class="header" href="#toom-cook-algorithm">Toom-Cook algorithm</a></h2>
+<p>The divide and conquer strategy can be taken further, leading to a reduction in the complexity of the multiplication algorithm. Toom and Cook developed several methods (known as Toom-X, X being a number), which consist of the following stages:</p>
+<ol>
+<li>Splitting</li>
+<li>Evaluation</li>
+<li>Pointwise multiplication</li>
+<li>Interpolation</li>
+<li>Recomposition</li>
+</ol>
+<p>Several variants of the algorithms are implemented in <a href="https://gmplib.org/">GNU Multiple Precision Arithmetic Library</a>. Toom-2 is the same as Karatsuba's algorithm. Toom-X begins by splitting the numbers \( x \) and \( y \) in X parts of equal length(1) and these are treated as the coefficients of some polynomial (we focus on Toom-3, but you can see more details <a href="https://gmplib.org/manual/Toom-4_002dWay-Multiplication">here</a>)(2):
+\( x(t)=x_2 t^2+x_1 t+x_0 \)
+\( y(t)=y_2 t^2+y_1 t+y_0 \)
+If we evaluate \( x \), \( y \) at \( t=b \), we get the numbers back. The multiplication of both numbers is equal to a polynomial of degree \( 2(X-1) \),
+\( w(t)=w_4t^4+w_3t^3+w_2t^2+w_1t+w_0 \)
+We can evaluate the polynomials at 5 different points, which will suffice to determine uniquely the polynomial \( w \) due to the <a href="https://en.wikipedia.org/wiki/Polynomial_interpolation#Interpolation_theorem">interpolation theorem</a>. We can choose 5 convenient points which make the evaluation and reconstruction of the polynomial easy. Common points are \( 0, 1, -1, 2 \) and \( \infty \) (this last one is just the product of the main coefficients). Let's see the form of each value:
+\( w(0)=x(0)y(0)=x_0y_0 \)
+\( w(1)=x(1)y(1)=(x_0+x_1+x_2)(y_0+y_1+y_2) \)
+\( w(-1)=x(-1)y(-1)=(x_0-x_1+x_2)(y_0-y_1+y_2) \)
+\( w(2)=x(2)y(2)=(x_0+2x_1+4x_2)(y_0+2y_1+4y_2) \)
+\( w(\infty)=x(\infty)y(\infty)=x_2y_2 \)</p>
+<p>If we look at things from \( w \) and its coefficients, we get:
+\( w(0)=w_0 \)
+\( w(1)=w_4+w_3+w_2+w_1+w_0 \)
+\( w(-1)=w_4-w_3+w_2-w_1+w_0 \)
+\( w(2)=16w_4+8w_3+4w_2+2w_1+w_0 \)
+\( w(\infty)=w_4 \)</p>
+<p>This is just solving one linear system (where 2 coefficients are straightforward). Once the coefficients are known, all that remains is to evaluate \( w \) at \( t=b \) and add. Toom-3 has a lower order (\( \mathcal{O}(n^{\log(5)/\log(3)})=\mathcal{O}(n^{1.46} \))) than Karatsuba's method (\( \mathcal{O}(n^{1.58}) \), so it runs faster for sufficiently large integers.</p>
+<p>For larger integers (in the order of 10,000 to 40,000 digits), we can go faster by means of the Schönhage-Strassen algorithm, which uses the fast-Fourier transform (FFT) to achieve a complexity \( \mathcal{O}(n\log(n)\log\log(n)) \). Before we can explain the algorithm, we need to introduce the FFT. The order can be further reduced to <a href="https://hal.archives-ouvertes.fr/hal-02070778/document">\( \mathcal{O}(n\log(n)) \)</a>, but this algorithm is only practical for (super-ultra) incredibly large numbers and is an example of a <a href="https://en.wikipedia.org/wiki/Galactic_algorithm">galactic algorithm</a>.</p>
+<h2 id="the-fast-fourier-transform"><a class="header" href="#the-fast-fourier-transform">The Fast-Fourier Transform</a></h2>
+<p>The FFT is one of the key building blocks of many important algorithms, such as fast multiplication of very large numbers, polynomial multiplication, solving finite difference equations, error correcting codes (Reed-Solomon codes), and digital signal processing. It was used by Gauss early in the 19th century when he was trying to interpolate the orbits of asteroids Pallas and Juno. A simple implementation requires \( \mathcal{O}(n^2) \) operations. In 1965, Cooley and Tukey realized that the algorithm could be implemented more efficiently, reducing it to \( \mathcal{O}(n\log(n)) \), which led to its widespread use. Almost every language and numerical computation library have it implemented. In Rust, you can check this <a href="https://docs.rs/GSL/latest/rgsl/fft/index.html">link</a>.</p>
+<p>To get an idea of the huge improvement over the naïve algorithm, let's look at the number of calculations for different samples:
+| Number of samples | \( 10^3 \) | \( 10^6 \) | \( 10^{12} \) |
+|------------------ | ------ | ------ | -------- |
+| DFT operations | \( 10^6 \) | \( 10^{12} \) | \( 10^{24} \) |
+| FFT operations | \( 10^4 \)  | \( 2\times10^{7} \) | \( 4\times10^{13} \) |</p>
+<p>We see that the amount of computations is reduced by more than two orders of magnitude for samples with \( 1000 \) or more elements!</p>
+<h3 id="fft-over-complex-numbers"><a class="header" href="#fft-over-complex-numbers">FFT over complex numbers</a></h3>
+<p>The Fourier transform maps a function from its original domain (space or time) to another function depending on the (space or time) frequency. Stated another way, it decomposes a function into a collection of sine waves with different frequencies and amplitudes, which are useful to analyze the behavior of a given system. We can also perform the inversion, adding all those waves to recover the original function. Even though (continuous) Fourier transforms have many applications, we will be interested in discrete Fourier transforms (DFT), where we have a finite collection of data. Given data \( x_0 \), \( x_1 \),...\( x_{N-1} \), the DFT gives a sequence \( X_0, X_1,...X_{N-1} \), where
+\( X=\sum_{k=0}^{N-1} x_k\exp(-2\pi i k/N) \)
+where \( i^2=-1 \) is the imaginary unit. Inversion of the DFT is given by
+\( x=\frac{1}{N}\sum_{k=0}^{N-1} X_k\exp(2\pi i k/N) \).</p>
+<p>The DFT can be cast in the form of a matrix-vector product, \( X=Mx \), where \( M \) is the \( N\times N \) DFT matrix:
+\( M=
+\left( {\begin{array}{ccccc}
+1 &amp; 1 &amp; 1 &amp; ... &amp; 1 \
+1 &amp; \omega &amp; \omega^2 &amp; ... &amp; \omega^{N-1} \
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \
+1 &amp; \omega^{N-1} &amp; \omega^{2(N-1)} &amp; ... &amp; \omega^{(N-1)(N-1)}
+\end{array} } \right) \)</p>
+<p>Implemented this way, the DFT requires \( N^2 \) operations, resulting from vector-matrix multiplication. The FFT will make this calculation more efficient, by taking advantage of the structure and using a divide and conquer strategy.</p>
+<p>We can also see the DFT as evaluating a polynomial with coefficients \( x_k \) over the roots of unity. This will be useful when discussing fast polynomial multiplication.</p>
+<p>The key point is that computing the DFT with \( N \) points can be reduced to calculating two DFTs with \( N/2 \) points. We can apply this recursively to break down a very large problem into a collection of smaller and easier-to-solve subproblems and then recombine those results to get the DFT.</p>
+<p>The algorithm also takes advantage of the properties of the \( n \)-th roots of unity in the complex plane. A number \( z \) is known as an \( n \)-root of unity if \( z^n=1 \). These are of the form
+\( z_k=\exp(2\pi i k/n) \) for \( k=0,1,2,...,n-1 \). An interesting point is that these roots come in conjugate pairs: for each root \( r \) we have the corresponding \( \bar{r} \) (as a matter of fact, they form a finite group of order \( n \) under multiplication). For example, the fourth roots of unity are: \( 1, i, -1, -i \). It is easy to see which are the pairs. </p>
+<p>To see how all works, suppose we have a vector \( x=(x_0,x_1,x_2,...x_{n-1}) \) and we want to compute the FFT. We can split between even and odd numbered terms:
+\( X=\sum_{k=0}^{n/2-1} x_{2k}\exp(2\pi i 2k/n)+\sum_{k=0}^{n/2-1} x_{2k+1}\exp(2\pi i (2k+1)/n) \)
+We can express the odd terms in a different way, by taking out a factor of \( \exp(2\pi i/n) \),
+\( X=\sum_{k=0}^{n/2-1} x_{2k}\exp(2\pi i 2k/n)+\exp(2\pi i/n)\sum_{k=0}^{n/2-1} x_{2k+1}\exp(2\pi i (2k)/n) \)
+We can now see that the factors corresponding to the \( n \)-roots of unity repeat themselves whenever \( k \) is larger than \( n/2 \). Another way to see this is to rearrange the terms by taking \( 2 \) from the numerator of the exponential and sending it to the denominator:
+\( X=\sum_{k=0}^{n/2-1} x_{2k}\exp(2\pi i k/(n/2))+\exp(2\pi i/n)\sum_{k=0}^{n/2-1} x_{2k+1}\exp(2\pi i (k)/(n/2)) \)
+We now find that \( \sum_{k=0}^{n/2-1} x_{2k}\exp(2\pi i k/(n/2))=DFT(x_{2k}) \) is just the DFT of the even terms, which contains \( n/2 \) points. Similarly, \( \sum_{k=0}^{n/2-1} x_{2k+1}\exp(2\pi i (k)/(n/2)) \) is the DFT of the odd terms, containing \( n/2 \) points. This way, we broke the \( n \) point DFT into two smaller \( n/2 \) point DFTs, which can be combined to yield the original one. Now, each of those \( n/2 \) DFTs can be broken into two smaller ones, so we can recursively reduce the number of computations by working with smaller samples (this way, we save ourselves of the large vector-matrix product).</p>
+<h3 id="extending-the-fft-to-arbitrary-rings"><a class="header" href="#extending-the-fft-to-arbitrary-rings">Extending the FFT to arbitrary rings</a></h3>
+<p>FFT can be extended from complex or real numbers to arbitrary rings, such as integers or polynomials (check our <a href="https://www.entropy1729.com/math-survival-kit-for-developers/">math survival kit</a>). In particular, we can use the number theoric transform which specializes the FFT to \( \mathbb{Z}/p\mathbb{Z} \), that is, the integers modulo \( p \) (a prime number). Here we also have the \( n \)-roots of unity, given by
+\( \alpha^n\equiv 1 \pmod{p} \)
+It is important that we restrict ourselves to prime numbers: in this case, we have that the square root of \( 1 \) are just \( 1 \) and \( -1 \). For example, if we take \( p=5 \), \( 1^2\equiv 1 \pmod{5} \) and \( -1\equiv 4 \), \( 4^2 =16 \equiv 1 \pmod{5} \). This is not true for \( 8 \) since \( 1^2\equiv 3^2\equiv 5^2\equiv 7^2\equiv 1 \pmod{8} \) and we would have \( 4 \) square roots!</p>
+<p>The problem with using FFT in finite fields is that we are not free to choose the domain and the field just as we please. We need to select a multiplicative subgroup of order \( 2^n \) (in other words, we need to select a group that is generated by an element \( g \) and which contains its powers up to \( 2^n \)). For example, if we take \( p=5 \), we have a group of order \( 4=2^2 \) which is generated by \( 2 \): \( {2^1=2,2^2=4,2^3\equiv 3, 2^4\equiv 1} \); it does not need to span all the elements of the field, though.</p>
+<h2 id="fft-multiplication-algorithm"><a class="header" href="#fft-multiplication-algorithm">FFT multiplication algorithm</a></h2>
+<p>The algorithm follows the same line as Karatsuba's and Toom's:</p>
+<ol>
+<li>Split</li>
+<li>Evaluation</li>
+<li>Pointwise multiplication</li>
+<li>Interpolation</li>
+<li>Combination</li>
+</ol>
+<p>The key difference lies in the use of the FFT to speed up calculations.</p>
+<h3 id="polynomial-multiplication"><a class="header" href="#polynomial-multiplication">Polynomial multiplication</a></h3>
+<p>Let's start with polynomial multiplication. Given two polynomials, \( p(x)=p_d x^d+p_{d-1}x^{d-1}+...+p_0 \) and \( q(x)=q_d x^d+q_{d-1}x^{d-1}+...+q_0 \), we want to find their product, \( w(x)=p(x)q(x) \). The simplest algorithm would be to apply repeatedly the distributive property, perform the multiplications and rearrange everything. The product of two polynomials of degree \( d \) is a polynomial of degree \( 2d \). We can see that this strategy involves operations of the order \( \mathcal{O}(d^2) \), that is, operations grow quadratically with the degree of the polynomials involved. We can take advantage of the structure of the polynomials and the interpolation theorem. We have at least two forms to describe the same polynomial:</p>
+<ul>
+<li>Giving the \( d+1 \) coefficients.</li>
+<li>Specifying the value of the polynomial at exactly \( d+1 \) points (3).</li>
+</ul>
+<p>What are the advantages of the second option? That we get to choose the points freely and reduce the number of calculations. For example, if we have an even function, \( f(x)=f(-x) \) we can evaluate fewer points. Similarly, if the function is odd, \( f(-x)=-f(x) \) and we have to change the sign to get the value of \( -x \). So, choosing pairs \( x \) and \( -x \) we reduce the number of evaluations by half (except if we choose \( 0 \), for example). We can split our polynomial between two polynomials: one has odd number terms, and the other even:
+\( p(x)=p_e(x)+xp_o(x) \).
+For example, if \( p=x^5+3x^4+5x^3+2x^2+6x+3 \), we split it:
+\( p(x)=(3x^4+2x^2+3)+x(x^4+5x^2+6) \)
+We have then:
+\( p_e=(3x^4+2x^2+3) \) and \( p_o=(x^4+5x^2+6) \), where both polynomials are even functions! This way, we easily see that:
+\( p(-x)=p_e(x)-xp_o(x) \)
+If we have pairs \( (x_k,p(x_k)) \) and \( (x_k,q(x_k)) \), the product polynomial evaluated at \( x_k \) is \( (x_k,p(x_k)q(x_k)) \).</p>
+<p>To determine the product polynomial, we need \( 2d+1 \) points; taking advantage of the above strategy, we need fewer point evaluations. If we could convert easily from the coefficient form to point evaluations, perform the multiplications in that form, and then transform back to coefficient form, we can achieve a lower complexity. We can recursively break the polynomials \( p_e(x^2) \) and \( p_o(x^2) \) into smaller polynomials.</p>
+<p>We can choose as evaluation points the \( n \) roots of unity, which come in pairs: \( exp(2\pi i k/n) \) with \( k=0,1,2...n-1 \). In other words, we can quickly calculate the DFT of the polynomials, multiply the coefficients and reverse the DFT once the product has been found. This leads to operations in the order \( \mathcal{O}(d\log(d)) \). </p>
+<h3 id="integer-multiplication"><a class="header" href="#integer-multiplication">Integer multiplication</a></h3>
+<p>To apply the FFT to integer multiplication, we need to transform our numbers to the coefficients of polynomials, perform the FFT multiplication and finally reconstruct the result. Overall this will take \( \mathcal{O}(n\log(n)\log(\log(n)) \) . There is a large overhead, which will make this algorithm practical only for very large integers. For example, if we want to multiply \( 3578 \) and \( 2457 \), we can define vectors \( (8,7,5,3,0,0,0,0) \) and \( (7,5,4,2,0,0,0,0) \), where we conveniently pad the numbers with zeros. </p>
+<p>Typically, operations are performed modulo \( 2^N+1 \), where \( N \) is larger than the combined number of bits of the integers \( x \) and \( y \), to make sure that results never wrap around.</p>
+<p>The Fourier transform has the advantage that an operation such as the convolution of \( x \) and \( y \) can be calculated from the product of the transforms \( X \) and \( Y \) and transforming back:
+\( \sum_{k=0}^{N} x_k y_{N-k}=IFFT(FFT(y)\times FFT(x)) \)</p>
+<p>The Schönhage-Strassen algorithm makes use of the negacyclic convolution. Given vectors \( x \) and \( y \) of length \( n \) and \( r \) a \( 2n \)-th (primitive) root of unity (that is, \( r^{2n}\equiv 1 \pmod{p} \) and \( r^k\not\equiv 1 \) if \( 0&lt;k&lt;2n \) ), we can define the following weight vectors:
+\( W_j=r^j \) for \( 0\leq j&lt;n \)
+\( W_j^{-1}=r^{-j} \) for \( 0\leq j&lt;n \)
+The negacyclic convolution (NCC) of \( x \) and \( y \) can be computed as:
+\( NCC(x,y)=W^{-1}IFFT(FFT(Wx)\times FFT(Wy)) \)</p>
+<p>A comparison of the different methods implemented in GNU Multiple Precision Arithmetic Library is shown in this <a href="https://gmplib.org/devel/">link</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="multiscalar-multiplication"><a class="header" href="#multiscalar-multiplication">Multiscalar Multiplication</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="primality-testing"><a class="header" href="#primality-testing">Primality Testing</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="chapter-3"><a class="header" href="#chapter-3">Chapter 3</a></h1>
