@@ -847,7 +847,35 @@ If we have pairs \( (x_k,p(x_k)) \) and \( (x_k,q(x_k)) \), the product polynomi
 The negacyclic convolution (NCC) of \( x \) and \( y \) can be computed as:
 \( NCC(x,y)=W^{-1}IFFT(FFT(Wx)\times FFT(Wy)) \)</p>
 <p>A comparison of the different methods implemented in GNU Multiple Precision Arithmetic Library is shown in this <a href="https://gmplib.org/devel/">link</a>.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="multiscalar-multiplication"><a class="header" href="#multiscalar-multiplication">Multiscalar Multiplication</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="multiscalar-muforltiplication"><a class="header" href="#multiscalar-muforltiplication">Multiscalar Muforltiplication</a></h1>
+<p>The Multi-Scalar Multiplication (MSM) problem consists of, given an elliptic curve, calculating 
+\[ \sum_{i=1}^{n} k_i P_i \]
+for some scalars \( k_i \), some elliptic curve points \( P_i = (x_i, y_i) \) and some \( n \) (For example, in the order of \( 2^{26} \)).</p>
+<p>It is estimated that around 80% of the time to produce a zk-SNARK proof is spent doing MSM, so optimizing it is very important for performance.</p>
+<h2 id="bucketing-method"><a class="header" href="#bucketing-method">Bucketing method</a></h2>
+<p>We can break the MSM into smaller sums and reduce the total number of operations, by repeteadly using a method called the windowing technique. If we want to compute each \( k_iP_i \), we can break it into windows of size \( c \) 
+\[ k_iP_i=k_{i0}P_i+k_{i1}2^{c} P_i+k_{i2}2^{2c} P_i+...+k_{i,m-1}2^{c(m-1)} P_i \]
+Using this, the MSM problem can be rewritten as
+\[P=\sum_{i} k_iP_i=\sum_{i}\sum_{j} k_{ij}2^{cj}P_i \]
+We can now change the order of the summations,
+\[ P=\sum_{i} k_iP_i=\sum_{j}2^{cj}\left(\sum_{i} k_{ij}P_i\right)=\sum_j 2^{cj} B_j \]
+In other words, we first divide the scalars into windows and then combine all the points in each window. Now we can focus on how to calculate each \( B_j \) efficiently:
+\[ B_j=\sum_{i} k_{ij}P_i=\sum_{\lambda=0}^{2^c-1} \lambda \sum_{u(\lambda)} P_u \]
+where the summation over \( u(\lambda) \) is done only over points whose coefficient is \( \lambda \). For example, if \( c=3 \) and we have \( 15 \) points,
+\[ B_1=4P_1+3P_2+5P_3+1P_4+4P_5+6P_7+6P_8+3P_{14}+5P_{15} \]
+We can split the summation by the coefficients \( \lambda \), taking values from \( 1 \) to \( 7 \). For \( \lambda=1 \), \( \sum_u P_u=P_4 \) (because \( P_4 \) is the only one with coefficient \( 1 \)), for \( \lambda=4 \), \( \sum_u P_u=P_1+P_5 \), etc. What we are doing is just placing all points with a common coefficient \( \lambda \) into the \( \lambda \)-bucket. Thus,
+\[ B_j=\sum_\lambda \lambda S_{j\lambda}=S_{j1}+2S_{j2}+3S_{j3}+4S_{4j}+5S_{5j}+6S_{j6}+7S_{j7} \]
+We can calculate this with a minimum number of point additions, using partial sums.
+\( T_{j1}=S_{j7} \)
+\( T_{j2}=T_{j1}+S_{j6} \)
+\( T_{j3}=T_{j2}+S_{j5} \)
+\( T_{j4}=T_{j3}+S_{j4} \)
+\( T_{j5}=T_{j4}+S_{j3} \)
+\( T_{j6}=T_{j5}+S_{j2} \)
+\( T_{j7}=T_{j6}+S_{j1} \)
+Each of these operations involves doing just one elliptic point addition. The final result can be obtained by summing these partial sums:
+\[ B_j=\sum T_{jk} \]</p>
+<p>We can improve the calculations by changing the expansion of the coefficients \( k_i \). In binary representation, the Hamming weight is the number of non-zero bits; ideally, we would like this weight to be as small as possible to reduce the number of additions (For example, 65537, which is \( 2^{16}+1 \) is used as public key for the RSA cryptosystem in many implementations. The square and multiply algorithm requires only two multiplications). The average Hamming weight in a binary representation is \( 1/2 \); if we introduce a signed binary representation (\( -1,0,1 \)), the average weight is reduced to \( 1/3 \), with the consequent decrease in the number of operations (on average).</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="primality-testing"><a class="header" href="#primality-testing">Primality Testing</a></h1>
 <p>We can test primality using the <a href="https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test">Miller-Rabin test</a>. Given an odd number \( n \), we can write it as \( n=2^r\times d +1 \), for some \( r&gt; 0 \) and \( d \) an odd number. If \( d \) is prime, then:
 \( a^d \equiv 1 \pmod{n} \)
@@ -907,23 +935,6 @@ The decryption algorithm, \( D \), on the other hand, takes the ciphertext and t
 <div style="break-before: page; page-break-before: always;"></div><h1 id="information-vs-computational-security"><a class="header" href="#information-vs-computational-security">Information vs Computational Security</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="bit-operations"><a class="header" href="#bit-operations">Bit Operations</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="stream-and-block-ciphers"><a class="header" href="#stream-and-block-ciphers">Stream and block ciphers</a></h1>
-<p>A block cipher takes a message of fixed length (128 bits, for example) and encrypts it, by performing some random permutation of its elements. Two values characterize the block cipher: the block size (for example 16 bytes -128 bits-) and the key size. Both determine the level of security of the cipher. This kind of cipher does not operate with individual bits, but with blocks of fixed size.</p>
-<p>Block sizes should neither very large nor very small. In the first case, it can impact the cost and performance of the encryption, since the memory footprint and ciphertext length will be important. However, if the block size is small, it is susceptible to a codebook attack.</p>
-<p>In practice, a block cipher is the repetitive application of permutation and substitution steps; these take place in rounds. The main building blocks are:</p>
-<ul>
-<li>Substitution boxes (S-boxes).</li>
-<li>Mixing permutations.</li>
-<li>Key schedule.</li>
-</ul>
-<p>If we call \(f_k \) the function corresponding to round \( k \), the ciphertext is
-\[ C= f_n(f_{n-1}(...f_2(f_1(P))))\]</p>
-<p>The functions for each round have the same operations but are parametrized by a different key (which leads to different substitutions and permutations). We should not use the same key for all steps, otherwise, our cryptosystem can be vulnerable to slide attacks.</p>
-<p>Decryption is the successive application of the inverse functions \( g_k=f_k^{-1}\),
-\[ P=g_1(g_2(...g_{n-1}(g_n(C))))\]</p>
-<p>Stream ciphers work in a very different way; instead of combining blocks of text and the key, they deterministically generate a sequence of &quot;random&quot; bits (called the keystream) from the key and perform XOR operations with the text.</p>
-<p>The keystream, \( KS \), is derived from the secret key \( k \) and a public nonce \( \mathrm{nonce} \). If we have our message, \( \mathrm{m} \) to encrypt we perform \( C=KS \oplus \mathrm{m} \). To decrypt, we simply XOR again, \( \mathrm{m}=KS\oplus C\). We can easily see that the encrypt and decrypt operations are essentially the same; we only need the keystream to be able to do it. It is very important that \( \mathrm{nonce} \), which need not be secret, is never reused. To see why, suppose we have two messages \( \mathrm{m}_1 \) and \( \mathrm{m}_2\), and their corresponding ciphertexts, which have been encrypted using the same key \( k \) and \( \mathrm{nonce} \). We can recover the message \( \mathrm{m}_1 \) using the following operation:
-\[ \mathrm{m}_1=C_2\oplus C_1 \oplus \mathrm{m}_2 \]</p>
-<p>This was an implementation error that Microsoft Excel and Word had: they reused the same nonce, which meant that decryption could be done if two versions of the same file were available.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="aes"><a class="header" href="#aes">AES</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="chacha20"><a class="header" href="#chacha20">ChaCha20</a></h1>
 
