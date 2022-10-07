@@ -1,4 +1,4 @@
-# SNARKs
+# SNARKS
 
 ## Introduction
 
