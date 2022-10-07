@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Integers - Cryptography in Rust for Hackers</title>
+        <title>Stream and block ciphers - Cryptography in Rust for Hackers</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -77,7 +77,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Index</a></li><li class="chapter-item expanded "><a href="../chapter_1/index.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li class="chapter-item expanded "><a href="../chapter_2/index.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/natural_numbers.html"><strong aria-hidden="true">3.1.</strong> Natural Numbers</a></li><li class="chapter-item expanded "><a href="../chapter_2/integers.html" class="active"><strong aria-hidden="true">3.2.</strong> Integers</a></li><li class="chapter-item expanded "><a href="../chapter_2/modular_arithmetic.html"><strong aria-hidden="true">3.3.</strong> Modular Arithmetic</a></li><li class="chapter-item expanded "><a href="../chapter_2/groups.html"><strong aria-hidden="true">3.4.</strong> Groups</a></li><li class="chapter-item expanded "><a href="../chapter_2/rings.html"><strong aria-hidden="true">3.5.</strong> Rings</a></li><li class="chapter-item expanded "><a href="../chapter_2/polynomials.html"><strong aria-hidden="true">3.6.</strong> Polynomials</a></li><li class="chapter-item expanded "><a href="../chapter_2/fields.html"><strong aria-hidden="true">3.7.</strong> Fields</a></li><li class="chapter-item expanded "><a href="../chapter_2/elliptic_curves.html"><strong aria-hidden="true">3.8.</strong> Elliptic Curves</a></li><li class="chapter-item expanded "><a href="../chapter_2/fast_multiplication_algorithms.html"><strong aria-hidden="true">3.9.</strong> Fast Multiplication Algorithms</a></li><li class="chapter-item expanded "><a href="../chapter_2/multiscalar_multiplication.html"><strong aria-hidden="true">3.10.</strong> Multiscalar Multiplication</a></li><li class="chapter-item expanded "><a href="../chapter_2/primality_testing.html"><strong aria-hidden="true">3.11.</strong> Primality Testing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/index.html"><strong aria-hidden="true">4.</strong> Chapter 3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_3/information.html"><strong aria-hidden="true">4.1.</strong> Information vs Computational Security</a></li><li class="chapter-item expanded "><a href="../chapter_3/bit_operations.html"><strong aria-hidden="true">4.2.</strong> Bit Operations</a></li><li class="chapter-item expanded "><a href="../chapter_3/stream_and_block.html"><strong aria-hidden="true">4.3.</strong> Stream and block ciphers</a></li><li class="chapter-item expanded "><a href="../chapter_3/aes.html"><strong aria-hidden="true">4.4.</strong> AES</a></li><li class="chapter-item expanded "><a href="../chapter_3/chacha20.html"><strong aria-hidden="true">4.5.</strong> ChaCha20</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Index</a></li><li class="chapter-item expanded "><a href="../chapter_1/index.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li class="chapter-item expanded "><a href="../chapter_2/index.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/natural_numbers.html"><strong aria-hidden="true">3.1.</strong> Natural Numbers</a></li><li class="chapter-item expanded "><a href="../chapter_2/integers.html"><strong aria-hidden="true">3.2.</strong> Integers</a></li><li class="chapter-item expanded "><a href="../chapter_2/modular_arithmetic.html"><strong aria-hidden="true">3.3.</strong> Modular Arithmetic</a></li><li class="chapter-item expanded "><a href="../chapter_2/groups.html"><strong aria-hidden="true">3.4.</strong> Groups</a></li><li class="chapter-item expanded "><a href="../chapter_2/rings.html"><strong aria-hidden="true">3.5.</strong> Rings</a></li><li class="chapter-item expanded "><a href="../chapter_2/polynomials.html"><strong aria-hidden="true">3.6.</strong> Polynomials</a></li><li class="chapter-item expanded "><a href="../chapter_2/fields.html"><strong aria-hidden="true">3.7.</strong> Fields</a></li><li class="chapter-item expanded "><a href="../chapter_2/elliptic_curves.html"><strong aria-hidden="true">3.8.</strong> Elliptic Curves</a></li><li class="chapter-item expanded "><a href="../chapter_2/fast_multiplication_algorithms.html"><strong aria-hidden="true">3.9.</strong> Fast Multiplication Algorithms</a></li><li class="chapter-item expanded "><a href="../chapter_2/multiscalar_multiplication.html"><strong aria-hidden="true">3.10.</strong> Multiscalar Multiplication</a></li><li class="chapter-item expanded "><a href="../chapter_2/primality_testing.html"><strong aria-hidden="true">3.11.</strong> Primality Testing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/index.html"><strong aria-hidden="true">4.</strong> Chapter 3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_3/information.html"><strong aria-hidden="true">4.1.</strong> Information vs Computational Security</a></li><li class="chapter-item expanded "><a href="../chapter_3/bit_operations.html"><strong aria-hidden="true">4.2.</strong> Bit Operations</a></li><li class="chapter-item expanded "><a href="../chapter_3/stream_and_block.html" class="active"><strong aria-hidden="true">4.3.</strong> Stream and block ciphers</a></li><li class="chapter-item expanded "><a href="../chapter_3/aes.html"><strong aria-hidden="true">4.4.</strong> AES</a></li><li class="chapter-item expanded "><a href="../chapter_3/chacha20.html"><strong aria-hidden="true">4.5.</strong> ChaCha20</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -136,25 +136,33 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="integers"><a class="header" href="#integers">Integers</a></h1>
-<p>One problem we have with the natural numbers is that we cannot subtract any two to yield a third one: for example, if we try \( 3-10 \) we get something that is not in the set. If we try doing that calculation using unsigned integers, Rust will output an error. The subtraction operation is not closed in the natural numbers. The set of integers, \( \mathbb{Z} \), is obtained by adding negative numbers: \( -1,-2,-3 \), etc. If we add a number and its negative, we get \( 0 \): \( 5+(-5)=0 \), \( 10+(-10)=0 \). We say that \( -a \) is the additive inverse (or opposite) of \( a \). We can view subtraction \( a-b \) as the addition of \( a \) and \( -b \), thanks to the incorporation of inverses. The addition operation has three basic properties:</p>
-<ol>
-<li>We have an identity element, \( 0 \). For any \( a \) in \( \mathbb{Z} \), \( a+0=a \)  .</li>
-<li>If \( a \) is in \( \mathbb{Z} \), so is \( b \) such that \( a+b=0 \); we commonly refer to \( b \) as \( -a \).</li>
-<li>For any \( a \), \( b \) in \( \mathbb{Z} \), then \( a+b \) is also in \( \mathbb{Z} \). This means that the operation is closed.</li>
-</ol>
-<p>The set of integers \( \mathbb{Z} \) with the addition operation forms an important algebraic structure, which is called a group. Many different mathematical objects share the same structure, even if the operations and elements are totally different, and we have general results and tools to deal with them.</p>
-<p>When we turn to division, we see that the operation is not closed. If we try doing \( 5/3 \), we do not get an integer. If we want the operation to be closed, we need to add need elements and arrive at the set of rational numbers, \( \mathbb{Q} \), which is the set of numbers that can be expressed as the ratio of two integers. </p>
-<p>For cryptography, the integers (with the addition and multiplication of elementary school) have several drawbacks that limit their application. We can define both operations in a slightly different way, which will have interesting properties and provide us with operations that are easy to compute, but hard to reverse.</p>
+                        <h1 id="stream-and-block-ciphers"><a class="header" href="#stream-and-block-ciphers">Stream and block ciphers</a></h1>
+<p>A block cipher takes a message of fixed length (128 bits, for example) and encrypts it, by performing some random permutation of its elements. Two values characterize the block cipher: the block size (for example 16 bytes -128 bits-) and the key size. Both determine the level of security of the cipher. This kind of cipher does not operate with individual bits, but with blocks of fixed size.</p>
+<p>Block sizes should neither very large nor very small. In the first case, it can impact the cost and performance of the encryption, since the memory footprint and ciphertext length will be important. However, if the block size is small, it is susceptible to a codebook attack.</p>
+<p>In practice, a block cipher is the repetitive application of permutation and substitution steps; these take place in rounds. The main building blocks are:</p>
+<ul>
+<li>Substitution boxes (S-boxes).</li>
+<li>Mixing permutations.</li>
+<li>Key schedule.</li>
+</ul>
+<p>If we call \(f_k \) the function corresponding to round \( k \), the ciphertext is
+\[ C= f_n(f_{n-1}(...f_2(f_1(P))))\]</p>
+<p>The functions for each round have the same operations but are parametrized by a different key (which leads to different substitutions and permutations). We should not use the same key for all steps, otherwise, our cryptosystem can be vulnerable to slide attacks.</p>
+<p>Decryption is the successive application of the inverse functions \( g_k=f_k^{-1}\),
+\[ P=g_1(g_2(...g_{n-1}(g_n(C))))\]</p>
+<p>Stream ciphers work in a very different way; instead of combining blocks of text and the key, they deterministically generate a sequence of &quot;random&quot; bits (called the keystream) from the key and perform XOR operations with the text.</p>
+<p>The keystream, \( KS \), is derived from the secret key \( k \) and a public nonce \( \mathrm{nonce} \). If we have our message, \( \mathrm{m} \) to encrypt we perform \( C=KS \oplus \mathrm{m} \). To decrypt, we simply XOR again, \( \mathrm{m}=KS\oplus C\). We can easily see that the encrypt and decrypt operations are essentially the same; we only need the keystream to be able to do it. It is very important that \( \mathrm{nonce} \), which need not be secret, is never reused. To see why, suppose we have two messages \( \mathrm{m}_1 \) and \( \mathrm{m}_2\), and their corresponding ciphertexts, which have been encrypted using the same key \( k \) and \( \mathrm{nonce} \). We can recover the message \( \mathrm{m}_1 \) using the following operation:
+\[ \mathrm{m}_1=C_2\oplus C_1 \oplus \mathrm{m}_2 \]</p>
+<p>This was an implementation error that Microsoft Excel and Word had: they reused the same nonce, which meant that decryption could be done if two versions of the same file were available.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../chapter_2/natural_numbers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../chapter_3/bit_operations.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../chapter_2/modular_arithmetic.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../chapter_3/aes.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -163,10 +171,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../chapter_2/natural_numbers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../chapter_3/bit_operations.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../chapter_2/modular_arithmetic.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../chapter_3/aes.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
