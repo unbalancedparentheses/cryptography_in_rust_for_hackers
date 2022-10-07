@@ -1,8 +1,8 @@
 # Summary
 
 - [Index](./index.md)
-- [Chapter 1](./chapter_1/index.md)
-- [Chapter 2](./chapter_2/index.md)
+- [Mathematics and Computation](./chapter_1/index.md)
+- [Mathematical Preliminaries](./chapter_2/index.md)
     - [Natural Numbers](./chapter_2/natural_numbers.md)
     - [Integers](./chapter_2/integers.md)
     - [Modular Arithmetic](./chapter_2/modular_arithmetic.md)
@@ -14,7 +14,7 @@
     - [Fast Multiplication Algorithms](./chapter_2/fast_multiplication_algorithms.md)
     - [Multiscalar Multiplication](./chapter_2/multiscalar_multiplication.md)
     - [Primality Testing](./chapter_2/primality_testing.md)
-- [Chapter 3](./chapter_3/index.md)
+- [Symmetric encryption](./chapter_3/index.md)
     - [Information vs Computational Security](./chapter_3/information.md)
     - [Bit Operations](./chapter_3/bit_operations.md)
     - [Stream and block ciphers](./chapter_3/stream_and_block.md)
