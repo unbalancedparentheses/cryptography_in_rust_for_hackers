@@ -1,6 +1,7 @@
 # Summary
 
-- [Preface](./index.md)
+[Preface](./index.md)
+
 - [Mathematics and Computation](./chapter_1/index.md)
 - [Mathematical Preliminaries](./chapter_2/index.md)
     - [Natural Numbers](./chapter_2/natural_numbers.md)
