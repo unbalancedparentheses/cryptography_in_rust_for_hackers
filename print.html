@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Index</a></li><li class="chapter-item expanded "><a href="chapter_1/index.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li class="chapter-item expanded "><a href="chapter_2/index.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2/natural_numbers.html"><strong aria-hidden="true">3.1.</strong> Natural Numbers</a></li><li class="chapter-item expanded "><a href="chapter_2/integers.html"><strong aria-hidden="true">3.2.</strong> Integers</a></li><li class="chapter-item expanded "><a href="chapter_2/modular_arithmetic.html"><strong aria-hidden="true">3.3.</strong> Modular Arithmetic</a></li><li class="chapter-item expanded "><a href="chapter_2/groups.html"><strong aria-hidden="true">3.4.</strong> Groups</a></li><li class="chapter-item expanded "><a href="chapter_2/rings.html"><strong aria-hidden="true">3.5.</strong> Rings</a></li><li class="chapter-item expanded "><a href="chapter_2/polynomials.html"><strong aria-hidden="true">3.6.</strong> Polynomials</a></li><li class="chapter-item expanded "><a href="chapter_2/fields.html"><strong aria-hidden="true">3.7.</strong> Fields</a></li><li class="chapter-item expanded "><a href="chapter_2/elliptic_curves.html"><strong aria-hidden="true">3.8.</strong> Elliptic Curves</a></li><li class="chapter-item expanded "><a href="chapter_2/fast_multiplication_algorithms.html"><strong aria-hidden="true">3.9.</strong> Fast Multiplication Algorithms</a></li><li class="chapter-item expanded "><a href="chapter_2/multiscalar_multiplication.html"><strong aria-hidden="true">3.10.</strong> Multiscalar Multiplication</a></li><li class="chapter-item expanded "><a href="chapter_2/primality_testing.html"><strong aria-hidden="true">3.11.</strong> Primality Testing</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3/index.html"><strong aria-hidden="true">4.</strong> Chapter 3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3/information.html"><strong aria-hidden="true">4.1.</strong> Information vs Computational Security</a></li><li class="chapter-item expanded "><a href="chapter_3/bit_operations.html"><strong aria-hidden="true">4.2.</strong> Bit Operations</a></li><li class="chapter-item expanded "><a href="chapter_3/stream_and_block.html"><strong aria-hidden="true">4.3.</strong> Stream and block ciphers</a></li><li class="chapter-item expanded "><a href="chapter_3/aes.html"><strong aria-hidden="true">4.4.</strong> AES</a></li><li class="chapter-item expanded "><a href="chapter_3/chacha20.html"><strong aria-hidden="true">4.5.</strong> ChaCha20</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Index</a></li><li class="chapter-item expanded "><a href="chapter_1/index.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li class="chapter-item expanded "><a href="chapter_2/index.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2/natural_numbers.html"><strong aria-hidden="true">3.1.</strong> Natural Numbers</a></li><li class="chapter-item expanded "><a href="chapter_2/integers.html"><strong aria-hidden="true">3.2.</strong> Integers</a></li><li class="chapter-item expanded "><a href="chapter_2/modular_arithmetic.html"><strong aria-hidden="true">3.3.</strong> Modular Arithmetic</a></li><li class="chapter-item expanded "><a href="chapter_2/groups.html"><strong aria-hidden="true">3.4.</strong> Groups</a></li><li class="chapter-item expanded "><a href="chapter_2/rings.html"><strong aria-hidden="true">3.5.</strong> Rings</a></li><li class="chapter-item expanded "><a href="chapter_2/polynomials.html"><strong aria-hidden="true">3.6.</strong> Polynomials</a></li><li class="chapter-item expanded "><a href="chapter_2/fields.html"><strong aria-hidden="true">3.7.</strong> Fields</a></li><li class="chapter-item expanded "><a href="chapter_2/elliptic_curves.html"><strong aria-hidden="true">3.8.</strong> Elliptic Curves</a></li><li class="chapter-item expanded "><a href="chapter_2/fast_multiplication_algorithms.html"><strong aria-hidden="true">3.9.</strong> Fast Multiplication Algorithms</a></li><li class="chapter-item expanded "><a href="chapter_2/multiscalar_multiplication.html"><strong aria-hidden="true">3.10.</strong> Multiscalar Multiplication</a></li><li class="chapter-item expanded "><a href="chapter_2/primality_testing.html"><strong aria-hidden="true">3.11.</strong> Primality Testing</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3/index.html"><strong aria-hidden="true">4.</strong> Chapter 3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3/information.html"><strong aria-hidden="true">4.1.</strong> Information vs Computational Security</a></li><li class="chapter-item expanded "><a href="chapter_3/bit_operations.html"><strong aria-hidden="true">4.2.</strong> Bit Operations</a></li><li class="chapter-item expanded "><a href="chapter_3/stream_and_block.html"><strong aria-hidden="true">4.3.</strong> Stream and block ciphers</a></li><li class="chapter-item expanded "><a href="chapter_3/aes.html"><strong aria-hidden="true">4.4.</strong> AES</a></li><li class="chapter-item expanded "><a href="chapter_3/chacha20.html"><strong aria-hidden="true">4.5.</strong> ChaCha20</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">5.</strong> Chapter 8</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1046,6 +1046,126 @@ This is expected: the addition of two odd or two even numbers is always even, wh
 \( c=c+b;\space b=b\oplus c;\space b&lt;&lt;&lt;7\)
 where \( &lt;&lt;&lt;n \) denotes an \( n \)-bit rotation towards the left.</p>
 <p>The ChaCha state is composed of 16 32-bit words: the first four are constants; the next 8 correspond to the key, followed by the counter and the nonce.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="snarks-1"><a class="header" href="#snarks-1">SNARKs</a></h1>
+<h2 id="introduction-1"><a class="header" href="#introduction-1">Introduction</a></h2>
+<p>Succinct Non-Interactive Arguments of Knowledge (SNARKs) are powerful cryptographic primitives, with applications in decentralized finances, governance, and computation. There are many different SNARKs out there, such as Marlin (which is the one Aleo is based on), Plonk, STARKs, Groth16, etc, depending on the tools they are built on, and with differences in performance, proof sizes, verification times, etc. However, they are all based on some common principles and properties. Among SNARKs, the most important ones for private applications are zero-knowledge SNARKs (zk-SNARKs, for short). They allow us to prove that we know certain variables, called witness, \( w \), such that the output of a function \( F \), evaluated at the witness and instance (public variables), \( x \), is \( F(x,w)=y \), without revealing anything about \( w \).</p>
+<p>Computer programs can be converted to functions receiving input (some of which we may want to conceal) and we can prove its correct execution with SNARKs. For example, we can transform the program into an arithmetic circuit, \( C \), and, given the public input and output, \( x \), and secret data, \( w \), we can prove that the program was correctly executed by showing the satisfiability of the circuit, \( C(x,w)=0 \). Since arithmetic circuit satisfiability is an NP-complete problem, we can reduce any NP problem to an arithmetic circuit (this is not the only alternative, though, and several constructions rely on different techniques).</p>
+<p>Before jumping into the details, let us first explain the main properties of a SNARK and the precise meaning of each term in the name. A zk-SNARK involves two parties, the prover and the verifier, where the first one tries to convince the latter of a given statement, such as the prover knows \( w \) such that \( C(w,x)=0 \). The SNARK must fulfill:</p>
+<ol>
+<li>Completeness: If the prover knows \( w \), he will always be able to convince an honest verifier of the validity of the statement.</li>
+<li>Soundness: if the statement is false, then no cheating prover could convince the verifier to accept, except with very low probability.</li>
+<li>Zero-knowledge: the proof does not reveal anything about the witness.</li>
+</ol>
+<p>As for the name, we have:</p>
+<ol>
+<li>Succinctness: the proofs have to be short and quick to verify. This would enable us to delegate expensive computations to untrusted parties and check their validity without having to run the program by ourselves.</li>
+<li>Non-interactive: does not require interaction between prover and verifier, nor to generate the proof or verify it. We will see that the construction will rely first on interactive proofs, but we can turn it into non-interactive by employing the <a href="https://en.wikipedia.org/wiki/Fiat%E2%80%93Shamir_heuristic">Fiat-Shamir</a> transform.</li>
+<li>Argument of knowledge: we can prove with a high probability that we know the witness. </li>
+</ol>
+<h2 id="setup"><a class="header" href="#setup">Setup</a></h2>
+<p>SNARKs require trusted setups. Among them, we can distinguish:</p>
+<ul>
+<li>Uniform reference string or transparent setups (URS).</li>
+<li>Structured reference string or private setup (SRS).</li>
+</ul>
+<p>In the case of SRS, we can find two cases:</p>
+<ul>
+<li>Universal (for example, MARLIN)</li>
+<li>Specific (Groth 16)</li>
+</ul>
+<p>In practice, the private setup is carried out as a multiparty computation; the construction will be secure as long as there is one honest party. The problem with specific SRS is that the string depends on the program and a new setup must be carried out for each one (this is an undesirable property).</p>
+<h2 id="probabilistic-proofs-and-capabilities-of-the-verifier"><a class="header" href="#probabilistic-proofs-and-capabilities-of-the-verifier">Probabilistic proofs and capabilities of the verifier</a></h2>
+<p>The succinctness of the argument relies on probabilistic proofs. To do that, we first have to establish the things that the &quot;powers&quot; or capabilities of the verifier. We have:</p>
+<ul>
+<li>Interaction: the verifier is allowed to interact with the prover, sending challenges and receiving responses.</li>
+<li>Multiprover: there are several provers, but they are isolated.</li>
+<li>Randomness: the verifier can select random elements or queries.</li>
+<li>Ability to perform queries to an oracle: the verifier may make queries to the prover's messages.</li>
+</ul>
+<p>When the verifier has access to more than one of these powers, we get different types of proofs:</p>
+<ul>
+<li>Interactivity + Randomness: Interactive proofs (IP).</li>
+<li>Randomness + Oracle: Probabilistically checkable proofs (PCP).</li>
+<li>Interactivity + Randomness + Oracle: Interactive Oracle Proofs (IOP)</li>
+</ul>
+<p>There are other possibilities, such as MIOP, but we will focus on the previous 3. Currently, IOPs give the most efficient constructions for SNARKs: quasilinear time verification, linear size proof lengths, linear time prover, and efficient implementations. PCP are interesting from an educational point of view but are not efficient in practice (it does not result in succinct proofs, except with linear queries). Finally, IP give some interesting building blocks, in the form of subroutines.</p>
+<p>In an IOP, the prover and verifier exchange messages. The prover sends arbitrary messages (in a polynomial IOP, the prover sends commitments - see next section- to polynomials) and the verifier sends random challenges. After some rounds, the verifier makes queries to some values and decides whether to accept or reject.</p>
+<h2 id="commitment-schemes"><a class="header" href="#commitment-schemes">Commitment schemes</a></h2>
+<p>The performance of SNARKs depends on the type of commitment used; there have been many advances over the last years to improve them.</p>
+<p>We can think of a commitment as a safe box. We make some choice for a bet and store it in the safe box and hand it to someone else. Once the result is known, we can reveal our bet by opening the safe box.</p>
+<p>A commitment has to verify two properties:</p>
+<ul>
+<li>Binding: we cannot produce two valid openings for the same commitment. In other words, if we committed to some value \( a \), it should be impossible to find \( b \) such that the \( cm(a)=cm(b) \).</li>
+<li>Hiding: the commitment reveals nothing about the committed data.</li>
+</ul>
+<p>One way to commit to a message is by using a <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function">collision-resistant hash function</a>. If we have a message \( m \) and some random value \( r \),
+\( \mathrm{cm}(m,r)=hash(m\mid r) \)
+Given that it is collision-resistant, we have the binding property.
+We can afterward open the commitment and verify:
+\( \mathrm{Verify}(m,r,\mathrm{cm})\rightarrow \) accept or reject
+One advantage of commitments is that they tend to be short. For example, if we use SHA-256, the length of the commitment will be 32 bytes.</p>
+<p>One important group of commitments is the polynomial schemes. Here are some constructions and the math that they rely on:</p>
+<ul>
+<li>Basic elliptic curves: bulletproofs</li>
+<li>Bilinear groups: Kate-Zaverucha-Goldberg (KZG) polynomial commitments (pairings, trusted setup) DORY (no trusted setup)</li>
+<li>Groups of unknown order: DARK</li>
+<li>Hash functions only: FRI</li>
+</ul>
+<h2 id="anatomy-of-a-snark"><a class="header" href="#anatomy-of-a-snark">Anatomy of a SNARK</a></h2>
+<p>A SNARK can be constructed by selecting the following two elements:</p>
+<ol>
+<li>A type of probabilistic proof: for example, probabilistically checkable proof (PCP) or interactive oracle proof (IOP). A special type of IOP is polynomial IOP (PIOP).</li>
+<li>A commitment scheme (cryptography). For example, polynomial/functional commitments, vector commitments, and linear encoding.</li>
+</ol>
+<p>The probabilistic proof determines the type of computation. It can be either in the form of a machine computation (such as vmTinyRam) or a circuit.</p>
+<p>The cryptographic element determines the cost to generate the proofs, whether it will be postquantum secure and the type of setup (transparent or structured). The math tools we need to work with each of them are:</p>
+<ul>
+<li>Linear encoding: Elliptic curve pairings (ECP) + Lattices</li>
+<li>Vector commitment: Collision resistant hash (CRH) functions + ECP.</li>
+<li>Polynomial commitment: CRH, ECP, PO groups, UO groups</li>
+</ul>
+<p>Some SNARK recipes are:</p>
+<ol>
+<li>Linear PCP + Linear encoding: Groth16, Groth-Maller 17</li>
+<li>PCP/IOP + vector commitment: STARKs</li>
+<li>Polynomial PCP/IOP + polynomial commitment: MARLIN, SONIC, Plonk, Spartan.</li>
+</ol>
+<p>Bulletproofs take some different combinations of the elements above and are based on cryptographic sum checks.</p>
+<p>The proof's size depends strongly on the type of construction. For example, for PIOP with KZG polynomial commitments, proofs take less than 1 kB (two elliptic curve elements), whereas IOP with <a href="https://vitalik.ca/general/2017/11/22/starks_part_2.html">FRI</a> (Fast Reed-Solomon Interactive Oracle Proofs of Proximity) needs around 100 kB, more than two orders of magnitude more! This is because FRI uses Merkle trees; the verification requires an authentication path, needing several hashes. </p>
+<p>One problem we are faced with circuits is that the verifier should read it, resulting in a verification time that depends linearly on the size (which would make it non-succinct). To avoid this, we can preprocess it and attain sublinear verification times.</p>
+<p>We will now focus on the KZG polynomial commitment, which is the basis of Marlin and Plonk. </p>
+<h2 id="kzg-commitment-scheme"><a class="header" href="#kzg-commitment-scheme">KZG commitment scheme</a></h2>
+<p>The polynomial commitment scheme has the following algorithms:</p>
+<ol>
+<li>Setup.</li>
+<li>Commit.</li>
+<li>Open.</li>
+</ol>
+<p>To commit to a polynomial, we will evaluate the polynomial at a given, but unknown, point \( \alpha \).</p>
+<p>The setup takes the maximum degree of the polynomial (which depends on the number of gates of the arithmetic circuit) and outputs the public parameters: proving key and verifying key. To be able to evaluate polynomials, we will use an elliptic curve (we will need it to be <a href="https://www.entropy1729.com/multiscalar-multiplication/">pairing friendly</a>, such as BLS 12-377) to hide \( \alpha \) and its powers (\( \alpha \) is chosen during the setup ceremony and discarded as toxic waste!). To do that, we pick a generator of a group of large prime order \( d+1 \), \( g \) and calculate
+\( H={g,\alpha g, \alpha^2 g, \alpha^3 g,..., \alpha^{d} g}={h_0,h_1,h_2,...h_{d}} \)
+This will give us a very large collection of elliptic curve points (we will save them as a string) which will work as the proving key. In the case of a universal setup, the number of elements will coincide with the maximum size of the circuit. Since elliptic curve points take in the order of \( 100 \) B, if we want to deal with \( 10^{8} \) gates, we will need more than 1 GB just to store it. For a given circuit, which could be much smaller than the maximum, MARLIN trims the key, so that it is much simpler and faster to work. The setup also depends on a security parameter \( \lambda \), but we will consider it to be fixed in our analysis.
+We therefore have \( \mathrm{setup}(\lambda,N)\rightarrow \mathrm{pp(pk,vk)} \).</p>
+<p>The prover generates the polynomial \( P(x)=p_0+p_1x+...p_dx^d \) and commits to it by evaluating it at \( \alpha \). Since we do not know \( \alpha \), only the scalar multiples of group elements of powers of \( \alpha \),
+\( \mathrm{cm}(P)=p_0g+p_1\alpha d+...+p_d\alpha^d g=p_0h_0+p_1h_1+...p_dh_d \)
+This is the problem of multiscalar multiplication (<a href="https://www.entropy1729.com/multiscalar-multiplication/">MSM</a>). We see that the polynomial commitment corresponds to one group element of the elliptic curve.</p>
+<p>We could use a <a href="https://en.wikipedia.org/wiki/Merkle_tree">Merkle tree</a> to commit to a polynomial, too. The problem with Merkle trees is that the size of the tree would be dependent on the degree of the polynomial. In the case of KZG, the commitment is just one group element, which is independent of the size. Besides, when we want to evaluate the polynomial in a proof, we need to send all the coefficients in the clear (which reveals the polynomial), with the verifier having to do linear work on the size of the polynomial. On the other hand, we will see that KZG mostly hides the polynomial (unless there are lots of queries) and the verification is independent of the degree of the polynomial. Additionally, KZG allows for batch proofs: if we have several commitments \( \mathrm{cm}_1 \), \( \mathrm{cm}_2 \), ..., \( \mathrm{cm}_k \), we can generate a single proof showing that all commitments are valid.</p>
+<p>Once the polynomial is committed, the verifier (in an interactive scheme) can send random points \( r_k \) to the prover and the latter gives the polynomial evaluated at \( r_k \), \( P(r_k) \). To make it non-interactive, we use the Fiat-Shamir transform, where the random challenges will be generated from a cryptographic hash function.</p>
+<p>Suppose that the prover wants to convince the verifier that \( P(u)=v \). He can transform that equation into a polynomial, \( g(x)=P(x)-v \), which has a root at \( x=u \). This means that \( g(x) \) is divisible by \( x-u \), which we can write as \( g(x)=P(x)-v=Q(x)(x-u) \), were \( Q \) is the quotient polynomial. The prover can commit to \( Q(x) \) doing the same as before, that is
+\( \mathrm{cm}(Q)=q_0g+q_1\alpha d+...+q_{d-1}\alpha^{d-1} g=q_0h_0+q_1h_1+...q_{d-1}h_{d-1} \)
+which is another MSM. The proof \( \pi \) contains this group element, which is constant size! The proof will show that \( P(u)=v \) and \( P \) is indeed a polynomial of at most degree \( d \) and that the commitment of \( P \) is \( \mathrm{cm}(P) \).</p>
+<p>The verifier accepts the proof if \( (\alpha-u)\mathrm{cm}(Q)=\mathrm{cm}(P)-vg \). The problem is that we do not know \( \alpha \). This is where <a href="https://vitalik.ca/general/2017/01/14/exploring_ecp.html">pairings</a> come to our aid and we only need the elements \( h_0 \) and \( h_1 \) to be able to compute. Roughly speaking, an elliptic curve pairing is a function
+\( f: \mathcal{G}_1 \times \mathcal{G}_2\rightarrow \mathcal{G}_t \)
+which takes two elements, \( P \) from \( \mathcal{G}_1 \) and \( Q \) from \( \mathcal{G}_2 \) and outputs an element \( R \) from \( \mathcal{G}_t \). All the groups have the same order \( r \) and correspond to groups in pairing-friendly elliptic curves. In the case of MARLIN, the <a href="https://www.entropy1729.com/multiscalar-multiplication/">curve BLS 12-377</a> is used. The pairing satisfies:
+\( f(P,Q)=f(g,g_2)^{pq} \)
+where \( g \) and \( g_2 \) are generators for the groups \( \mathcal{G}_1 \) and \( \mathcal{G}_2 \) (and \( P=pg \) and \( Q=qg_2 \)). The form of the verification equation in terms of pairings is
+\( f(\mathrm{cm}(Q),(\alpha-u)g_2)=f(\mathrm{cm}(P)-vg,g_2) \)
+The check is done over \( \mathcal{G}_t \). We only need to know \( \alpha g_2 \) from the trusted setup.</p>
+<p>Now, how can we be convinced that if we evaluated the polynomials at a single point and they coincide, then it is very likely that the argument is true? The answer lies with the <a href="https://en.wikipedia.org/wiki/Schwartz%E2%80%93Zippel_lemma">Schwartz-Zippel lemma</a> (we will state it for finite fields): for a polynomial \( P \) of degree \( d \) over a finite field of order \( p \), the probability that the polynomial is zero at a point sampled at random \( r \) is
+\( \mathrm{Pr}(P(r)=0)=d/p \)
+Given that the maximum size of circuits (which gives the maximum degree of a polynomial) is around \( 2^{26}\approx 10^8 \) and the size of the field is larger than \( 2^{256} \), the probability is around \( 2^{-230}\approx 10^{-70} \). If we say \( P_1 \) and \( P_2 \) coincide at one point \( r \), we can construct the polynomial \( P(x)=P_1(x)-P_2(x) \) (since polynomial addition is closed) and \( P(r)=0 \). Given how unlikely it is to hit a zero at random, we can be quite confident that \( P(x) \) is the zero polynomial.</p>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<p>zk-SNARKs have started gaining attention due to their use in developing fully private applications. They provide succinct proofs that a certain computation was carried out correctly, without revealing sensitive information. There are many possible constructions, based on probabilistic proofs and a commitment scheme. Depending on the different choices, more efficient versions are possible and determine the type of computation (machine or circuit computation). We explored the KZG commitment scheme, which shows the idea behind systems such as MARLIN and Plonk and the calculations we need to carry out to generate and verify the proofs. </p>
 
                     </main>
 
