@@ -6,3 +6,4 @@ src = "src"
 title = "Cryptography in Rust for Hackers"
 [output.html]
 mathjax-support = true
+default-theme = "rust"
