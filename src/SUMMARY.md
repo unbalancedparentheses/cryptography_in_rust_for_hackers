@@ -3,7 +3,7 @@
 [Preface](./index.md)
 
 - [Mathematics and Computation](./chapter_1/index.md)
-- [Mathematical Preliminaries](./chapter_2/index.md)
+- [Foundations](./chapter_2/index.md)
     - [Natural Numbers](./chapter_2/natural_numbers.md)
     - [Integers](./chapter_2/integers.md)
     - [Modular Arithmetic](./chapter_2/modular_arithmetic.md)

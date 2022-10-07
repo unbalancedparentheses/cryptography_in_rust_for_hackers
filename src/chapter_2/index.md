@@ -1,4 +1,4 @@
-# Chapter 2: Math preliminaries
+# Foundations 
 
 ## Introduction
 
