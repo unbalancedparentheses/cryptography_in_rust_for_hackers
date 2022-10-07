@@ -20,4 +20,4 @@
     - [Stream and block ciphers](./stream_and_block.md)
     - [AES](./AES.md)
     - [ChaCha20](./ChaCha20.md)
-
+- [Chapter 8](./chapter_8)
