@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Chapter 3 - Cryptography in Rust for Hackers</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Index</a></li><li class="chapter-item expanded "><a href="../chapter_1/index.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li class="chapter-item expanded "><a href="../chapter_2/index.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/natural_numbers.html"><strong aria-hidden="true">3.1.</strong> Natural Numbers</a></li><li class="chapter-item expanded "><a href="../chapter_2/integers.html"><strong aria-hidden="true">3.2.</strong> Integers</a></li><li class="chapter-item expanded "><a href="../chapter_2/modular_arithmetic.html"><strong aria-hidden="true">3.3.</strong> Modular Arithmetic</a></li><li class="chapter-item expanded "><a href="../chapter_2/groups.html"><strong aria-hidden="true">3.4.</strong> Groups</a></li><li class="chapter-item expanded "><a href="../chapter_2/rings.html"><strong aria-hidden="true">3.5.</strong> Rings</a></li><li class="chapter-item expanded "><a href="../chapter_2/polynomials.html"><strong aria-hidden="true">3.6.</strong> Polynomials</a></li><li class="chapter-item expanded "><a href="../chapter_2/fields.html"><strong aria-hidden="true">3.7.</strong> Fields</a></li><li class="chapter-item expanded "><a href="../chapter_2/elliptic_curves.html"><strong aria-hidden="true">3.8.</strong> Elliptic Curves</a></li><li class="chapter-item expanded "><a href="../chapter_2/fast_multiplication_algorithms.html"><strong aria-hidden="true">3.9.</strong> Fast Multiplication Algorithms</a></li><li class="chapter-item expanded "><a href="../chapter_2/multiscalar_multiplication.html"><strong aria-hidden="true">3.10.</strong> Multiscalar Multiplication</a></li><li class="chapter-item expanded "><a href="../chapter_2/primality_testing.html"><strong aria-hidden="true">3.11.</strong> Primality Testing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/index.html" class="active"><strong aria-hidden="true">4.</strong> Chapter 3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../information.html"><strong aria-hidden="true">4.1.</strong> Information vs Computational Security</a></li><li class="chapter-item expanded "><a href="../bit_operations.html"><strong aria-hidden="true">4.2.</strong> Bit Operations</a></li><li class="chapter-item expanded "><a href="../stream_and_block.html"><strong aria-hidden="true">4.3.</strong> Stream and block ciphers</a></li><li class="chapter-item expanded "><a href="../aes.html"><strong aria-hidden="true">4.4.</strong> AES</a></li><li class="chapter-item expanded "><a href="../chacha20.html"><strong aria-hidden="true">4.5.</strong> ChaCha20</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Cryptography in Rust for Hackers</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="symmetric-encryption"><a class="header" href="#symmetric-encryption">Symmetric encryption</a></h1>
+<p>Encryption has been the main application of cryptography for a very long time. Its goal is to transform map a message into another one and send it through an insecure channel, such that only the intended parties (who know all the elements necessary to reverse the transformation) can read it while looking like absolute nonsense to everybody else. For example, suppose that you are a general during a war and you need to communicate the battle plan to your reinforcement battalions (which are still far from you) and launch a surprise attack at the precise moment. If you sent some messenger with a letter containing the plans written in plain form, then anyone getting the letter would know your plans and act in consequence; what's more, the messenger could betray you and exchange that information with your enemies and thwart your masterminded tactic.</p>
+<p>Encryption uses an algorithm called cipher and some key to change the message into a random-looking text. More precisely, it takes plaintext and, through some mathematical computations, outputs a ciphertext. The cyphertext can only be decrypted if the key is known. In modern encryption, only the key is secret; the details of the encryption algorithm are publicly known. This is in agreement with Kerkhoff's principle, which states that, in a cryptographic system, only the key should be secret. In older times, people tried to hide the message by using unknown algorithms or strategies, hoping that the enemy would not be able to figure out the secret; this is known as security through obscurity. Needless to point out, this strategy has failed numerous times with catastrophic consequences.</p>
+<p>Symmetric encryption is widely used today and there are efficient algorithms, some of them even implemented on hardware. Examples of symmetric encryption algorithms are AES (Advanced Encryption Standard), 3DES, ChaCha, Salsa, Twofish, Blowfish, and Serpent, to name some of them. In this type of encryption, the same key is used to encrypt and decrypt messages (therefore, if someone can send encrypted messages, then he can decrypt too). We will see in a later chapter that there is asymmetric encryption (or public key cryptography), where we have two different keys: a public key (used to encrypt messages) and a private key (used to decrypt).</p>
+<p>Once we have the key, we can send secure messages between the parties and it is unlikely that they will be decrypted, thanks to the math and heuristics behind it and the appropriate security levels. However, we find ourselves with the problem of how to agree on the key between the involved parties: if we tried sending it in plaintext over an insecure channel, it could be compromised and the symmetric encryption would be pointless since adversaries could have obtained it. We will focus in a later chapter on how to perform key exchanges.</p>
+<p>There are two main ciphers types for symmetric encryption: block and stream ciphers. We will analyze their characteristics in the next sections.</p>
+<h2 id="formalization"><a class="header" href="#formalization">Formalization</a></h2>
+<p>We have two parties wanting to communicate securely, which we will call Alice and Bob (for A and B, respectively). Alice wants to send Bob a plaintext, \( P \) in such a way that only Bob can read it and learn its contents. They have previously agreed on a common secret key, \( k \), and they will be using some algorithm, such as AES. The encryption algorithm is some function, $E$, taking the plaintext and the key and outputting the ciphertext \( C \):
+\[ E(P,k)=C \]
+The decryption algorithm, \( D \), on the other hand, takes the ciphertext and the key and returns the plaintext
+\[ D(C,k)=P \]</p>
+<p>There are a couple of things we would like from our encryption algorithm and the output ciphertext. First, the ciphertext should appear as random text, with no clear patterns. We would also like that, if we change even a single bit from the message, the resulting ciphertext is completely different from the original one: this is known as the avalanche effect. </p>
+<p>These are related to two properties that a secure cipher should have: confusion and diffusion. Confusion serves to hide the relationship between the key and the ciphertext. Diffusion is related to the fact that the value in the ciphertext of one bit depends on others; equivalently, if we changed one bit from the plaintext, we could expect that many bits would also change their values, which is related to the avalanche effect.</p>
+<p>To be secure, a cipher's permutation should satisfy the following three conditions:</p>
+<ul>
+<li>The permutation should be determined by the key.</li>
+<li>Different keys should give rise to different permutations.</li>
+<li>The permutations should look random.</li>
+</ul>
+<p>The first condition guarantees that we need the key to be able to decrypt. If the permutations are not given by the key, then it plays no role whatsoever in the process and things could be decrypted without it. The second one means that there are not two keys yielding the same permutation. If it were so, then the messages encrypted with one key could be decrypted with another, and that would make it easier to break the cryptosystem. The third one is simply that we should not be able to learn anything about the plaintext from the ciphertext (an example where this fails is on certain bitmaps with ECB mode encryption).</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../chapter_2/primality_testing.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../information.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../chapter_2/primality_testing.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../information.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
