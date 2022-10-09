@@ -19,6 +19,7 @@
     - [AES](./chapter_3/aes.md)
     - [ChaCha20](./chapter_3/chacha20.md)
 - [Asymmetric encryption](./chapter_4/asymmetric_encryption.md)
+    - [Fermat's little theorem](./chapter_4/fermat_little_theorem.md)
     - [Primality Testing](./chapter_4/primality_testing.md)
     - [Elliptic Curves](./chapter_4/elliptic_curves.md)
 - [Hash functions](./chapter_5/hash_functions.md)
