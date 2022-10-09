@@ -1,7 +1,5 @@
 # Key Exchange
 
-# Key Exchange
-
 ## Introduction
 
 ## Diffie-Hellman
