@@ -7,7 +7,6 @@ It goes further, as for each provable proposition there exists a program with a 
 programs are proofs<br><br>
 Hence, it is possible to prove a mathematical theorem using a computer (which is referred to as computer-assisted proof). One notorious example is the proof of the four color theorem [22]. Thus, by using dependent types to encode propositions as types, the resulting program can be used as a proof. As the compiler will type check the program, it only needs to compile to be proven true [18]. In a way, by type checking your program the compiler will prove that your program verifies certain theorems [22]. Thus, dependently typed programs are in essence “proof carrying code” [17].
 
-
 ## PCP
 
 >Classical computer science has shown that every language in NP has a Probabilistically Checkable Proof (PCP), where a computational resource-restricted verifier can quickly confirm membership in that language using only a few queries of a specially-constructed proof. Less formally, we can interpret this as "every true statement that has a reasonably sized proof, also has a reasonably sized proof whose correctness can be checked (with high probability) by only looking at a small number of locations of the proof."<br><br>
