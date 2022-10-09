@@ -188,3 +188,6 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - http://numbers.computation.free.fr/Constants/Algorithms/fft.html
 - https://cr.yp.to/papers/pippenger-20020118-retypeset20220327.pdf
 - https://cp-algorithms.com/algebra/fft.html#two-stripes
+
+### Applications
+- [Mental Poker in the Age of SNARKs - Part 1](https://www.geometryresearch.xyz/notebook/mental-poker-in-the-age-of-snarks-part-1)
