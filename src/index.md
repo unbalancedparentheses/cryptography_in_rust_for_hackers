@@ -8,6 +8,7 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 
 ## References
 - [ingopedia](https://github.com/ingonyama-zk/ingopedia)
+- [So, you want to be a Cryptographer?](https://github.com/SalusaSecondus/CryptoGotchas/blob/master/GettingStarted.md)
 
 ### Books
 - Understanding Cryptography
@@ -27,7 +28,6 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - https://youtube.com/playlist?list=PL8yHsr3EFj53L8sMbzIhhXSAOpuZ1Fov8
 
 ### Algebra 
-
 - https://youtube.com/playlist?list=PL8yHsr3EFj52XDLrmvrFDgwcf6XOm2TEE
 - https://youtube.com/playlist?list=PLL0ATV5XYF8AQZuEYPnVwpiFy0jEipqN-
 - https://youtube.com/playlist?list=PLL0ATV5XYF8CP3A00vb4qjTt6jWmXL2K_
@@ -61,7 +61,6 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - [PLONK by Hand (Part 1: Setup)](https://research.metastate.dev/plonk-by-hand-part-1/)
 - [PLONK by Hand (Part 2: The Proof)](https://research.metastate.dev/plonk-by-hand-part-2-the-proof/)
 - [PLONK by Hand (Part 3: Verification)](https://research.metastate.dev/plonk-by-hand-part-3-verification/)
-
 
 ### STARKs
 - [STARK Brainfuck](https://aszepieniec.github.io/stark-brainfuck/)
