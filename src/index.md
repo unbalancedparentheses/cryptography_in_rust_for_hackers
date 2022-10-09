@@ -72,7 +72,6 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - Tom Stuart Understanding computation
 
 ### Number Theory 
-
 - https://crypto.stanford.edu/pbc/notes/numbertheory/
 - https://explained-from-first-principles.com/number-theory/#extended-euclidean-algorithm
 - https://youtube.com/playlist?list=PL8yHsr3EFj53L8sMbzIhhXSAOpuZ1Fov8
@@ -106,6 +105,13 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - [Curated_list] (https://github.com/matter-labs/awesome-zero-knowledge-proofs)
 - [zcash] (https://z.cash/technology/zksnarks/)
 - [Missing_explanation_snark] (https://www.cryptologie.net/article/508/the-missing-explanation-of-zk-snarks-part-2/)
+- [Recursive Zero-Knowledge Proofs: A Comprehensive Primer](https://www.michaelstraka.com/posts/recursivesnarks/)
+
+#### PLONK
+- [PLONK by Hand (Part 1: Setup)](https://research.metastate.dev/plonk-by-hand-part-1/)
+- [PLONK by Hand (Part 2: The Proof)](https://research.metastate.dev/plonk-by-hand-part-2-the-proof/)
+- [PLONK by Hand (Part 3: Verification)](https://research.metastate.dev/plonk-by-hand-part-3-verification/)
+
 
 ### STARKs
 - [STARK Brainfuck](https://aszepieniec.github.io/stark-brainfuck/)
@@ -141,8 +147,10 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - [RSA, LLL Attacks] https://github.com/mimoo/RSA-and-LLL-attacks
 - [side channel] (https://youtu.be/cX-o9rM2DgM)
 
-### Miscellaneous
+### Applications
+- [Mental Poker in the Age of SNARKs - Part 1](https://www.geometryresearch.xyz/notebook/mental-poker-in-the-age-of-snarks-part-1)
 
+### Miscellaneous
 - https://soatok.blog/2020/06/10/how-to-learn-cryptography-as-a-programmer/
 - Elliptic curves https://curves.xargs.org/
 - Lattice based cryptography https://medium.com/cryptoblog/what-is-lattice-based-cryptography-why-should-you-care-dbf9957ab717
@@ -188,6 +196,3 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - http://numbers.computation.free.fr/Constants/Algorithms/fft.html
 - https://cr.yp.to/papers/pippenger-20020118-retypeset20220327.pdf
 - https://cp-algorithms.com/algebra/fft.html#two-stripes
-
-### Applications
-- [Mental Poker in the Age of SNARKs - Part 1](https://www.geometryresearch.xyz/notebook/mental-poker-in-the-age-of-snarks-part-1)
