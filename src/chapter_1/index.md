@@ -1,4 +1,4 @@
-# Programs Correspond to Proofs
+# Mathematics and Computation
 
 > Programs are proofs
 The development of type-dependent programming languages originated from the Curry-Howard correspondence [11]. Essentially, it outlines a correspondence between mathematics (intuitionistic logic) and programming languages (type theory) [18]. It derives its name from the fact that it was first observed by Haskell Curry (in 1934 [19]) and later refined by William Alvin Howard (in 1969 [20])[21]. At the beginning of the 1930s, Curry realized the similarity between axioms of implicational propositional calculus P ⊃ Q ⊃ P (P ⊃ Q ⊃ R) ⊃ (P ⊃ Q) ⊃ P ⊃ R and types of SKI combinator calculus (in particular combinators S and K) [11] A → B → A (A → B → C) → (A → B) → A → C Other similarities started to be discovered which resulted in the Curry-Howard correspondence. The Curry-Howard correspondence states on a high level that each proposition of intuitionistic logic can be converted into a type in the programming language and vice versa [21]. It results that:
