@@ -293,7 +293,15 @@
 <li>https://cr.yp.to/papers/pippenger-20020118-retypeset20220327.pdf</li>
 <li>https://cp-algorithms.com/algebra/fft.html#two-stripes</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="chapter-1-mathematics-and-computation"><a class="header" href="#chapter-1-mathematics-and-computation">Chapter 1: Mathematics and Computation</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="programs-correspond-to-proofs"><a class="header" href="#programs-correspond-to-proofs">Programs Correspond to Proofs</a></h1>
+<h2 id="references-1"><a class="header" href="#references-1">References</a></h2>
+<ul>
+<li><a href="https://youtu.be/IOiZatlZtGU">Propositions as Types - Philip Wadler</a></li>
+<li><a href="https://www.p%C3%A9drot.fr/slides/inria-junior-02-15.pdf">The Curry-Howard isomorphism for dummies - Pierre-Marie Pédrot</a></li>
+<li><a href="https://cs3110.github.io/textbook/chapters/adv/curry-howard.html">The Curry-Howard Correspondence</a></li>
+<li><a href="https://research.metastate.dev/a-gentle-introduction-to-dependent-types/">A Gentle Introduction to Dependent Types</a></li>
+<li><a href="https://max.fan/posts/hacking-python-types/">Hacking Python’s Type System for Proof Checking</a></li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="foundations"><a class="header" href="#foundations">Foundations</a></h1>
 <h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
 <p>Math is at the core of cryptography. It gives us a framework to work with and prove that cryptographic primitives are safe or, at least, that some problems are really hard to solve. Public key cryptography is possible due to the fact that some calculations are fast to be done in one way, but it is difficult to do them the other way round and that has to do only with math. Even if a good understanding of math is important, some of the key concepts for cryptography are rather easy to grasp and related to elementary school math. Besides, you don't have to be really good at doing calculations, you just have to understand how to implement the different cryptographic primitives in a secure way. For example, the RSA cryptosystem relies on finding prime numbers and multiplicative inverses (in short, given \( a \) , find \( b \) such that \( a\times b=1 \) ) and efficiently computing powers of numbers. The method owes its strength to the difficulty of factoring a number into its prime factors. We will now explain in more detail each of these concepts (though it is likely that many of these ideas ring a bell) and, more importantly, how to implement them in practice. There are, of course, some underlying subtleties and we will need at some points to go down the rabbit hole, but this will be much easier if we know the reasons why we need it.</p>
