@@ -1,60 +1,10 @@
 # Cryptography in Rust for Hackers
 
-Objectives:
+A large part of the documentation on cryptography is written by academics for other academics to read.
 
 Explain introductory number theory and abstract algebra, symmetric encryption (block and stream cipher), asymmetric encryption (RSA, Elliptic curve), hashes, signatures, key exchange, polynomial commitments, SNARKs and STARKs.
 
 XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed25519.
-
-## Table of Contents
-
-1. Mathematics and Computation 
-- Models of Computation (INTRODUCTION TO THEORETICAL COMPUTER SCIENCE BOAZ BARAK)
-    - Von Neumann
-    - Turing Machines
-    - Lambda Calculus
-- Computation
-- P vs NP
-- Halting Problem
-- PCP
-
-2. Number theory and Abstract Algebra
-- Integers
-- Modular arithmetic
-- Groups
-- Rings
-- Rings + Modular arithmetic
-- Fields
-- Elliptic curves
-- Fast multiplication algorithms:
-    - Karatsuba
-    - Toom
-    - FFT
-    - Parallelization
-    - The discrete log problem
-- Primality testing
-    - Euler's theorem
- 
-3. Symmetric encryption
-
-4. Asymmetric encryption 
-
-5. Hash functions
-
-6. Pseudorandom Number Generator (PRNG)
-
-7. Signatures
-
-8. Key Exchange
-
-9. Polynomial commitments and Elliptic curve pairings
-
-10. SNARKs
-
-11. Arithmetization
-- R1CS
-
-12. STARKs
 
 ## References
 - [ingopedia](https://github.com/ingonyama-zk/ingopedia)
