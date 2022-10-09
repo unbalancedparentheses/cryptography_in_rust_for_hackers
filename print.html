@@ -622,6 +622,12 @@ Polynomial addition has an identity element (the polynomial whose coefficients a
 <p>We can also think of polynomials as functions. If we specify the value of \( x \), we can evaluate the expression and obtain a result. We say that \( x_0 \) is a root of a polynomial if \( p(x_0)=0 \). The fundamental theorem </p>
 <p>Polynomials will play an important role in the development of zk-SNARKs. Elliptic curves can be seen as the set of zeros of some polynomial in two variables.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="randomness"><a class="header" href="#randomness">Randomness</a></h1>
+<h2 id="pseudorandom-number-generators"><a class="header" href="#pseudorandom-number-generators">Pseudorandom number generators</a></h2>
+<h2 id="introduction-1"><a class="header" href="#introduction-1">Introduction</a></h2>
+<h2 id="applications-1"><a class="header" href="#applications-1">Applications</a></h2>
+<h2 id="information-entropy"><a class="header" href="#information-entropy">Information Entropy</a></h2>
+<h2 id="security-requirements-for-cprng"><a class="header" href="#security-requirements-for-cprng">Security requirements for CPRNG</a></h2>
+<h2 id="bad-uses-of-prng"><a class="header" href="#bad-uses-of-prng">Bad uses of PRNG</a></h2>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="symmetric-encryption"><a class="header" href="#symmetric-encryption">Symmetric encryption</a></h1>
 <p>Encryption has been the main application of cryptography for a very long time. Its goal is to transform map a message into another one and send it through an insecure channel, such that only the intended parties (who know all the elements necessary to reverse the transformation) can read it while looking like absolute nonsense to everybody else. For example, suppose that you are a general during a war and you need to communicate the battle plan to your reinforcement battalions (which are still far from you) and launch a surprise attack at the precise moment. If you sent some messenger with a letter containing the plans written in plain form, then anyone getting the letter would know your plans and act in consequence; what's more, the messenger could betray you and exchange that information with your enemies and thwart your masterminded tactic.</p>
 <p>Encryption uses an algorithm called cipher and some key to change the message into a random-looking text. More precisely, it takes plaintext and, through some mathematical computations, outputs a ciphertext. The cyphertext can only be decrypted if the key is known. In modern encryption, only the key is secret; the details of the encryption algorithm are publicly known. This is in agreement with Kerkhoff's principle, which states that, in a cryptographic system, only the key should be secret. In older times, people tried to hide the message by using unknown algorithms or strategies, hoping that the enemy would not be able to figure out the secret; this is known as security through obscurity. Needless to point out, this strategy has failed numerous times with catastrophic consequences.</p>
@@ -757,7 +763,7 @@ This is expected: the addition of two odd or two even numbers is always even, wh
 where \( &lt;&lt;&lt;n \) denotes an \( n \)-bit rotation towards the left.</p>
 <p>The ChaCha state is composed of 16 32-bit words: the first four are constants; the next 8 correspond to the key, followed by the counter and the nonce.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="asymmetric-encryption"><a class="header" href="#asymmetric-encryption">Asymmetric encryption</a></h1>
-<h2 id="introduction-1"><a class="header" href="#introduction-1">Introduction</a></h2>
+<h2 id="introduction-2"><a class="header" href="#introduction-2">Introduction</a></h2>
 <h2 id="rsa-cryptosystem"><a class="header" href="#rsa-cryptosystem">RSA cryptosystem</a></h2>
 <h3 id="math-fundamentals"><a class="header" href="#math-fundamentals">Math fundamentals</a></h3>
 <h3 id="key-generation"><a class="header" href="#key-generation">Key generation</a></h3>
@@ -987,8 +993,8 @@ If we let \( x_1=x_2 \) and \( y_1=y_2 \) we get the expressions for point doubl
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-discrete-logarithm-problem"><a class="header" href="#the-discrete-logarithm-problem">The discrete logarithm problem</a></h1>
 <p>Given a group, we can apply the operation repeatedly on a point \( g \) to get to a point \( P \), that is \( g^k=g\times g\times g\times ... \times g=P \). For example, in \( (\mathbb{Z}/7\mathbb{Z})^\star \), \( 5 \) generates all the elements by successive multiplications with itself. We could then ask how many times \( x \) should we multiply \( 5 \) with itself to get to \( 3 \), that is, \( 5^x\equiv 3 \pmod{7} \). Since we know that the order of the group is \( 6 \), we should only concern ourselves with numbers \( 0-6 \). If we look above or try all combinations, \( 5^5\equiv 3 \pmod{7} \) so \( x=5 \). Similarly, if we look for \( y \) such that \( 5^y\equiv 4 \pmod{7} \), we get \( y=2 \). The problem of finding \( x \) so that \( g^k=P \) is known as the discrete logarithm problem (in number theory, \( x \) and \( y \) are known as indices). We quickly see that this logarithm works quite differently from the common logarithm on the real numbers (though the idea is the same, given \( y \), find \( x \) such that \( e^x=y \)). There is no obvious pattern, it is not increasing and if we had to search over a large set, it could be really daunting. Many cryptographic systems rely on the hardness of this problem over a finite cyclic group.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hash-functions"><a class="header" href="#hash-functions">Hash functions</a></h1>
-<h2 id="introduction-2"><a class="header" href="#introduction-2">Introduction</a></h2>
-<h2 id="applications-1"><a class="header" href="#applications-1">Applications</a></h2>
+<h2 id="introduction-3"><a class="header" href="#introduction-3">Introduction</a></h2>
+<h2 id="applications-2"><a class="header" href="#applications-2">Applications</a></h2>
 <h2 id="secure-hash-functions"><a class="header" href="#secure-hash-functions">Secure Hash Functions</a></h2>
 <p>Definition of collision resistant hash function, unpredictability, preimage resistance, finding collisions, etc</p>
 <h2 id="commitments-binding-and-hiding"><a class="header" href="#commitments-binding-and-hiding">Commitments. Binding and hiding</a></h2>
@@ -1000,12 +1006,7 @@ If we let \( x_1=x_2 \) and \( y_1=y_2 \) we get the expressions for point doubl
 <h2 id="sha-3"><a class="header" href="#sha-3">SHA-3</a></h2>
 <h2 id="blake2"><a class="header" href="#blake2">Blake2</a></h2>
 <h2 id="poseidon"><a class="header" href="#poseidon">Poseidon</a></h2>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="pseudorandom-number-generators"><a class="header" href="#pseudorandom-number-generators">Pseudorandom number generators</a></h1>
-<h2 id="introduction-3"><a class="header" href="#introduction-3">Introduction</a></h2>
-<h2 id="applications-2"><a class="header" href="#applications-2">Applications</a></h2>
-<h2 id="information-entropy"><a class="header" href="#information-entropy">Information Entropy</a></h2>
-<h2 id="security-requirements-for-cprng"><a class="header" href="#security-requirements-for-cprng">Security requirements for CPRNG</a></h2>
-<h2 id="bad-uses-of-prng"><a class="header" href="#bad-uses-of-prng">Bad uses of PRNG</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="pseudorandom-number-generators-1"><a class="header" href="#pseudorandom-number-generators-1">Pseudorandom number generators</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="digital-signatures"><a class="header" href="#digital-signatures">Digital signatures</a></h1>
 <h2 id="introduction-4"><a class="header" href="#introduction-4">Introduction</a></h2>
 <h2 id="applications-3"><a class="header" href="#applications-3">Applications</a></h2>
