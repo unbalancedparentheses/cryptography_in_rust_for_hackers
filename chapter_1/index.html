@@ -136,31 +136,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="mathematics-and-computation"><a class="header" href="#mathematics-and-computation">Mathematics and Computation</a></h1>
-<blockquote>
-<p>Programs are proofs
-The development of type-dependent programming languages originated from the Curry-Howard correspondence [11]. Essentially, it outlines a correspondence between mathematics (intuitionistic logic) and programming languages (type theory) [18]. It derives its name from the fact that it was first observed by Haskell Curry (in 1934 [19]) and later refined by William Alvin Howard (in 1969 [20])[21]. At the beginning of the 1930s, Curry realized the similarity between axioms of implicational propositional calculus P ⊃ Q ⊃ P (P ⊃ Q ⊃ R) ⊃ (P ⊃ Q) ⊃ P ⊃ R and types of SKI combinator calculus (in particular combinators S and K) [11] A → B → A (A → B → C) → (A → B) → A → C Other similarities started to be discovered which resulted in the Curry-Howard correspondence. The Curry-Howard correspondence states on a high level that each proposition of intuitionistic logic can be converted into a type in the programming language and vice versa [21]. It results that:
-types are propositions<br><br>
-It goes further, as for each provable proposition there exists a program with a corresponding type and vice versa [21]. Thus:
-programs are proofs<br><br>
-Hence, it is possible to prove a mathematical theorem using a computer (which is referred to as computer-assisted proof). One notorious example is the proof of the four color theorem [22]. Thus, by using dependent types to encode propositions as types, the resulting program can be used as a proof. As the compiler will type check the program, it only needs to compile to be proven true [18]. In a way, by type checking your program the compiler will prove that your program verifies certain theorems [22]. Thus, dependently typed programs are in essence “proof carrying code” [17].</p>
-</blockquote>
-<h2 id="pcp"><a class="header" href="#pcp">PCP</a></h2>
-<blockquote>
-<p>Classical computer science has shown that every language in NP has a Probabilistically Checkable Proof (PCP), where a computational resource-restricted verifier can quickly confirm membership in that language using only a few queries of a specially-constructed proof. Less formally, we can interpret this as &quot;every true statement that has a reasonably sized proof, also has a reasonably sized proof whose correctness can be checked (with high probability) by only looking at a small number of locations of the proof.&quot;<br><br>
-This kind of &quot;proof&quot; radically revises the traditional notion of a mathematical proof. Traditional mathematical proofs, as most of us are taught in school, are &quot;fragile&quot;: even a single incorrect or logically invalid step is enough to make the entire proof invalid. Not carefully checking every single step of a proof seemingly allows faulty &quot;proofs&quot; of false statements. However, PCPs show that not much has to be sacrificed: in exchange for allowing only a small probability of accepting a &quot;proof&quot; of a false statement, we can write robust proofs: ones whose correctness becomes almost certainly guaranteed by inspecting only a small random part.<br><br>
-In the cryptographic setting, SNARKs have been developed as a &quot;succinct&quot; version of a PCP, for a specific kind of statement: proof of knowledge. In a SNARK, a computationally-restricted prover can convince a computationally-restricted verifier that the prover knows a traditional proof of some true statement (formally, knows a witness for a member of a language in NP), using an extremely short &quot;proof&quot; (typically polylogarithmic in the original proof/witness, thus shrinking the traditional proof by a significant amount)<br><br>
-PCPs are typically constructed using local testing of low degree polynomials, and so are most SNARKs. Since low degree polynomials have good error correcting properties, only a few queries are needed to verify that the SNARK could only (plausibly) have been constructed by a prover with knowledge of a witness to the statement being proven. The connection between PCPs and low degree polynomials is incredibly subtle, but at its most abstract level, low degree polynomials are completely characterized by a small number of points; &quot;knowing&quot; the evaluations of a low degree polynomial at a few random points is enough to &quot;know&quot; the entire polynomial. This ultimately will allow the correctness of a PCP to be determined by &quot;knowing&quot; a small number of random parts of the PCP.</p>
-</blockquote>
-<p>Source: <a href="https://research.metastate.dev/demystifying-supersonic-part-1/#">Demystifying Supersonic: Part I</a></p>
-<h2 id="references"><a class="header" href="#references">References</a></h2>
-<ul>
-<li><a href="https://youtu.be/IOiZatlZtGU">Propositions as Types - Philip Wadler</a></li>
-<li><a href="https://www.p%C3%A9drot.fr/slides/inria-junior-02-15.pdf">The Curry-Howard isomorphism for dummies - Pierre-Marie Pédrot</a></li>
-<li><a href="https://cs3110.github.io/textbook/chapters/adv/curry-howard.html">The Curry-Howard Correspondence</a></li>
-<li><a href="https://research.metastate.dev/a-gentle-introduction-to-dependent-types/">A Gentle Introduction to Dependent Types</a></li>
-<li><a href="https://max.fan/posts/hacking-python-types/">Hacking Python’s Type System for Proof Checking</a></li>
-</ul>
+                        <h1 id="theoretical-computer-science"><a class="header" href="#theoretical-computer-science">Theoretical Computer Science</a></h1>
 
                     </main>
 
