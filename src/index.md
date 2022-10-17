@@ -21,6 +21,7 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - https://raw.githubusercontent.com/crypto101/crypto101.github.io/master/Crypto101.pdf
 - [Cryptobook] (https://crypto.stanford.edu/~dabo/cryptobook/BonehShoup_0_5.pdf)
 - Tom Stuart Understanding computation
+- [Moonmath] https://github.com/LeastAuthority/moonmath-manual/raw/main/main-moonmath.pdf
 
 ### Number Theory 
 - https://crypto.stanford.edu/pbc/notes/numbertheory/
@@ -145,3 +146,29 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - http://numbers.computation.free.fr/Constants/Algorithms/fft.html
 - https://cr.yp.to/papers/pippenger-20020118-retypeset20220327.pdf
 - https://cp-algorithms.com/algebra/fft.html#two-stripes
+- https://youtu.be/IOiZatlZtGU
+- https://cs3110.github.io/textbook/chapters/adv/curry-howard.html
+- https://www.pédrot.fr/slides/inria-junior-02-15.pdf
+- https://vitalik.ca/general/2022/03/14/trustedsetup.html
+- https://github.com/Entropy1729/bft-consensus-poc/
+- https://blog.cryptographyengineering.com/2011/09/29/what-is-random-oracle-model-and-why-3/
+- https://blog.cryptographyengineering.com/2017/01/21/zero-knowledge-proofs-an-illustrated-primer-part-2/
+- https://blog.cryptographyengineering.com/2014/11/27/zero-knowledge-proofs-illustrated-primer/
+- https://blog.cryptographyengineering.com/
+- https://eprint.iacr.org/2006/372.pdf
+- https://github.com/DelphinusLab/zkWasm.git
+- https://twitter.com/SalomonCrypto/status/1581314867243327489?s=20&t=SL7BbhF99hyqKHo1HinAbQ
+- https://twitter.com/BTC_Archive/status/1580857619664670725
+- https://arxiv.org/pdf/2210.00264.pdf
+- https://www.cryptologie.net/article/507/the-missing-explanation-of-zk-snarks/
+- https://a16zcrypto.com/measuring-snark-performance-frontends-backends-and-the-future/
+- https://www.quantamagazine.org/mathematicians-discover-the-perfect-way-to-multiply-20190411/
+- https://github.com/LeastAuthority/moonmath-manual/raw/main/main-moonmath.pdf
+- https://xiaohuiliu.medium.com/how-plonk-works-part-2-1072dcd7634a
+- https://xiaohuiliu.medium.com/how-plonk-works-part-1-bc8050f4805e
+- https://delendum.xyz/2022/10/12/a-brief-taxonomy-of-circuit-compilation-strategies.html
+- https://eprint.iacr.org/2013/279.pdf
+- https://eprint.iacr.org/2021/322
+- https://arxiv.org/abs/2112.01472
+- https://blog.cryptographyengineering.com/2017/01/21/zero-knowledge-proofs-an-illustrated-primer-part-2/
+- https://twitter.com/delendumv/status/1581068663448555521
