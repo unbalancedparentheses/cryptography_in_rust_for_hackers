@@ -54,6 +54,11 @@ Sponge constructions have two different phases: absorbing and squeezing. The int
 * In the squeezing phase, take the first \\( r \\) bits of the internal state; if the length is less than the desired hash length, \\( l_h \\), apply recursively the permutation function and extract the next \\( r \\) bits, until the length is greater \\( l_h \\).
 * If the resulting bit string is larger than \\( l_h \\), truncate the result to \\( l_h \\).
 
+## Merkle trees
+
+We mentioned that hashes can be used to assure the authenticity of a file. This enables the use of remote storage since we can trust a large file to a server and verify that it has not been changed or replaced by checking its hash value, which we can store. If we have \\( N \\) files, a naïve solution is to have \\( N \\) hashes, but this has the problem that the amount of information scales linearly with the number of files (that is, we have one hash for each file). A better way to do this is through a Merkle tree: the leaves are the hashes of the files and these are combined to obtain other leaves. A picture of a Merkle tree is shown in figure .
+
+Say we have \\( 2^N \\) hashes, \\( h_1, h_2, h_3,...h_{2^N} \\). We can compute \\( 2^{N-1} \\) hashes from those, by taking the hash value of a pair, \\( h_j^1=H(h_j,h_{j+1}) \\), reducing the number of necessary hashes. We can proceed further, \\( h_j^2=H(h_j^1,h^1_{j+1}) \\), until we get to only one hash value, which is known as the root. We can check the integrity of the whole storage just by looking at the root. This has found applications in blockchains, too.
 
 ## Applications
 
