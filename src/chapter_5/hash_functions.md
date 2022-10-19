@@ -60,6 +60,16 @@ We mentioned that hashes can be used to assure the authenticity of a file. This 
 
 Say we have \\( 2^N \\) hashes, \\( h_1, h_2, h_3,...h_{2^N} \\). We can compute \\( 2^{N-1} \\) hashes from those, by taking the hash value of a pair, \\( h_j^1=H(h_j,h_{j+1}) \\), reducing the number of necessary hashes. We can proceed further, \\( h_j^2=H(h_j^1,h^1_{j+1}) \\), until we get to only one hash value, which is known as the root. We can check the integrity of the whole storage just by looking at the root. This has found applications in blockchains, too.
 
+## Commitments
+
+A commitment scheme allows one party to pledge to a certain message \\( m \\) (in truth, it can be almost anything, including functions or polynomials) by providing a commitment \\( \mathrm{com} \\), with the chance of later revealing it. We can think of the commitment scheme as a type of envelope, where we seal some message, store it safely and open it later to see whether the message was right. Anyone can see \\( \mathrm{com} \\), but nobody (except the sender) could learn its content before the right time. A commitment scheme should satisfy two properties:
+* Hiding: the commitment does not reveal anything about the message.
+* Binding: it is infeasible for the committer to output a different message than the one originally used in the commitment.
+
+We can see that cryptographic hash functions and their properties are well-suited for commitment schemes. The hiding property is satisfied by the fact that the hash of an input looks random and the function is one-way. Collision resistance guarantees that it is infeasible to find \\( m,m^\prime\\) such that they hash to the same value. A simple commitment would thus be \\( \mathrm{com}=H(m) \\). The problem with this strategy is that, if the attacker has some information on the message, he can conduct a brute-force search over all possibilities and find the original message (this could be the case where we want to bet on the tossing of a coin and the chances are heads or tails).
+
+A better way to commit would be to incorporate some randomness. We select at random a bit string \\( r \\) of length \\( n \\) and take the hash of the concatenation of \\( m \\) and \\( r \\): \\( \mathrm{com}=H(m\vert \vert r) \\).
+
 ## Applications
 
 ## Secure Hash Functions
