@@ -1,5 +1,14 @@
 # Hash functions
 
+## Objectives
+
+At the end of this chapter, the reader should:
+* Learn what a hash function is and its properties.
+* Become acquainted with different hash functions in use and their advantages and disadvantages.
+* Understand the working principles behind hash functions in current use.
+* Understand the different uses of hash functions.
+* Know different types of attacks that can be performed on hash functions.
+
 ## Introduction
 
 Hash functions are one of the most versatile tools in cryptography. They have many applications in signatures, integrity verification, message authentication, public key encryption, and commitments, among many others. For example, they can be used in storage systems or in criminal cases to detect whether a file has been modified or not. Git uses hashes to identify files in a repository. Bitcoin uses hash functions in its proof of work.
@@ -20,6 +29,10 @@ The main property of secure hash functions is called preimage resistance. Given 
 
 There are two types of preimage resistance, called first and second preimage resistance. The former states that it is (nearly) impossible to find a message \\( m \\) that hashes to \\( h \\), while the latter indicates that if we have have \\( h_1=H(m_1) \\), it is infeasible to find \\( m_2\neq m_1 \\) such that \\( H(m_2)=h_1\\). If we find such \\( m_2 \\), we say that we have found a collision for \\( h_1 \\). We can see that if a hash function is second preimage resistant, then it also has first preimage resistance. 
 
+The other property is collision resistance: it is computationally infeasible to find two messages \\( m_1,m_2 \\) which hash to the same value, that is, \\( H(m_1)=H(m_2) \\). We can see that if a hash function is collision-resistant, then it is second preimage resistant.
+
+These properties mean that an adversary cannot modify or replace data without changing its hash value. Whereas collision resistance means that the attacker cannot create two messages with the same hash, second preimage resistance indicates that given a message, it is not possible to create a different one with the same hash.
+
 ## Construction of hash functions
 
 The easiest way to hash a message is to split it into pieces and process each of them in succession with a similar algorithm. This is known as iterative hashing and there are two main groups:
@@ -28,7 +41,19 @@ The easiest way to hash a message is to split it into pieces and process each of
 
 The Merkle-Damgård construction splits the message into blocks of the same size and combines them with an internal state, using compression functions. For example, given \\( m \\), we split it into blocks \\( m_1,m_2,...,m_k \\) (typically, 512 or 1024 bits) and we start with an initialization vector \\( h_0 \\). If the message cannot be split into blocks of the desired size, we just pad the message. We take \\( m_1 \\) and \\( h_0 \\) and give them to the compression function \\( f \\), yielding \\( h_1=f(m_1,h_0) \\). We then give \\( h_1 \\) and \\( m_2 \\) and calculate \\( h_2=f(m_2,h_1) \\) and continue recursively until we get the hash \\( h \\), \\( h=h_k=f(m_k,h_{k-1}) \\).
 
-Compression functions can be built from block ciphers. One common construction is the Davies-Meyer construction: we take \\( h_{k-1} \\) as the plaintext and encrypt it using \\( m_k \\) as the symmetric key, \\( e=\mathrm{encrypt}(h_{k-1},m_k) \\) and we then perform an XOR operation, \\( h_k=h_{k-1} \oplus e\\). The XOR is necessary for security because the block cipher can be inverted.
+Compression functions can be built from block ciphers. One common construction is the Davies-Meyer construction: we take \\( h_{k-1} \\) as the plaintext and encrypt it using \\( m_k \\) as the symmetric key, \\( e=\mathrm{encrypt}(h_{k-1},m_k) \\) and we then perform an XOR operation, \\( h_k=h_{k-1} \oplus e\\). The XOR is necessary for security because the block cipher can be inverted: you can take the final hash, decrypt it using the last block as key and get \\( h_{k-1} \\) and so on.
+
+Sponge functions perform bit mixing using XOR operations between message blocks and an internal state. Sponge functions are more versatile than compression functions and have found applications not only in hashing but also as deterministic random bit generators, authenticated ciphers, and pseudorandom functions.
+
+Sponge constructions have two different phases: absorbing and squeezing. The internal state consists of two parts: the rate, \\( r \\), and the capacity, \\( c \\). The capacity determines the security level of the scheme and prevents length extension attacks. The working principle is as follows:
+* Initialize the internal state of \\( r+c \\) bits, \\( r_0, c_0 \\).
+* The message is padded so that it can be split in equal blocks \\( m_1,m_2,...m_k \\) of \\( r \\) bits.
+* Perform \\( i_1=m_1 \oplus r_0 \\)
+* Apply the permutation function to \\( i_1, c_0 \\) to obtain the next internal state, \\( r_1 c_1 \\).
+* Take the next block \\( m_{k+1} \\), calculate \\( i_{k+1}=m_{k+1}\oplus r_k \\) and use the permutation function on \\( i_{k+1},c_k \\) to find the next internal state, \\( r_{k+1},c_{k+1}\\). This is the absorbing phase.
+* In the squeezing phase, take the first \\( r \\) bits of the internal state; if the length is less than the desired hash length, \\( l_h \\), apply recursively the permutation function and extract the next \\( r \\) bits, until the length is greater \\( l_h \\).
+* If the resulting bit string is larger than \\( l_h \\), truncate the result to \\( l_h \\).
+
 
 ## Applications
 
