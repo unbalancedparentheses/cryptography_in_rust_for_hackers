@@ -56,7 +56,8 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - [Curated_list] (https://github.com/matter-labs/awesome-zero-knowledge-proofs)
 - [zcash] (https://z.cash/technology/zksnarks/)
 - [Missing_explanation_snark] (https://www.cryptologie.net/article/508/the-missing-explanation-of-zk-snarks-part-2/)
-- [Recursive Zero-Knowledge Proofs: A Comprehensive Primer](https://www.michaelstraka.com/posts/recursivesnarks/)
+- [Recursive Zero-Knowledge Proofs: A Comprehensive Primer](https://www.michaelstraka.com/posts/recursivesnarks/]
+- [HyperPlonk] (https://eprint.iacr.org/2022/1355.pdf)
 
 #### PLONK
 - [PLONK by Hand (Part 1: Setup)](https://research.metastate.dev/plonk-by-hand-part-1/)
@@ -172,3 +173,12 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - https://arxiv.org/abs/2112.01472
 - https://blog.cryptographyengineering.com/2017/01/21/zero-knowledge-proofs-an-illustrated-primer-part-2/
 - https://twitter.com/delendumv/status/1581068663448555521
+- https://github.com/thor314/pazk
+- https://twitter.com/salomoncrypto/status/1580677281474699264
+- https://twitter.com/salomoncrypto/status/1581695845023350785
+- https://hackernoon.com/trade-it-like-it-is-hot-a-review-of-popular-zk-projects-and-the-zero-knowledge-proof-technology
+- http://www.zeroknowledgeblog.com/index.php/the-pinocchio-protocol
+- https://medium.com/aztec-protocol/aztecs-zk-zk-rollup-looking-behind-the-cryptocurtain-2b8af1fca619
+- https://github.com/worldcoin/awesome-zkml
+- https://twitter.com/salomoncrypto/status/1583705993300492288
+- https://xiaohuiliu.medium.com/zk-snarks-on-bitcoin-239d96d182bd
