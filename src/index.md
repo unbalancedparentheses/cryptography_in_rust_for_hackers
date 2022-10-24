@@ -182,3 +182,9 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - https://github.com/worldcoin/awesome-zkml
 - https://twitter.com/salomoncrypto/status/1583705993300492288
 - https://xiaohuiliu.medium.com/zk-snarks-on-bitcoin-239d96d182bd
+- https://www.espressosys.com/blog/veri-zexe-decentralized-private-computation-with-universal-setup
+- https://eprint.iacr.org/2022/802
+- https://github.com/fluidex/awesome-plonkhttps://eprint.iacr.org/2020/499.pdf
+- https://www.iacr.org/cryptodb/data/paper.php?pubkey=30562
+- https://github.com/ZK-Garage/plonk/blob/master/plonk-book/src/chapter_2.md
+- https://github.com/arielgabizon/Lectures
