@@ -53,10 +53,10 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - [KZG] (https://dankradfeist.de/ethereum/2020/06/16/kate-polynomial-commitments.html)
 - [Performance] (https://a16zcrypto.com/measuring-snark-performance-frontends-backends-and-the-future/)
 - [Spartan] (https://github.com/microsoft/Spartan)
-- [Curated_list] (https://github.com/matter-labs/awesome-zero-knowledge-proofs)
+- [Matter Labs Awesome ZKP] (https://github.com/matter-labs/awesome-zero-knowledge-proofs)
 - [zcash] (https://z.cash/technology/zksnarks/)
 - [Missing_explanation_snark] (https://www.cryptologie.net/article/508/the-missing-explanation-of-zk-snarks-part-2/)
-- [Recursive Zero-Knowledge Proofs: A Comprehensive Primer](https://www.michaelstraka.com/posts/recursivesnarks/]
+- [Recursive Zero-Knowledge Proofs: A Comprehensive Primer](https://www.michaelstraka.com/posts/recursivesnarks/)
 - [HyperPlonk] (https://eprint.iacr.org/2022/1355.pdf)
 
 #### PLONK
