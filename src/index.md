@@ -19,9 +19,9 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - Applied Cryptography Book by Bruce Schneier
 - Pairings for Beginners, Craig Costello <https://static1.squarespace.com/static/5fdbb09f31d71c1227082339/t/5ff394720493bd28278889c6/1609798774687/PairingsForBeginners.pdf>
 - https://raw.githubusercontent.com/crypto101/crypto101.github.io/master/Crypto101.pdf
-- [Cryptobook] (https://crypto.stanford.edu/~dabo/cryptobook/BonehShoup_0_5.pdf)
+- [Cryptobook](https://crypto.stanford.edu/~dabo/cryptobook/BonehShoup_0_5.pdf)
 - Tom Stuart Understanding computation
-- [Moonmath] https://github.com/LeastAuthority/moonmath-manual/raw/main/main-moonmath.pdf
+- [Moonmath](https://github.com/LeastAuthority/moonmath-manual/raw/main/main-moonmath.pdf)
 
 ### Number Theory 
 - https://crypto.stanford.edu/pbc/notes/numbertheory/
