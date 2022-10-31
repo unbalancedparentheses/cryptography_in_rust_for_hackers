@@ -19,9 +19,9 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - Applied Cryptography Book by Bruce Schneier
 - Pairings for Beginners, Craig Costello <https://static1.squarespace.com/static/5fdbb09f31d71c1227082339/t/5ff394720493bd28278889c6/1609798774687/PairingsForBeginners.pdf>
 - https://raw.githubusercontent.com/crypto101/crypto101.github.io/master/Crypto101.pdf
-- [Cryptobook] (https://crypto.stanford.edu/~dabo/cryptobook/BonehShoup_0_5.pdf)
+- [Cryptobook](https://crypto.stanford.edu/~dabo/cryptobook/BonehShoup_0_5.pdf)
 - Tom Stuart Understanding computation
-- [Moonmath] https://github.com/LeastAuthority/moonmath-manual/raw/main/main-moonmath.pdf
+- [Moonmath](https://github.com/LeastAuthority/moonmath-manual/raw/main/main-moonmath.pdf)
 
 ### Number Theory 
 - https://crypto.stanford.edu/pbc/notes/numbertheory/
@@ -53,10 +53,11 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - [KZG] (https://dankradfeist.de/ethereum/2020/06/16/kate-polynomial-commitments.html)
 - [Performance] (https://a16zcrypto.com/measuring-snark-performance-frontends-backends-and-the-future/)
 - [Spartan] (https://github.com/microsoft/Spartan)
-- [Curated_list] (https://github.com/matter-labs/awesome-zero-knowledge-proofs)
+- [Matter Labs Awesome ZKP] (https://github.com/matter-labs/awesome-zero-knowledge-proofs)
 - [zcash] (https://z.cash/technology/zksnarks/)
 - [Missing_explanation_snark] (https://www.cryptologie.net/article/508/the-missing-explanation-of-zk-snarks-part-2/)
 - [Recursive Zero-Knowledge Proofs: A Comprehensive Primer](https://www.michaelstraka.com/posts/recursivesnarks/)
+- [HyperPlonk] (https://eprint.iacr.org/2022/1355.pdf)
 
 #### PLONK
 - [PLONK by Hand (Part 1: Setup)](https://research.metastate.dev/plonk-by-hand-part-1/)
@@ -172,3 +173,18 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - https://arxiv.org/abs/2112.01472
 - https://blog.cryptographyengineering.com/2017/01/21/zero-knowledge-proofs-an-illustrated-primer-part-2/
 - https://twitter.com/delendumv/status/1581068663448555521
+- https://github.com/thor314/pazk
+- https://twitter.com/salomoncrypto/status/1580677281474699264
+- https://twitter.com/salomoncrypto/status/1581695845023350785
+- https://hackernoon.com/trade-it-like-it-is-hot-a-review-of-popular-zk-projects-and-the-zero-knowledge-proof-technology
+- http://www.zeroknowledgeblog.com/index.php/the-pinocchio-protocol
+- https://medium.com/aztec-protocol/aztecs-zk-zk-rollup-looking-behind-the-cryptocurtain-2b8af1fca619
+- https://github.com/worldcoin/awesome-zkml
+- https://twitter.com/salomoncrypto/status/1583705993300492288
+- https://xiaohuiliu.medium.com/zk-snarks-on-bitcoin-239d96d182bd
+- https://www.espressosys.com/blog/veri-zexe-decentralized-private-computation-with-universal-setup
+- https://eprint.iacr.org/2022/802
+- https://github.com/fluidex/awesome-plonkhttps://eprint.iacr.org/2020/499.pdf
+- https://www.iacr.org/cryptodb/data/paper.php?pubkey=30562
+- https://github.com/ZK-Garage/plonk/blob/master/plonk-book/src/chapter_2.md
+- https://github.com/arielgabizon/Lectures
