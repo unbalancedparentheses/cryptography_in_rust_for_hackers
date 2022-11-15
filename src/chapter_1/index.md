@@ -78,12 +78,64 @@ i
 * \\( B \\) is the symbol that represents the blank. 
 * \\(q_a\\)  is the set of acceptance states. 
 
+
+#### Universal Turing Machine
+
+We have seen, so far, that a Turing Machine is an abstract machine model consisting of a tape divided into cells. Each cell initially contains a blank symbol. Before it starts to run, the tape must be loaded with a specific input. Finally, the machine starts running and can achieve three final states:
+
+* accept the Input
+* reject the Input 
+* continue running on a loop.
+
+A Universal Turing Machine U is a T.M.  U  that accepts as Input a tuple:
+<M, I>, where M is a Turing machine description, and I is its Input. In other words, a Turing machine U reads the tape, interprets all the states of M, and prints M's output should print. 
+
+In his article, Turing describes the Universal Machine as follows:
+      
+"It is possible to invent a single machine which can be used to compute any computable sequence. If this machine M is  supplied with a tape on the beginning of which is written the S.D of some computing machine . At, then It will compute the same sequence as it. " 
+
+S. D. stands for Standard Description.
+
+
+In other words, a universal Turing machine is an interpreter, a general-purpose computer!
+
+
 #### Halting Problem
-  
+The Halting Problem
+
+Due to the existence of a Universal Turing Machine, we can propose HALT=<M, x> where M is a T. M., and M halt with the input x, UTM input. The halting problem is based on whether a U.T.M can determine if M will halt having x as input in a finite number of steps. 
+The proof of HALT can be achieved by assuming that HALT is computable. In that case, exist a UTM U defined as:
+
+\\[
+\begin{equation}
+ 	   U_i(M_i,x)=
+ 	   \begin{cases}
+  	       halt & \text{if $M_i$ halts on $x$ } \\\\ \\\\  
+  	       loop & \text{if $M_i$ loops on $x$}
+ 	   \end{cases}
+\end{equation}
+\\]
+As we did in the Entscheidungsproblem, we will make some changes on \\( U_i \\) to obtain \\( U_d \\), it will receive as input \\( M_i, D.N. of M_i \\), where D.N. of \\( M_i \\) stands for Description Number. This change makes that  \\( U_i \\) input is a T.M. and its description:
+
+\\[
+    \begin{equation}
+ 	U_d(M_i,D.N of M_i)=
+ 	 \begin{cases}
+      halt & \text{if $M_i$ does not halts on D.N of M_i } \\\\ \\\\
+  	  loop & \text{if $M_i$ alts on D.N of $M_i$ $x$}
+\end{cases}
+	\end{equation}
+\\]
+
+Note:  each Turing machine has a unique Description Number.
+
+Here is where the contradiction arises if \\( M_i \\) is \\( U_d \\):
+ if \\( U_d \\) does not halt it means that \\( U_d \\)  halts.
+if \\( U_d \\) halts it means that \\( U_d \\) does no halts.
+There not exists a Turing Machin capable of determining whether or not a Turing machine will halt on an Input x.
 
 ### Alonso Church: Lambda Calculus
- 
- 
+
 ### Von Neuman: Universal Stored-programmed computing machine
  
  
