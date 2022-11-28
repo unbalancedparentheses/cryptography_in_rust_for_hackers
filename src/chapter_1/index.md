@@ -136,6 +136,21 @@ There not exists a Turing Machin capable of determining whether or not a Turing 
 
 ### Alonso Church: Lambda Calculus
 
+In 1936, Alonzo Chuch, in his paper called "An Unsolvable Problem of Elementary Number Theory."  He intended to find a good definition of what "effective calculability" was. He proposed a new notation for functions in another article called "A set of postulates for the foundation of logic." The objective of this new notation was to remove ambiguity from the classical mathematical functions. He introduced the \\( \lambda \\)-Calculus.  There are three important components:
+
+Variable: a symbol, such as x.
+Function or Abstraction:  \\( \lambda x[M] \\) in its original definition, in a modern form of its, is \\( \lambda x.M \\), where the function has a parameter x, and a body M commonly called \\( \lambda \\)-term. 
+Application: the function is called by using a function, a variable, or a value as an argument.
+Examples:
+
+* \\( \lambda x.x \\) this lambda function is equivalent to \\( f(x)=x \\)
+* \\( \lambda x.x^2+5 \\) this lambda function is equivalent to \\( f(x)=x^2+5 \\)
+* \\( \lambda x.x+y \\) this lambda function is equivalent to \\( f(x)=x+y \\). 
+
+In this last example \\( x \\) is called bounded variable because is in the function body; and \\(y \\) is called free variable. 
+
+
+
 ### Von Neuman: Universal Stored-programmed computing machine
  
  
@@ -148,6 +163,8 @@ There not exists a Turing Machin capable of determining whether or not a Turing 
 #### NP Complete Problems
  
 ### References
+
+- Hopcroft, John E., Rajeev Motwani, and Jeffrey D. Ullman. "Introduction to automata theory, languages, and computation." Acm Sigact News 32.1 (2001): 60-65.
  
 - Copeland, B. Jack, ed. "The essential turing". Clarendon Press, 2004.
 
