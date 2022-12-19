@@ -45,7 +45,7 @@
     - [Stream and block ciphers](./chapter_3/stream_and_block.md)
     - [AES](./chapter_3/aes.md)
     - [ChaCha20 and XChaCha20](./chapter_3/chacha20.md)
-    - [MiMC]
+    - [MiMC]()
     - [Rescue and Vision]()
    
 - [Asymmetric encryption](./chapter_4/asymmetric_encryption.md)
