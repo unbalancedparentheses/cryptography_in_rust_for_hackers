@@ -2,14 +2,14 @@
 
 [Preface](./index.md)
 
-- [Introduction]
-    - [Kerckhoff's Principle]
-    - [Symmetric encryption]
-    - [Secret sharing]
-    - [Asymmetric encryption]
-    - [Zero Knowledge Proofs]
-    - [Fully Homomorphic Encryption]
-    - [Secure Multi-Party Computation]
+- [Introduction]()
+    - [Kerckhoff's Principle]()
+    - [Symmetric encryption]()
+    - [Secret sharing]()
+    - [Asymmetric encryption]()
+    - [Zero Knowledge Proofs]()
+    - [Fully Homomorphic Encryption]()
+    - [Secure Multi-Party Computation]()
   
 - [Theoretical Computer Science](./chapter_1/index.md)
 
