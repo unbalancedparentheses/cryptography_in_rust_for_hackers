@@ -2,7 +2,17 @@
 
 [Preface](./index.md)
 
+- [Introduction]
+    - [Kerckhoff's Principle]
+    - [Symmetric encryption]
+    - [Secret sharing]
+    - [Asymmetric encryption]
+    - [Zero Knowledge Proofs]
+    - [Fully Homomorphic Encryption]
+    - [Secure Multi-Party Computation]
+  
 - [Theoretical Computer Science](./chapter_1/index.md)
+
 - [Abstract algebra and number theory](./chapter_2/index.md)
     - [Natural Numbers](./chapter_2/natural_numbers.md)
     - [Integers](./chapter_2/integers.md)
