@@ -23,6 +23,9 @@ XChaCha20 and Poly1305, BLAKE2b, Poseidon, Argon2i, X25519, EdDSA (RFC 8032), Ed
 - Tom Stuart Understanding computation
 - [Moonmath](https://github.com/LeastAuthority/moonmath-manual/raw/main/main-moonmath.pdf)
 
+### Computational complexity theory
+- [Cryptography and P vs. NP: A Basic Outline](https://jamvie.net/posts/2020/07/cryptography-and-p-vs.-np-a-basic-outline/)
+
 ### Number Theory 
 - https://crypto.stanford.edu/pbc/notes/numbertheory/
 - https://explained-from-first-principles.com/number-theory/#extended-euclidean-algorithm
