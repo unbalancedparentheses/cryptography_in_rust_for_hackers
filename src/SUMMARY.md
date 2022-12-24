@@ -63,6 +63,9 @@
 
 - [Pseudorandom number generators](./chapter_6/pseudorandom_generator.md)
 - [Signatures](./chapter_7/signatures.md)
+	- [Schnorr]()
+	- [MuSig]
+	
 - [Message Authentication Codes](./chapter_9/message_authentication_codes.md)
     - [Poly1305]()
    
@@ -71,7 +74,7 @@
     - [Arithmetization]()
     - [Probabilistically Checkable Proof]()
     - [Interactive oracle proof]()
-    - [Polynomial commitments and KZ]()
+    - [Polynomial commitments]()
     - [Multiscalar Multiplication](./chapter_10/multiscalar_multiplication.md)
     - [Groth16]()
     - [Plonk]()
