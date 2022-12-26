@@ -31,7 +31,7 @@
     - [Polynomial interpolation]()
     - [The Arithmetic of Elliptic Curves](./chapter_4/elliptic_curves.md)
     - [Pairings and field extensions]()
-    - [Lattices]
+    - [Lattices]()
     - [Ring learning with errors]()
 
 - [Secret sharing]()
@@ -64,7 +64,7 @@
 - [Pseudorandom number generators](./chapter_6/pseudorandom_generator.md)
 - [Signatures](./chapter_7/signatures.md)
 	- [Schnorr]()
-	- [MuSig]
+	- [MuSig]()
 	
 - [Message Authentication Codes](./chapter_9/message_authentication_codes.md)
     - [Poly1305]()
