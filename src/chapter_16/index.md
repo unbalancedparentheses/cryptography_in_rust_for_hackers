@@ -672,3 +672,5 @@ The only remaining check shows that the trace and composition polynomial are rel
 ## Summary
 
 This post covered a pen-and-paper example of computational integrity using STARKs. We chose a sequence where each element is the square of the previous one, starting from 3. We stated the problem, interpreted the computation as evaluating a polynomial over a suitable domain, and performed Lagrange interpolation. After that, we enforced the constraints over the execution trace and obtained the composition polynomial. To improve soundness, we forced the prover to evaluate at a point $z$ outside the domain and showed that the trace and composition polynomial are related. Then, we created a rational function that ensured the prover did not cheat and sent the correct values. If the prover is honest, then the resulting function is a polynomial, and we proved by showing that it is close to a low-degree polynomial using FRI. If you want to try more complicated examples, follow the updates at Lambdaworks.
+
+![STARKflow](./0STARKflow.png)
