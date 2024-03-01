@@ -79,9 +79,13 @@
     - [Groth16]()
     - [Plonk]()
 
-- [STARKs]()
+- [BabySNARK](./chapter_13/index.md)
+
+- [Groth 16](./chapter_15/index.md)
+
+- [STARKs](./chapter_16/index.md)
 	- [AIR]()
 
-- [Fully Homomorphic Encryption]()
+- [Plonk](./chapter_17/index.md)
 
 - [Secure Multi-Party Computation]()
