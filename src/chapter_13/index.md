@@ -97,6 +97,10 @@ To compute the commitments, we need parameters $s , \beta , \gamma$ to be unknow
 
 ## Implementation
 
+The following figure shows the flow for BabySNARK:
+
+![0BabySNARKflow](/0BabySNARKflow.png)
+
 ### Setup
 
 Prover and verifier agree on a pairing-friendly elliptic curve and generators of the groups $G_1$ and $G_2$, denoted by $g_1$ and $g_2$, respectively. In our case, we choose BLS12-381. The proving key consists of the following:
