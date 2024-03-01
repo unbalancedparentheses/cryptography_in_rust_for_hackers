@@ -99,7 +99,7 @@ To compute the commitments, we need parameters $s , \beta , \gamma$ to be unknow
 
 The following figure shows the flow for BabySNARK:
 
-![0BabySNARKflow](/0BabySNARKflow.png)
+![0BabySNARKflow](./0BabySNARKflow.png)
 
 ### Setup
 
