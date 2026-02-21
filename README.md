@@ -4,6 +4,18 @@ A hands-on book covering cryptography from mathematical foundations through SNAR
 
 **Read the book:** [cryptographyinrustforhackers.com](https://cryptographyinrustforhackers.com)
 
+## Not yet reviewed
+
+> These resources were recently found and have not been reviewed yet.
+
+- [Proofs, Arguments, and Zero-Knowledge - Justin Thaler (free PDF)](https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.html) - Most rigorous and complete textbook on interactive proofs, SNARKs, and ZK arguments
+- [ZK-Learning MOOC (Berkeley CS294)](https://rdi.berkeley.edu/zk-learning/) - Full university-level course on ZKP foundations through practical construction
+- [MIT IAP: Modern Zero Knowledge Cryptography](https://zkiap.com/) - MIT intensive on elliptic curves, polynomial commitments, Groth16, PLONK, Halo2
+- [Real-World Cryptography - David Wong (Manning, 2021)](https://www.manning.com/books/real-world-cryptography) - Applied crypto covering modern primitives, ZK proofs, and post-quantum
+- [Binius: Succinct Arguments over Binary Fields](https://eprint.iacr.org/2023/1784.pdf) - Proofs over binary fields for dramatically cheaper hash-heavy computations
+- [Jolt: SNARKs for Virtual Machines via Lookups (Eurocrypt 2024)](https://eprint.iacr.org/2023/1217) - Full RISC-V zkVM from lookup arguments
+- [Nova: Recursive ZK Arguments from Folding Schemes (CRYPTO 2022)](https://eprint.iacr.org/2021/370) - Lightweight alternative to SNARKs for incrementally verifiable computation
+
 ## Further Reading and References
 
 ### Mathematics
