@@ -16,6 +16,37 @@ A hands-on book covering cryptography from mathematical foundations through SNAR
 - [Jolt: SNARKs for Virtual Machines via Lookups (Eurocrypt 2024)](https://eprint.iacr.org/2023/1217) - Full RISC-V zkVM from lookup arguments
 - [Nova: Recursive ZK Arguments from Folding Schemes (CRYPTO 2022)](https://eprint.iacr.org/2021/370) - Lightweight alternative to SNARKs for incrementally verifiable computation
 
+### Post-Quantum Cryptography
+- [ml-kem - RustCrypto (2024)](https://github.com/RustCrypto/KEMs) - Pure Rust implementation of FIPS 203 ML-KEM (formerly Kyber); `no_std` compatible, tracks the final NIST standard
+- [ml-dsa - RustCrypto (2024)](https://github.com/RustCrypto/signatures/tree/master/ml-dsa) - Pure Rust implementation of FIPS 204 ML-DSA (formerly Dilithium) digital signatures
+- [The State of Post-Quantum Cryptography in Rust - Project Eleven (2025)](https://blog.projecteleven.com/posts/the-state-of-post-quantum-cryptography-in-rust-the-belt-is-vacant) - Survey of every Rust PQC crate; concludes no production-audited Rust PQC implementation yet exists
+- [Microsoft rust-symcrypt (2024-2025)](https://github.com/microsoft/rust-symcrypt) - Rust wrappers over SymCrypt; Microsoft rewriting core algorithms in Rust with formal verification via Aeneas/Lean
+
+### ZK Proving Systems and Tooling
+- [Plonky3 - Polygon (2024)](https://github.com/Plonky3/Plonky3) - Modular Rust toolkit for building polynomial IOPs (PLONK, STARKs); backend for SP1 and Valida zkVMs, audited
+- [SP1 (Succinct Processor 1) - Succinct Labs (2024-2025)](https://github.com/succinctlabs/sp1) - zkVM that proves arbitrary Rust programs via RISC-V; 4-28x faster than prior zkVMs, adopted by Optimism, Polygon, Celestia
+- [RISC Zero R0VM 2.0 (2024-2025)](https://github.com/risc0/risc0) - RISC-V-based zkVM using zk-STARKs with FRI; pursuing formal verification of the full circuit
+- [Noir - Aztec Labs (1.0 pre-release 2025)](https://github.com/noir-lang/noir) - Rust-inspired DSL for ZK circuits; backend-agnostic, supports Barretenberg, Halo2, Plonky2
+- [ICICLE v3 - Ingonyama (2024-2025)](https://github.com/ingonyama-zk/icicle) - Hardware-acceleration library for ZK crypto with Rust/C++/Go bindings; GPU, Apple Silicon, up to 80x speedup
+
+### Homomorphic Encryption
+- [TFHE-rs v1.0 - Zama (2025)](https://github.com/zama-ai/tfhe-rs) - Pure Rust FHE library implementing TFHE; supports booleans, integers, GPU/HPU backends, and WASM client API
+- [Concrete v2.10 with Rust support - Zama (2025)](https://github.com/zama-ai/concrete) - TFHE compiler converting Python programs into FHE equivalents; added native Rust support
+
+### Multi-Party Computation
+- [MPZ - Privacy & Scaling Explorations (2025)](https://github.com/privacy-scaling-explorations/mpz) - Modular Rust MPC libraries (garbled circuits, oblivious transfer, dual execution VM); built for TLS Notary
+- [Swanky - Galois Inc. (2024)](https://github.com/GaloisInc/swanky) - Research-grade Rust MPC suite covering oblivious transfer, garbled circuits, and private set intersection
+
+### Threshold Signatures
+- [FROST - Zcash Foundation (2024-2025)](https://github.com/ZcashFoundation/frost) - RFC 9591 two-round threshold Schnorr signatures; includes Bitcoin Taproot support (BIP340/341), NCC-audited
+
+### TLS
+- [Rustls 0.23.x with post-quantum key exchange (2024-2025)](https://github.com/rustls/rustls) - Pure Rust TLS 1.2/1.3; added hybrid post-quantum key exchange and experimental ML-DSA signing
+
+### Books and Surveys
+- [Understanding Cryptography, 2nd ed. - Paar, Pelzl, Guneysu (Springer, 2024)](https://link.springer.com/book/10.1007/978-3-662-69007-9) - Major revision adding post-quantum chapter (ML-KEM, ML-DSA, SLH-DSA); minimal math prerequisites
+- [Towards Safe and Modern Cryptography: Overview of the Rust Ecosystem in 2024 - Kerkour](https://kerkour.com/rust-cryptography-2024) - Practical survey of which Rust crypto crates to use with security and maintenance assessments
+
 ## Further Reading and References
 
 ### Mathematics
