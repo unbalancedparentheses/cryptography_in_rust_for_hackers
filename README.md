@@ -2,6 +2,8 @@
 
 A hands-on book covering cryptography from mathematical foundations through SNARKs and STARKs, with Rust implementations.
 
+The Rust ecosystem now has production-quality implementations across every major cryptographic primitive. Post-quantum: `ml-kem` and `ml-dsa` crates implement the new NIST standards; `rust-symcrypt` wraps Microsoft's SymCrypt for FIPS-validated crypto. ZK tooling: Plonky3 (Polygon), SP1 (Succinct), and RISC Zero provide zkVM frameworks where you write normal Rust and get zero-knowledge proofs. ICICLE (Ingonyama) provides GPU acceleration for the expensive parts (NTT, MSM). FROST (Flexible Round-Optimized Schnorr Threshold Signatures) implementations enable threshold signing where no single party holds the full key -- critical infrastructure for multisig wallets and distributed key management. TFHE-rs from Zama is the most mature FHE library in Rust, enabling integer and boolean operations on encrypted data.
+
 **Read the book:** [cryptographyinrustforhackers.com](https://cryptographyinrustforhackers.com)
 
 ## Further Reading and References
